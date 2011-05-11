@@ -1,0 +1,155 @@
+<tool id="rdiffweb_instructions" name="Examples and Instructions (rDiff)">
+  <description>Instructions on how to use the rDiff tools and examples with predefined data sets</description>
+  <command>~/bin/octave_start_script.sh "setup_mgene; galaxy_rdiff_web_gendata('$organism', '$Genome_Sequence', '$GFF3_Annotation', '$SAM_Alignments1', '$SAM_Alignments2', '$Info'); " > /dev/null </command>
+  <inputs>
+    <param name="organism" type="select" label="Example data for the following organism is added to the history" help="Select one of the example data sets and click execute to transfer these data sets into the current history. Please check out the instructions below.">
+      <option value="c_elegans_WS200-I-regions">Caenorhabditis elegans (WS200, 50 genes)</option>  
+    </param>
+  </inputs>
+  <outputs>
+    <data format="fasta" name="Genome_Sequence" label="Example Data: Genome Sequence in FASTA format"/>
+    <data format="gff3" name="GFF3_Annotation" label="Example Data: Genome Annotation in GFF3 format"/>
+    <data format="sam" name="SAM_Alignments1" label="Example Data: Alignments Sample 1 in SAM format"/>
+    <data format="sam" name="SAM_Alignments2" label="Example Data: Alignments Sample 2 in SAM format"/>
+    <data format="txt" name="Info" label="Example Data: Information about the data sets"/>
+  </outputs>
+
+  <help>
+
+
+Introduction
+------------
+
+This is **rDiff.web**, a web service for convenient access to tools for
+differential expression testing of RNA-Seq data.
+
+To get started either try the example data below, or upload a genome,
+its annotations and short read alignments in SAM format using the
+`Upload File` tool located under `Get Data`. For a general
+introduction to galaxy please visit http://main.g2.bx.psu.edu.
+
+
+Example
+-------
+
+To run one of the provided simple examples the following tools are needed 
+(they can be selected from the toolbar on the left):
+
+* **Examples and Instructions:** Choose "Caenorhabditis elegans (one nGASP training region on chromosome I)" as example data and press "Execute". Six files will appear in your history panel on the right: Genome Sequence (FASTA), Genome Annotation (GFF3), Alignments Sample 1 (SAM), Alignments Sample 1 (SAM) and a file with information on the used data set.
+
+* **GenomeTool:** Select "From current history" as Source of genome sequence. Make sure that the Example Data FASTA file is selected as Genomic Sequence. Press "Execute" and wait until the result file is generated in your history panel.
+
+* **GFF2Anno:** Select your previously generated genome information object from your history as Genome information file. Make sure that the Example GFF3 file is selected as Genome annotation and "Wormbase GFF3 format" as Version of GFF3 file. Press "Execute" and wait until the result file is generated in your history panel.
+
+* **SAM-to-BAM:** Select "History" as the source for the reference list. Use the Example Data read alignment SAM files as input SAM file and the Example Data FASTA file as reference file to generate the compressed BAM alignment file. Press "Execute" and wait until the result file is generated in your history panel.
+
+* **rDiff:** Select your previously generated files from your history as input (Genome Info in GIO format, Genome annotation file in AGS format and the BAM alignment files). Press "Execute" and wait until the result file is generated in your history panel.
+
+The result is a tab-limited text file that stores the name of the testing method and the p-value for each gene name.
+
+A more detailed description is available here: http://fml.mpg.de/raetsch/suppl/rdiff.
+
+
+Tools Overview
+--------------
+ 
+In detail, the individual tools serve the following purposes (further
+information is provided when calling the individual tools):
+
+**Data preparation**
+
+* **GenomeTool** converts a file in FASTA format containing genomic
+  sequences into a genome object, stored in a Genome Information Object
+  (GIO file), to be used by other mGene tools.
+
+* **GFF2Anno** reads a file in GFF3 format and converts it
+  into an internal annotation structure (AGS format). It requires a Genome Information Object for reference.
+
+* **SAM-to-BAM** generates the alignment file in the compressed format BAM from a SAM file.
+
+**Differential expression testing**
+
+
+------
+
+**Licenses**
+
+If **rDiff.web** is used to obtain results for scientific publications it
+should be cited as [1]_.
+
+**References** 
+
+.. [1] Stegle, O, Drewe, P, Bohnert, R, Borgwardt, K, and Rätsch, G (2010): `Statistical Tests for Detecting Differential RNA-Transcript Expression from Read Counts`_. Preprint.
+
+.. _Statistical Tests for Detecting Differential RNA-Transcript Expression from Read Counts: http://precedings.nature.com/documents/4437/version/1
+
+------
+
+.. class:: infomark
+
+**About formats**
+
+
+
+**FASTA format** A sequence in FASTA format begins with a single-line
+description, followed by lines of sequence data. The description line
+is distinguished from the sequence data by a "greater than" (>) symbol
+in the first column. The token until the first space or the end of the 
+line is used as an identifier for the sequence. The remainder of the 
+description line is ignored.
+
+An example sequence in FASTA format is:
+
+>CHR1
+
+CCCTAAACCCTAAACCCTAAACCCTAAACCTCTGAATCCTTAATCCCTAAATCCCTAAAT
+CTTTAAATCCTACATCCATGAATCCCTAAATACCTAATTCCCTAAACCCGAAACCGGTTT
+CTCTGGTTGAAAATCATTGTGTATATAATGATAATTTTATCGTTTTTATGTAATTGCTTA
+TTGTTGTGTGTAGATTTTTTAAAAATATCATTTGAGGTCAATACAAATCCTATTTCTTGT
+GGTTTTCTTTCCTTCACTTAGCTATGGATGGTTTATCTTCATTTGTTATATTGGATACAA
+GCTTTGCTACGATCTACATTTGGGAATGTGAGTCTCTTATTGTAACCTTAGGGTTGGTTT
+ATCTCAAGAATCTTATTAATTGTTTGGACTGTTTATGTTTGGACATTTATTGTCATTCTT
+ACTCCTTTGTGGAAATGTTTGTTCTATCAATTTATCTTTTGTGGGAAAATTATTTAGTTG
+TAGGGATGAAGTCTTTCTTCGTTGTTGTTACGCTTGTCATCTCATCTCTCAATGATATGG
+GATGGTCCTTTAGCATTTATTCTGAAGTTCTTCTGCTTGATGATTTTATCCTTAGCCAAA
+AGGATTGGTGGTTTGAAGACACATCATATCAAAAAAGCTATCGCCTCGACGATGCTCTAT
+TTCTATCCTTGTAGCACACATTTTGGCACTCAAAAAAGTATTTTTAGATGTTTGTTTTGC
+...
+
+**GFF3 format** General Feature Format is a format for describing genes
+and other features associated with DNA, RNA, and protein sequences. GFF
+lines have nine tab-separated fields:
+
+1. seqname - The name of the chromosome or scaffold (e.g., chr1, chrY_random).
+2. source - The program that generated this feature.
+3. feature - The name of this type of feature. Some examples of standard feature types are "CDS", "start_codon", "stop_codon", and "exon".
+4. start - The starting position of the feature in the sequence. (The first base on a chromosome is numbered 1.)
+5. end - The ending position of the feature (inclusive).
+6. score - A score between 0 and 1000. If there is no score value, enter ".".
+7. strand - Defines the strand - either '+' or '-'.
+8. frame - If the feature is a coding exon, frame should be a number between 0 and 2 that represents the reading frame of the first base. If the feature is not a coding exon, the value should be '.'.
+9. group - All lines with the same group are linked together into a single item.
+
+For more information see http://www.sequenceontology.org/gff3.shtml
+
+**GIO format** Genome Information Object is an internal format used to
+store relevant information about the genome under consideration (as
+extracted from a FASTA file). It includes, for example, number and
+length of chromosomes/contigs. The file is generated by applying the
+GenomeTool.
+
+**AGS format** Annotation Gene Structure Object is an internal
+structure that efficiently stores the information from a GFF3 file. It
+can be generated with the GFF2Anno tool. The Anno2GFF converts it back
+to a GFF3 file.
+
+**SAM/BAM format** The Sequence Alignment/Map (SAM) format is a
+tab-limited text format that stores large nucleotide sequence
+alignments. BAM is the binary version of a SAM file that allows for
+fast and intensive data processing. The format specification and the
+description of SAMtools can be found on
+http://samtools.sourceforge.net/.
+
+
+</help>
+</tool>
