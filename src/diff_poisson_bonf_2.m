@@ -1,11 +1,22 @@
 function [P_VALUE, STRUCT]= diff_poisson_bonf_2(READS1,READS2,GENE,START_OR_COVERAGE)
-
 % Calculates the p-Values of a poisson test on each of the intervalls
 % and combines them to one p-values. SEGMENTS is a n x 2 array where
 % each row is the start and the end of an exon
 %START_OR_COVERAGE tells whether the test should be based on the
 %startpoints or the coverage. START_OR_COVERAGE=0 means start =1
 %means coverage
+%
+%
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 3 of the License, or
+%   (at your option) any later version.
+%
+%   Written (W) 2009-2011 Philipp Drewe
+%   Copyright (C) 2009-2011 Max Planck Society
+%
+
+
 if nargin<4
   START_OR_COVERAGE = 1;
 end;

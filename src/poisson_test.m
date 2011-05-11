@@ -1,4 +1,15 @@
 function [p_values]=poisson_test(genes,bam1,bam2)
+%
+%
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 3 of the License, or
+%   (at your option) any later version.
+%
+%   Written (W) 2009-2011 Philipp Drewe
+%   Copyright (C) 2009-2011 Max Planck Society
+%
+
 
 min_read_length = 0;
 

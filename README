@@ -1,0 +1,52 @@
+---------------------
+  rDiff version X.X
+---------------------
+
+DESCRIPTION
+rDiff is a programme to determine abundances of multiple transcripts
+per gene locus from RNA-Seq measurements. It can simultaneously
+estimate the effect of biases introduced by experimental settings. 
+
+REQUIREMENTS
+- Octave or Matlab
+- Python >=2.6.5 and Scipy >=0.7.1
+- SAMTools >= 0.1.7
+
+GETTING STARTED
+To install rDiff and the required software please follow the
+instructions in INSTALL in this directory.
+
+CONTENTS
+All relevant scripts for rDiff are located in the subdirectory src.
+rdiff.sh is the main script to start rDiff.
+
+GALAXY
+rDiff can be used as a web service embedded in a Galaxy instance
+(cf. http://galaxy.fml.tuebingen.mpg.de/tool_runner?tool_id=rdiffweb).
+The Galaxy tool configuration file of rDiff is located in the
+subdirectory galaxy along with XML file for loading example data and
+instructions (rdiff_web.xml and rdiff_web_instructions.xml,
+respectively). Please adapt the paths to the respective tools in
+command section of the XML files as indicated.
+The subdirectory test_data contains all data for running a functional
+test in Galaxy (e.g. with sh run_functional_test.sh -id rdiffweb). You
+may need to move these test files into the Galaxy test-data directory.
+
+DOCUMENTATION
+More information is available in doc/rdiff_web_instructions.txt and
+doc/rdiff_web.txt. Examples for running rDiff can be found in
+examples/./run_example.sh.
+You can also find information on rDiff on
+http://fml.mpg.de/raetsch/suppl/rdiff.
+ 
+LICENSE
+rDiff is licensed under the GPL version 3 or any later version
+(cf. LICENSE).
+
+CITE US
+If you use rDiff in your research you are kindly asked to cite the
+following publication:
+* Oliver Stegle, Philipp Drewe, Regina Bohnert, Karsten Borgwardt, and
+Gunnar Raetsch: Statistical Tests for Detecting Differential
+RNA-Transcript Expression from Read Counts. Available from Nature
+Precedings, May 2010.

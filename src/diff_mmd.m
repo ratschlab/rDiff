@@ -6,6 +6,16 @@ function [pval,info] = diff_mmd(reads1,reads2,gene,kernel)
 % note: if N1!=N2 the larger one is subsampled to yield the same
 % size. This is needed to apply mmd
 % kernel: currently polynomial only
+%
+%
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 3 of the License, or
+%   (at your option) any later version.
+%
+%   Written (W) 2009-2011 Philipp Drewe
+%   Copyright (C) 2009-2011 Max Planck Society
+%
 
 %1. ensure reads are sparse
 

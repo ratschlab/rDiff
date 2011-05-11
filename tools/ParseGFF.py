@@ -6,8 +6,8 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# Written (W) 2010 Vipin T Sreedharan
-# Copyright (C) 2010 Max Planck Society
+# Written (W) 2010-2011 Vipin T Sreedharan
+# Copyright (C) 2010-2011 Max Planck Society
 #
 
 """Description: Parse genome annotation from a GFF3 (a tab delimited format for storing sequence features and annotations:

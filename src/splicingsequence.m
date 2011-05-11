@@ -1,9 +1,18 @@
-function [SPLICINGEVENTS,SEQUENCE,EXONSEQUENCE,IDENTIFICATIONLENGTH]= ...
-    splicingsequence(GENE)
+function [SPLICINGEVENTS,SEQUENCE,EXONSEQUENCE,IDENTIFICATIONLENGTH]= splicingsequence(GENE)
 %This function generates all sequence of all splicesites
 %SPLICINGEVENTS, a SEQUENCE marking which elements in
 %SPLICINGEVENTS are introns and exons and a sequence for each
 %transcript which indicates which Exons are in cluded in this transcript
+%
+%
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 3 of the License, or
+%   (at your option) any later version.
+%
+%   Written (W) 2009-2011 Philipp Drewe
+%   Copyright (C) 2009-2011 Max Planck Society
+%
 
   EXONS=GENE.exons;
   START=GENE.start;
