@@ -46,9 +46,6 @@ for j=1:size(genes,2)
       reads2=(spconvert([[mask2',ones(size(mask2,2),1)];max21+1,1,-1;max21+2,gene.stop-gene.start+1,-1]));
       reads2=reads2(sum(reads2,2)>min_read_length,:);    
     end
-
-    keyboard
-
     [P_VALUE, STRUCT]= diff_exp_poisson(reads1,reads2,gene);
     p_values(j)=P_VALUE;
     else

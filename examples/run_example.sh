@@ -28,7 +28,7 @@ then
   echo "   or:" $0 --help
   false
 fi
-if [ "$1" != 'poisson'  -a "$1" != 'mmd' ];
+if [ "$1" != 'poisson' -a "$1" != 'poisson_exp' -a "$1" != 'mmd' ];
 then
   echo invalid parameter
   false
@@ -43,6 +43,10 @@ BAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.bam
 EXP=c_elegans_WS200-I-regions
 TEST_METH=$1
 if [ "$1" == 'poisson' ];
+then
+    echo Note: Running this script takes about 1 minute \(on a single CPU\).
+fi
+if [ "$1" == 'poisson_exp' ];
 then
     echo Note: Running this script takes about 1 minute \(on a single CPU\).
 fi

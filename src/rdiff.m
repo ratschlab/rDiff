@@ -7,7 +7,7 @@ function rdiff(anno_fname, track1, track2, out_fname, test_meth)
 %   track1:     name of BAM file 1
 %   track2:     name of BAM file 2
 %   out_fname:  name of result file with p-values
-%   test_meth:  test method ('poisson' or 'mmd')
+%   test_meth:  test method ('poisson' or 'poisson_exp 'or 'mmd')
 %
 %
 %   This program is free software; you can redistribute it and/or modify

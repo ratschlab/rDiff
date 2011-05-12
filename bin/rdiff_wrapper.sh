@@ -10,7 +10,7 @@
 # Copyright (C) 2009-2010 Max Planck Society
 #
 
-# rQuant wrapper script to start the interpreter with the correct list of arguments
+# rDiff wrapper script to start the interpreter with the correct list of arguments
 
 set -e
 

@@ -37,6 +37,17 @@
     <test>
       <!--
 	command:
+	./rdiff.sh ../test_data/rdiff_c_elegans_WS200-I-regions.gff3 0 ../test_data/genes.mat ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001872.bam ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001875.bam ../test_data/rdiff_c_elegans_WS200-I-regions_rdiff_poisson_exp.txt poisson_exp
+	-->
+      <param name="anno_input_selected" value="rdiff_c_elegans_WS200-I-regions.gff3" ftype="gff3" />
+      <param name="bam_alignments1" value="rdiff_c_elegans_WS200-I-regions-SRX001872.bam" ftype="bam" />
+      <param name="bam_alignments2" value="rdiff_c_elegans_WS200-I-regions-SRX001875.bam" ftype="bam" />
+      <param name="test_meth" value="poisson_exp" />
+      <output name="rdiff_out" file="rdiff_c_elegans_WS200-I-regions_rdiff_poisson_exp.txt" />
+    </test>
+    <test>
+      <!--
+	command:
 	./rdiff.sh ../test_data/rdiff_c_elegans_WS200-I-regions.gff3 0 ../test_data/genes.mat ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001872.bam ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001875.bam ../test_data/rdiff_c_elegans_WS200-I-regions_rdiff_poisson.txt poisson 
 	-->
       <param name="anno_input_selected" value="rdiff_c_elegans_WS200-I-regions.gff3" ftype="gff3" />
@@ -46,7 +57,6 @@
       <output name="rdiff_out" file="rdiff_c_elegans_WS200-I-regions_rdiff_poisson.txt" />
     </test>
     <test>
-     <test>
       <!--
 	command:
 	./rdiff.sh ../test_data/rdiff_c_elegans_WS200-I-regions.gff3 0 ../test_data/genes.mat ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001872.bam ../test_data/rdiff_c_elegans_WS200-I-regions-SRX001875.bam ../test_data/rdiff_c_elegans_WS200-I-regions_rdiff_mmd.txt mmd 
@@ -57,7 +67,6 @@
       <param name="test_meth" value="mmd" />
       <output name="rdiff_out" file="rdiff_c_elegans_WS200-I-regions_rdiff_mmd.txt" />
     </test>
-    <test> 
   </tests>
 
   <help>
@@ -120,13 +129,6 @@ sequences. GFF3 lines have nine tab-separated fields:
 7. strand - Valid entries include '+', '-', or '.' (for don't know/care).
 8. phase - If the feature is a coding exon, frame should be a number between 0-2 that represents the reading frame of the first base. If the feature is not a coding exon, the value should be '.'.
 9. attributes - All lines with the same group are linked together into a single item.
-
-For the quantitation we provide two additional attributes:
-
-1. ARC: estimated average read coverage (direct output from rQuant)
-2. RPKM: the number of reads per thousand bases per million mapped reads
-
-describing the estimated expression value for each transcript.
 
 For more information see http://www.sequenceontology.org/gff3.shtml
 
