@@ -15,6 +15,9 @@ function rdiff_config
 % rDiff paths
 global RDIFF_PATH RDIFF_SRC_PATH
 
+% rDiff version
+global RDIFF_VERSION
+
 % interpreter paths
 global INTERPRETER MATLAB_BIN_PATH OCTAVE_BIN_PATH
 
@@ -22,6 +25,7 @@ global INTERPRETER MATLAB_BIN_PATH OCTAVE_BIN_PATH
 global SAMTOOLS_DIR
 
 % configuration (adapt to the user's configuration)
+RDIFF_VERSION = getenv('RDIFF_VERSION');
 RDIFF_PATH = getenv('RDIFF_PATH');
 RDIFF_SRC_PATH = getenv('RDIFF_SRC_PATH');
 INTERPRETER = getenv('INTERPRETER');

@@ -1,13 +1,14 @@
-function write_rdiff_result(genes, p_values, out_fname, test_meth) 
+function write_rdiff_result(genes, p_values, out_fname, test_meth, version_num) 
 % WRITE_RDIFF_RESULT   Writes rDiff results to file.
 %
-%   write_rdiff_result(genes, out_fname, source, mapped_reads, read_len) 
+%   write_rdiff_result(genes, out_fname, source, mapped_reads, read_len, version_num) 
 %
 %   -- input --
-%   genes:     struct defining genes with start, stops, exons etc.
-%   p_values:  p-values of test
-%   out_fname: name of result file with p-values
-%   test_meth: test method ('poisson' or 'mmd')
+%   genes:       struct defining genes with start, stops, exons etc.
+%   p_values:    p-values of test
+%   out_fname:   name of result file with p-values
+%   test_meth:   test method ('poisson' or 'mmd')
+%   version_num: number of release version
 %
 %
 %   This program is free software; you can redistribute it and/or modify
@@ -30,7 +31,7 @@ else
   disp(msg);
 end
 
-fprintf(fd, '# gene name\ttesting method\tp-value\n');
+fprintf(fd, '#rDiff version %s: gene name\ttesting method\tp-value\n', version_num);
 for g = 1:length(genes),
   fprintf(fd, '%s\t%s\t%.4f\n', genes(g).name, test_meth, p_values(g));
 end

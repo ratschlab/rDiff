@@ -12,7 +12,7 @@
 
 
 
-export RDIFF_VERSION=X.X
+export RDIFF_VERSION=0.1
 export RDIFF_PATH=/fml/ag-raetsch/home/bohnert/svn/releases/rDiff/trunk
 export RDIFF_SRC_PATH=/fml/ag-raetsch/home/bohnert/svn/releases/rDiff/trunk/src
 export RDIFF_BIN_PATH=/fml/ag-raetsch/home/bohnert/svn/releases/rDiff/trunk/bin

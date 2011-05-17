@@ -23,6 +23,9 @@ function rdiff(anno_fname, track1, track2, out_fname, test_meth)
 % rDiff paths
 global RDIFF_PATH RDIFF_SRC_PATH
 
+% rDiff version
+global RDIFF_VERSION
+
 % interpreter paths
 global INTERPRETER MATLAB_BIN_PATH OCTAVE_BIN_PATH
 
@@ -53,7 +56,7 @@ end
 
 [ret, timedate] = unix('date');
 timedate(timedate==sprintf('\n')) = [];
-fprintf(1, '\n*** rDiff started with %s test %s *** \n\n', test_meth, timedate);
+fprintf(1, '\n*** rDiff version %s started with %s test %s *** \n\n', RDIFF_VERSION, test_meth, timedate);
 
 %%%% load genes %%%%%
 load(anno_fname, 'genes');
@@ -64,8 +67,8 @@ p_values = eval(sprintf('%s_test(genes, track1, track2)', test_meth));
 fprintf(1, 'done.\n');
 
 %%%%% write to txt file %%%%%
-write_rdiff_result(genes, p_values, out_fname, test_meth);
+write_rdiff_result(genes, p_values, out_fname, test_meth, RDIFF_VERSION);
 
 [ret, timedate] = unix('date');
 timedate(timedate==sprintf('\n')) = [];
-fprintf(1, '\n*** rDiff finished with %s test %s *** \n\n', test_meth, timedate);
+fprintf(1, '\n*** rDiff version %s finished with %s test %s *** \n\n', RDIFF_VERSION, test_meth, timedate);

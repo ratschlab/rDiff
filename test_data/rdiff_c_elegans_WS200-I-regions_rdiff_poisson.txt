@@ -1,8 +1,8 @@
-# gene name	testing method	p-value
+#rDiff version 0.1: gene name	testing method	p-value
 Gene:Gene:Y18H1A.6	poisson	1.0000
 Gene:Gene:F53G12.8	poisson	1.0000
 Gene:Gene:F53G12.3	poisson	1.0000
-Gene:Gene:F56C11.6b	poisson	0.1868
+Gene:Gene:F56C11.6b	poisson	0.7127
 Gene:Gene:Y73E7A.1a.1	poisson	0.0000
 Gene:Gene:Y48G1C.12	poisson	1.0000
 Gene:Gene:F53G12.4	poisson	1.0000
@@ -13,7 +13,7 @@ Gene:Gene:Y48G1BL.1	poisson	1.0000
 Gene:Gene:Y48G1C.9.1	poisson	0.0000
 Gene:Gene:Y92H12BR.6	poisson	1.0000
 Gene:Gene:Y71F9AM.4a	poisson	0.0000
-Gene:Gene:F56A6.1b	poisson	1.8965
+Gene:Gene:F56A6.1b	poisson	1.9819
 Gene:Gene:K12C11.2.1	poisson	0.0000
 Gene:Gene:Y73E7A.9	poisson	1.0000
 Gene:Gene:Y65B4BR.4b	poisson	0.0000
@@ -30,11 +30,11 @@ Gene:Gene:Y34D9A.6	poisson	1.0000
 Gene:Gene:F53G12.7	poisson	1.0000
 Gene:Gene:C54G6.2	poisson	1.0000
 Gene:Gene:Y71G12B.16	poisson	1.0000
-Gene:Gene:R06A10.2.1	poisson	0.0285
+Gene:Gene:R06A10.2.1	poisson	0.0697
 Gene:Gene:Y71G12B.18	poisson	1.0000
-Gene:Gene:Y71F9AM.5b	poisson	0.0004
+Gene:Gene:Y71F9AM.5b	poisson	0.0002
 Gene:Gene:Y92H12BR.7	poisson	1.0000
-Gene:Gene:C53D5.1c.1	poisson	0.0001
+Gene:Gene:C53D5.1c.1	poisson	0.0012
 Gene:Gene:Y95B8A.6a.2	poisson	0.0000
 Gene:Gene:F53G12.5b	poisson	0.0000
 Gene:Gene:W04C9.2	poisson	1.0000
@@ -42,9 +42,9 @@ Gene:Gene:Y92H12BR.3b	poisson	0.0000
 Gene:Gene:W04C9.1	poisson	1.0000
 Gene:Gene:Y95B8A.8	poisson	1.0000
 Gene:Gene:Y65B4BR.8	poisson	1.0000
-Gene:Gene:T06A4.1b	poisson	0.0612
+Gene:Gene:T06A4.1b	poisson	0.1277
 Gene:Gene:Y74C9A.2.2	poisson	0.0000
-Gene:Gene:T06A4.3a	poisson	0.0166
+Gene:Gene:T06A4.3a	poisson	1.1244
 Gene:Gene:Y65B4BR.1	poisson	1.0000
 Gene:Gene:Y95B8A.5	poisson	1.0000
 Gene:Gene:F47G6.1	poisson	1.0000

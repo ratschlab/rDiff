@@ -1,4 +1,4 @@
-# gene name	testing method	p-value
+#rDiff version 0.1: gene name	testing method	p-value
 Gene:Gene:Y18H1A.6	poisson_exp	1.0000
 Gene:Gene:F53G12.8	poisson_exp	1.0000
 Gene:Gene:F53G12.3	poisson_exp	1.0000
