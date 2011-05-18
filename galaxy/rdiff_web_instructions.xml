@@ -1,12 +1,15 @@
-<tool id="rdiffweb_instructions" name="Examples and Instructions (rDiff)">
+<tool id="rdiffweb_instructions" name="Examples and Instructions (rDiff)" version="0.1">
   <description>Instructions on how to use the rDiff tools and examples with predefined data sets</description>
   <command> <!-- Please replace RDIFF_PATH by the correct path to rDiff -->
-    RDIFF_PATH/src/./rdiff_gendata.sh $organism $Genome_Sequence $GFF3_Annotation $SAM_Alignments1 $SAM_Alignments2 $Info > /dev/null </command>
+    RDIFF_PATH/src/./rdiff_gendata.sh $organism $Genome_Sequence $GFF3_Annotation $SAM_Alignments1 $SAM_Alignments2 $Info > /dev/null
+  </command>
+  
   <inputs>
     <param name="organism" type="select" label="Example data for the following organism is added to the history" help="Select one of the example data sets and click execute to transfer these data sets into the current history. Please check out the instructions below.">
       <option value="c_elegans_WS200-I-regions">Caenorhabditis elegans (WS200, 50 genes)</option>  
     </param>
   </inputs>
+  
   <outputs>
     <data format="fasta" name="Genome_Sequence" label="Example Data: Genome Sequence in FASTA format"/>
     <data format="gff3" name="GFF3_Annotation" label="Example Data: Genome Annotation in GFF3 format"/>

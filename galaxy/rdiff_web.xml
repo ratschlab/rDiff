@@ -1,11 +1,13 @@
-<tool id="rdiffweb" name="rDiff">
+<tool id="rdiffweb" name="rDiff" version="0.1">
   <description>Determines differentially expressed transcripts from read alignments</description>
   <command> <!-- Please replace RDIFF_PATH by the correct path to rDiff -->
     RDIFF_PATH/src/./rdiff.sh $anno_input_selected $anno_input.select_anno_format $anno_out $bam_alignments1 $bam_alignments2 $rdiff_out $test_meth
-    >> $Log_File; </command>
+    >> $Log_File
+  </command>
+  
   <inputs>
     <conditional name="anno_input">
-      <param name="select_anno_format" type="select" label="Genome annotation format" help="Select format of your genome annotation file." >
+      <param name="select_anno_format" type="select" label="Genome annotation format" help="Select the format of your genome annotation file." >
 	<option value="0">GFF3</option>
 	<option value="1">AGS</option>
       </param>

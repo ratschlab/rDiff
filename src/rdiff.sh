@@ -47,20 +47,26 @@ echo
 if [ "$ANNO_FORMAT" == '0' ]
 then
     echo load the genome annotation in GFF3 format and create an annotation object
-    if [ ! -f ${GENES_FN} ]
+    echo
+    if [[ ! -f ${GENES_FN} || ! -s ${GENES_FN} ]]
     then
 	export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
 	${PYTHON_PATH} ${DIR}/../tools/ParseGFF.py ${ANNO_INPUT} all all ${GENES_FN}
-	${DIR}/../bin/genes_cell2struct ${GENES_FN}
-    fi
+	if [[ ! -s ${GENES_FN} && -f ${GENES_FN}.mat ]]
+	then
+	    mv ${GENES_FN}.mat ${GENES_FN}
+	fi
+    fi    
 fi
 
 if [ "$ANNO_FORMAT" == '1' ]
 then
     echo load the genome annotation in AGS format
-    ln -s ${ANNO_INPUT} ${GENES_FN}
-    ${DIR}/../bin/genes_cell2struct ${GENES_FN}
+    echo
+    GENES_FN=${ANNO_INPUT}
 fi
+${DIR}/../bin/genes_cell2struct ${GENES_FN}
+
 
 echo
 echo %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,6 +76,7 @@ echo
 
 echo testing genes for differential expression using given alignments
 ${DIR}/../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH}
+
 
 echo
 echo %%%%%%%%
