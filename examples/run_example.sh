@@ -24,13 +24,13 @@ echo
 
 if [ -z "$1" -o "$1" == '--help' ];
 then
-  echo Usage: $0 small\|big
+  echo Usage: $0 poisson\|poisson_big\|mmd
   echo "   or:" $0 --help
   false
 fi
 if [ "$1" != 'poisson' -a "$1" != 'poisson_exp' -a "$1" != 'mmd' ];
 then
-  echo invalid parameter
+  echo invalid parameter: $1
   false
 fi
 
