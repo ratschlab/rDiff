@@ -1,0 +1,7 @@
+rDiff version 0.1 (Month DD, 2011)
+----------------------------------------
+
+This is the first release of rDiff, which is a tool for differential
+expression testing of RNA-Seq data.
+Please also visit http://fml.mpg.de/raetsch/suppl/rdiff for more
+information about this software.
