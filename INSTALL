@@ -1,0 +1,9 @@
+To setup rDiff, please follow these steps:
+
+1. Download the SAMTools (version 0.1.7) from http://samtools.sourceforge.net/ and install it. You need to add the flag -fPIC in the SAMTools Makefile for compilation.
+2. Add the SAMTools directory to ./mex/Makefile, go to ./mex and run make ('make octave' for Octave and 'make matlab' for Matlab).
+3. Run ./setup_rdiff.sh and setup paths and configuration options for rDiff.
+
+Optional
+5. Download the example data with ./get_data.sh in ./examples.
+6. Run an example by executing ./run_example.sh with input 'poisson_exp', 'poisson' or 'mmd' to perform a Poisson-based test for differential gene expression, a Poisson-based or MMD-based test for differential transcript expression, respectively, on a C. elegans data set in the examples directory.
