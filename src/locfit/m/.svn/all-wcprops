@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m
+END
+lcv.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lcv.m
+END
+lfband.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfband.m
+END
+rsum.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/rsum.m
+END
+predict.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/predict.m
+END
+smooth_lf.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/smooth_lf.m
+END
+aicplot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/aicplot.m
+END
+lfsmooth.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfsmooth.m
+END
+residuals.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/residuals.m
+END
+aic.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/aic.m
+END
+vecr.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/vecr.m
+END
+lfplot.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfplot.m
+END
+hatmatrix.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/hatmatrix.m
+END
+lfgui.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfgui.m
+END
+backtr.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/backtr.m
+END
+scb.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/scb.m
+END
+lfmarg.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfmarg.m
+END
+locfit_all.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/locfit_all.m
+END
+plotbyfactor.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/plotbyfactor.m
+END
+lf_censor.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lf_censor.m
+END
+invlink.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/invlink.m
+END
+kappa0.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/kappa0.m
+END
+gcvplot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/gcvplot.m
+END
+gcv.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/gcv.m
+END
+fitted.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/fitted.m
+END
+lfknots.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lfknots.m
+END
+locfit.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/locfit.m
+END
+spence21.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/spence21.m
+END
+lcvplot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/lcvplot.m
+END
+spence15.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/m/spence15.m
+END
