@@ -1,74 +1,62 @@
-function rdiff(anno_fname, track1, track2, out_fname, test_meth)
-% RDIFF   Performs differential expression testing from RNA-Seq measurements.
-%   rdiff(anno_fname, track1, track2, out_fname, test_meth)
-%
-%   -- input --
-%   anno_fname: name of file containing genes
-%   track1:     name of BAM file 1
-%   track2:     name of BAM file 2
-%   out_fname:  name of result file with p-values
-%   test_meth:  test method ('poisson' or 'poisson_exp 'or 'mmd')
-%
-%
-%   This program is free software; you can redistribute it and/or modify
-%   it under the terms of the GNU General Public License as published by
-%   the Free Software Foundation; either version 3 of the License, or
-%   (at your option) any later version.
-%
-%   Written (W) 2009-2011 Regina Bohnert
-%   Copyright (C) 2009-2011 Max Planck Society
+function []=rDiff()
+% rDiff()
 %
 
+%%% Add paths  %%%
+fprintf('Set the paths\n')
+CFG.paths = set_rDiff_paths();
 
-% rDiff paths
-global RDIFF_PATH RDIFF_SRC_PATH
 
-% rDiff version
-global RDIFF_VERSION
+%%% Read configuration file %%%
+fprintf('Load configuration\n')
+CFG = configure_rDiff(CFG);
+CFG = process_configure_rDiff(CFG);
 
-% interpreter paths
-global INTERPRETER MATLAB_BIN_PATH OCTAVE_BIN_PATH
+%%% Get read counts %%%
 
-% SAMTools path
-global SAMTOOLS_DIR
+%load the gene structure
+load(CFG.genes_path , 'genes');
 
-addpath(sprintf('%s/mex', RDIFF_PATH));
-addpath(sprintf('%s/tools', RDIFF_PATH));
-addpath(sprintf('%s', RDIFF_SRC_PATH));
+% mask the regions which overlap with other genes
+fprintf('Compute regions common to multiple genes\n')
+[genes]=detect_overlapping_regions(genes);
 
-samtools_dir = sprintf('%s/', SAMTOOLS_DIR);
+%Precompute testing regions
+fprintf('Compute alternative regions\n')
+[genes]=compute_testing_region(CFG,genes);
 
-if ~exist(sprintf('%s.bai', track1), 'file')
-  command = sprintf('%s./samtools index %s', samtools_dir, track1);
-  [s m] = unix(command);
-  if ~exist(sprintf('%s.bai', track1), 'file')
-    sprintf('\nbai file for %s could not be created\n', track1); 
-  end
+%Get the gene expression
+if CFG.estimate_gene_expression
+    fprintf('Measure gene expression\n')
+    get_read_counts(CFG,genes);
 end
 
-if ~exist(sprintf('%s.bai', track2), 'file')
-  command = sprintf('%s./samtools index %s', samtools_dir, track2);
-  [s m] = unix(command);
-  if ~exist(sprintf('%s.bai', track2), 'file')
-    sprintf('\nbai file for %s could not be created\n', track2); 
-  end
+%%% Estimate variance function %%%
+if CFG.perform_nonparametric
+    variance_function_nonparametric_1=[];
+    variance_function_nonparametric_2=[];
+    [variance_function_nonparametric_1, variance_function_nonparametric_2]=estimate_variance_nonparametric(CFG,genes);
 end
 
-[ret, timedate] = unix('date');
-timedate(timedate==sprintf('\n')) = [];
-fprintf(1, '\n*** rDiff version %s started with %s test %s *** \n\n', RDIFF_VERSION, test_meth, timedate);
 
-%%%% load genes %%%%%
-load(anno_fname, 'genes');
+if CFG.perform_parametric
+    variance_function_parametric_1=[];
+    variance_function_parametric_2=[];
+    [variance_function_parametric_1, variance_function_parametric_2]=estimate_variance_parametric(CFG,genes); 
+end
 
-%%%% rDiff %%%%%
-fprintf(1, 'testing %i genes for differential expression...\n', length(genes));
-p_values = eval(sprintf('%s_test(genes, track1, track2)', test_meth)); 
-fprintf(1, 'done.\n');
+%%% Perform tests &  Write output %%%
 
-%%%%% write to txt file %%%%%
-write_rdiff_result(genes, p_values, out_fname, test_meth, RDIFF_VERSION);
+%Run the prametric tests
+if or(CFG.perform_parametric,CFG.perform_poisson)
+    perform_parametric_tests(CFG,genes,variance_function_parametric_1, variance_function_parametric_2)
+end
+%Run the nonparametric tests
+if or(CFG.perform_nonparametric,CFG.perform_mmd)
+    perform_nonparametric_tests(CFG,genes,variance_function_nonparametric_1, variance_function_nonparametric_2)
+end
 
-[ret, timedate] = unix('date');
-timedate(timedate==sprintf('\n')) = [];
-fprintf(1, '\n*** rDiff version %s finished with %s test %s *** \n\n', RDIFF_VERSION, test_meth, timedate);
+return
+
+
+
