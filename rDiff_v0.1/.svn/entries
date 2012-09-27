@@ -1,0 +1,79 @@
+10
+
+dir
+0
+https://svn.tuebingen.mpg.de/ag-raetsch/projects/RNASeq/difftest/rDiff_release
+https://svn.tuebingen.mpg.de/ag-raetsch
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+e1793c9e-67f9-0310-80fc-b846ff1f7b36
+
+tools
+dir
+
+
+
+add
+
+get_nonparametric_tests_caller.m
+file
+
+
+
+add
+
+configure_rDiff.m
+file
+
+
+
+add
+
+get_reads_caller.m
+file
+
+
+
+add
+
+sge
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+svn:special
+
+perform_parametric_tests.m
+file
+
+
+
+add
+

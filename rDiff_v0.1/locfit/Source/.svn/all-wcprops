@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source
+END
+local.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/local.h
+END
+mutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/mutil.h
+END
+lfev.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lfev.h
+END
+lffuns.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lffuns.h
+END
+tube.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/tube.h
+END
+liblocf.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/liblocf.c
+END
+mut.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/mut.h
+END
+mexlf.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/mexlf.c
+END
+design.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/design.h
+END
+liblfev.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/liblfev.c
+END
+lfwin.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lfwin.h
+END
+libtube.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/libtube.c
+END
+lfstruc.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lfstruc.h
+END
+mlfut.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/mlfut.c
+END
+locf.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/locf.h
+END
+lfcons.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lfcons.h
+END
+mexpp.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/mexpp.c
+END
+libmut.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/libmut.c
+END
+lfev.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/lfev.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/ag-raetsch/!svn/ver/20806/tools/chronux/locfit/Source/Makefile
+END
