@@ -1,6 +1,6 @@
 function [COMB_MEAN,COMB_VARIANCE]=get_mean_variance_seg(gene_expression_1,gene_expression_2,region_counts_1,region_counts_2,variance_function_parametric_1, variance_function_parametric_2)
 
-%keyboard
+
 COMB_READS_PER_EXON=[region_counts_1;region_counts_2];
 GENE_EXPRESSION=[gene_expression_1';gene_expression_2'];
 IX_SAMPLE1=1:length(gene_expression_1);
@@ -16,8 +16,8 @@ for i=1:size(region_counts_1,2)
     SR_VECT=GENE_EXPRESSION;
     
     %Are there any counts at all in the region?
-    if sum(INTEN1+INTEN2)>0
-        %ompute the means under the null hypothesis
+    if sum(INTENSITY)>0
+        %Compute the means under the null hypothesis
         Q=(INTENSITY./SR_VECT)/sum(SR_VECT>0);
         
         if sum(isnan(SR_VECT))
@@ -34,6 +34,7 @@ for i=1:size(region_counts_1,2)
     end
     
 end
+
 VARIANCE1= predict_variance(COMB_MEAN(1,:)',variance_function_parametric_1)';
 VARIANCE2= predict_variance(COMB_MEAN(2,:)',variance_function_parametric_2)';
 

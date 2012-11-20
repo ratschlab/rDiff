@@ -16,7 +16,7 @@ COUNTS=cell(size(genes,2),1);
 
 
 % NON_PARAM_SAMPLE contains the read start density 
-if CFG.perform_nonparmetric
+if CFG.perform_nonparametric
     NON_PARAM_SAMPLE=sparse([],[],[],10000,1,5000);
 end
 
@@ -53,6 +53,8 @@ for i=1:size(genes,2)
   %Get the reads from gene
 
   [reads] = get_reads_for_gene(CFG,gene);
+
+%  keyboard
  
   %Get total number of reads
   NR_OF_READS=size(reads,1);
@@ -84,7 +86,7 @@ for i=1:size(genes,2)
   
   
   %Get Counts for nonparametric variance function
-  if CFG.perform_nonparmetric
+  if CFG.perform_nonparametric
       %Get the read starts
       [TEMP,START]=max(reads,[],2); 
       read_starts=sparse((1:NR_OF_READS)',START,ones(NR_OF_READS,1),NR_OF_READS,size(reads,2),NR_OF_READS);
@@ -142,7 +144,7 @@ for i=1:size(genes,2)
 end
 fprintf('\n')
 %Save the counts
-OUT_FILENAME=[CFG.outfile_prefix '.mat'];
+OUT_FILENAME=[CFG.outfile_prefix];
 save(OUT_FILENAME,'COUNTS')
 %Save the nonparametric histogram
 

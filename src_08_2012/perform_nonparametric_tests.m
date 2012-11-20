@@ -116,6 +116,11 @@ for j = 1:CFG.rproc_num_jobs
                 if CFG.perform_nonparametric
                     if not(isempty(P_VALS{k,COUNTER}))
                         P_values_rDiff_nonparametric(IDX(k))=P_VALS{k,COUNTER}{1};
+			if length(P_VALS{k,COUNTER})>1
+			  if iscell(P_VALS{k,COUNTER}{2}) && length(P_VALS{k,COUNTER}{2}{3})>3
+			    P_values_rDiff_nonparametric(IDX(k))=min(10*min(P_VALS{k,COUNTER}{2}{3})+max(P_VALS{k,COUNTER}{2}{3})*(10/(CFG.bootstraps+1)),1);
+			  end
+			end
                         if not(isempty(P_VALS{k,COUNTER}{2}))
                             P_values_rDiff_nonparametric_error_flag{IDX(k)}='NOT_TESTED';
                         else

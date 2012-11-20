@@ -209,7 +209,7 @@ statistic=statistic(:,1:COUNTER);
 
 pval=double(sum(bootstrap_results>=statistic,2)) / COUNTER;
 
-info = {bootstrap_results,statistic,max(pval)};
+info = {bootstrap_results,statistic,pval};
 pval=min(pval)*10;
 
 function result = eucl_dist_weigthed(A,B,W)
