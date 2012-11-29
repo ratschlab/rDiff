@@ -1,6 +1,6 @@
 function []=perform_nonparametric_tests(CFG,genes,variance_function_nonparametric_1, variance_function_nonparametric_2)
 
-
+keyboard
 
 %Get the gene expression
 fprintf('Loading gene expression\n')

@@ -111,9 +111,9 @@ CFG.nr_of_slices=10;
 
 % Tests to perform
 CFG.perform_nonparametric=1;
-CFG.perform_parametric=1;
-CFG.perform_mmd=1;
-CFG.perform_poisson=1;
+CFG.perform_parametric=0;
+CFG.perform_mmd=0;
+CFG.perform_poisson=0;
 
 
 %%%%% rproc settings %%%%%
