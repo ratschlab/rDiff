@@ -12,6 +12,6 @@ rDiff_paths=[rDiff_paths ':' './tools/'];
 rDiff_paths=[rDiff_paths ':' './tools/read_utils/'];
 rDiff_paths=[rDiff_paths ':' './variance/'];
 rDiff_paths=[rDiff_paths ':' genpath('./locfit/')];
-rDiff_paths=[rDiff_paths ':' '/fml/ag-raetsch/home/drewe/svn/tools/utils/'];
-rDiff_paths=[rDiff_paths ':' '/fml/ag-raetsch/home/drewe/svn/tools/rproc/'];
+%rDiff_paths=[rDiff_paths ':' '/fml/ag-raetsch/home/drewe/svn/tools/utils/'];
+%rDiff_paths=[rDiff_paths ':' '/fml/ag-raetsch/home/drewe/svn/tools/rproc/'];
 addpath(rDiff_paths);

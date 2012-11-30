@@ -5,29 +5,29 @@ function CFG = configure_rDiff(CFG)
 
 % Give the filenames of the bam-files to be considered
 %CFG.BAM_FILES={'S2_DRSC_CG8144_RNAi_1.sorted.bam','S2_DRSC_CG8144_RNAi_3.sorted.bam','S2_DRSC_CG8144_RNAi_4.sorted.bam','S2_DRSC_Untreated_1.sorted.bam','S2_DRSC_Untreated_3.sorted.bam','S2_DRSC_Untreated_4.sorted.bam'};
-CFG.BAM_FILES={'condition_A_replicate_1_large_var.bam','condition_A_replicate_2_large_var.bam','condition_B_replicate_1_large_var.bam','condition_B_replicate_2_large_var.bam'};
+CFG.BAM_FILES={'S2_DRSC_CG8144_RNAi_3.sorted.bam','S2_DRSC_CG8144_RNAi_4.sorted.bam','S2_DRSC_Untreated_3.sorted.bam','S2_DRSC_Untreated_4.sorted.bam'};
 
 %Name of the experiment. Use the FILENAMES if the entries are empty.
-CFG.NAMES={'A1','A2','B1','B2'};
+CFG.NAMES={'2_DRSC_3','2_DRSC_4','S2_3','S2_4'};
 
 
 % Give the directory where the bam-files are
-CFG.data_dir = '/Users/drewe/Data/rdiff/arti/';
+CFG.data_dir = '/fml/ag-raetsch/nobackup/projects/sequencing_runs/D_melanogaster/reads/rdiff/';
 
 % Indicate to which sample the bam-files belong
 CFG.SAMPLES=[1,1,2,2];
 
 % Location of the gene structure
-CFG.genes_path='/Users/drewe/Data/rdiff/arti/genes_label_large_var.mat';
+CFG.genes_path='/fml/ag-raetsch/nobackup/projects/sequencing_runs/D_melanogaster/reads/modEncode/genome/annotation/modencode/dm_modencode_genes.mat';
 
 % Output directory
-CFG.out_base =  '/Users/drewe/Data/rdiff/arti/out';
+CFG.out_base =  '/fml/ag-raetsch/nobackup/projects/difftest/drosophila/';
 
 % Output directory for temporary files
-CFG.out_base_temp =  '/Users/drewe/Data/rdiff/arti/out/temp/';
+CFG.out_base_temp =  '/fml/ag-raetsch/nobackup/projects/difftest/drosophila/temp/';
 
 %Length of the reads
-CFG.sequenced_length=75;
+CFG.sequenced_length=36;
 
 % Prefix for the chromosome name when getting geetting reads from
 % the bam-files
@@ -117,7 +117,7 @@ CFG.perform_poisson=0;
 
 
 %%%%% rproc settings %%%%%
-CFG.use_rproc = 0; % 1: cluster submission or 0: locally
+CFG.use_rproc = 1; % 1: cluster submission or 0: locally
 if CFG.use_rproc,
     CFG.rproc_num_jobs              = 100;
     CFG.rproc_memreq                = 8000;

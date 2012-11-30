@@ -1,0 +1,63 @@
+10
+
+dir
+0
+https://svn.tuebingen.mpg.de/ag-raetsch/projects/RNASeq/difftest/rDiff_release/tools
+https://svn.tuebingen.mpg.de/ag-raetsch
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+e1793c9e-67f9-0310-80fc-b846ff1f7b36
+
+detect_overlapping_regions.m
+file
+
+
+
+add
+
+compute_testing_region.m
+file
+
+
+
+add
+
+read_utils
+dir
+
+
+
+add
+
+transform_single_end_reads.m
+file
+
+
+
+add
+
+convert_reads_to_region_indicators.m
+file
+
+
+
+add
+
