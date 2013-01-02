@@ -11,15 +11,15 @@
 
 
 export RDIFF_VERSION=0.1
-export RDIFF_PATH=/fml/ag-raetsch/home/raetsch/svn/releases/rDiff/trunk
-export RDIFF_SRC_PATH=/fml/ag-raetsch/home/raetsch/svn/releases/rDiff/trunk/src
-export RDIFF_BIN_PATH=/fml/ag-raetsch/home/raetsch/svn/releases/rDiff/trunk/bin
+export RDIFF_PATH=/Users/drewe/git/software/rdiff/
+export RDIFF_SRC_PATH=/Users/drewe/git/software/rdiff//src
+export RDIFF_BIN_PATH=/Users/drewe/git/software/rdiff//bin
 export INTERPRETER=octave
-export MATLAB_BIN_PATH=/fml/ag-raetsch/share/software/matlab/bin/matlab
-export MATLAB_MEX_PATH=/fml/ag-raetsch/share/software/matlab/bin/mex
-export MATLAB_INCLUDE_DIR=/fml/ag-raetsch/share/software/matlab/extern/include
-export OCTAVE_BIN_PATH=/fml/ag-raetsch/share/software/octave-3.0.3/bin/octave
-export OCTAVE_MKOCT=/fml/ag-raetsch/share/software/octave-3.0.3/bin/mkoctfile
-export SAMTOOLS_DIR=/fml/ag-raetsch/share/software/samtools
-export PYTHON_PATH=/usr/bin/python
-export SCIPY_PATH=/fml/ag-raetsch/home/vipin/lib/python2.5/site-packages/
+export MATLAB_BIN_PATH=/Applications/MATLAB_R2012b.app/bin/matlab
+export MATLAB_MEX_PATH=/Applications/MATLAB_R2012b.app/bin/mex
+export MATLAB_INCLUDE_DIR=/Applications/MATLAB_R2012b.app/extern/include/
+export OCTAVE_BIN_PATH=/Applications/Octave.app/Contents/MacOS/Octave
+export OCTAVE_MKOCT=/Applications/Octave.app/Contents/Resources/bin/mkoctfile
+export SAMTOOLS_DIR=/Users/drewe/Programs/samtools-0.1.18/
+export PYTHON_PATH=/usr/bin/python2.7
+export SCIPY_PATH=

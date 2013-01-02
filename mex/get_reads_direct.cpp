@@ -1,13 +1,4 @@
-/*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*   Written (W) 2010-2011 Jonas Behr, Regina Bohnert, Gunnar Raetsch
-*   Copyright (C) 2010-2011 Max Planck Society
-*/
-
+/* written by Jonas Behr, Regina Bohnert and Gunnar Raetsch, FML Tuebingen, Germany, 2010 */
 
 #include <stdio.h>
 #include <assert.h>
@@ -55,7 +46,7 @@ static int pileup_func(uint32_t tid, uint32_t pos, int n, const bam_pileup1_t *p
 }
 #endif
 int parse_sam_line(char* line, CRead* read);
-//int set_strand(char c);
+int set_strand(char c);
 //void parse_cigar(bam1_t* b, CRead* read);
 void parse_cigar(bam1_t* b, CRead* read, bam_header_t* header);
 
@@ -63,7 +54,7 @@ void parse_cigar(bam1_t* b, CRead* read, bam_header_t* header);
 int get_reads_from_bam(char* filename, char* region, vector<CRead*>* reads, char strand, int lsubsample)
 {
 	subsample = lsubsample;
-	//set_strand(strand);
+	set_strand(strand);
 
 	srand (time(NULL));
 	//srand (1234);
@@ -134,16 +125,13 @@ int bam_fetch_reads(bamFile fp, const bam_index_t *idx, int tid, int beg, int en
 						CRead* read = new CRead();
 						parse_cigar(b, read, header);
 
-						if (strand == '0' || strand==read->strand[0] || read->strand[0]=='0')
+						if (strand == '0' || strand==read->strand[0])
 						{
-							read->left = (b->core.flag & left_flag_mask) >0;
-							read->right = (b->core.flag & right_flag_mask) >0;
-							read->reverse = (b->core.flag & reverse_flag_mask) >0;
 							reads->push_back(read);
 						}
-						else 
+						else if (read->strand[0]=='0')
 						{
-							delete read;
+							reads->push_back(read);
 						}
 						//else if (read->strand[0]=='0'&&((b->core.flag & g_flag_off) >0))
 						//{
@@ -173,8 +161,6 @@ void parse_cigar(bam1_t* b, CRead* read, bam_header_t* header)
 {
 	read->start_pos = b->core.pos+1;
 	read->set_strand('0');
-	read->read_id = new char[100];
-	sprintf(read->read_id, "%s\0", bam1_qname(b));
 
 	for (int k = 0; k < b->core.n_cigar; ++k) 
 	{
@@ -279,20 +265,19 @@ void parse_cigar(bam1_t* b, CRead* read, bam_header_t* header)
 	}
 }
 
-//int set_strand(char c)
-//{
-//	if (c=='+')
-//	{
-//		char* fl = (char*) "0x0010";
-//		g_flag_on = strtol(fl, 0, 0);
-//		g_flag_off = 0;
-//	}
-//	else if (c=='-')
-//	{
-//		char* fl = (char*) "0x0010";
-//		g_flag_off = strtol(fl, 0, 0);
-//		g_flag_on = 0;
-//	}
-//	return 0;
-//}
+int set_strand(char c)
+{
+	if (c=='+')
+	{
+		char* fl = (char*) "0x0010";
+		g_flag_on = strtol(fl, 0, 0);
+		g_flag_off = 0;
+	}
+	else if (c=='-')
+	{
+		char* fl = (char*) "0x0010";
+		g_flag_off = strtol(fl, 0, 0);
+		g_flag_on = 0;
+	}
+}
 
