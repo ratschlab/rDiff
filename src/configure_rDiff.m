@@ -4,15 +4,14 @@ function CFG = configure_rDiff(CFG)
 %%% rDiff parameters %%%
 
 % Give the filenames of the bam-files to be considered
-%CFG.BAM_FILES={'S2_DRSC_CG8144_RNAi_1.sorted.bam','S2_DRSC_CG8144_RNAi_3.sorted.bam','S2_DRSC_CG8144_RNAi_4.sorted.bam','S2_DRSC_Untreated_1.sorted.bam','S2_DRSC_Untreated_3.sorted.bam','S2_DRSC_Untreated_4.sorted.bam'};
-CFG.BAM_FILES={'condition_A_replicate_1_large_var.bam','condition_A_replicate_2_large_var.bam','condition_B_replicate_1_large_var.bam','condition_B_replicate_2_large_var.bam'};
+CFG.BAM_FILES={'condition_A_replicate_1.bam','condition_A_replicate_2.bam','condition_B_replicate_1.bam','condition_B_replicate_2.bam'};
 
 %Name of the experiment. Use the FILENAMES if the entries are empty.
 CFG.NAMES={'A1','A2','B1','B2'};
 
 
 % Give the directory where the bam-files are
-CFG.data_dir = '/Users/drewe/Data/rdiff/arti/';
+CFG.data_dir = '/Users/USER/git/rDiff/data/';
 
 % Indicate to which sample the bam-files belong
 CFG.SAMPLES=[1,1,2,2];
@@ -21,10 +20,10 @@ CFG.SAMPLES=[1,1,2,2];
 CFG.genes_path='/Users/drewe/Data/rdiff/arti/genes_label_large_var.mat';
 
 % Output directory
-CFG.out_base =  '/Users/drewe/Data/rdiff/arti/out';
+CFG.out_base =  '/Users/USER/git/rDiff/data';
 
 % Output directory for temporary files
-CFG.out_base_temp =  '/Users/drewe/Data/rdiff/arti/out/temp/';
+CFG.out_base_temp =  '/Users/USER/git/rDiff/data/temp/';
 
 %Length of the reads
 CFG.sequenced_length=75;
@@ -110,7 +109,7 @@ CFG.bootstraps=1000;
 CFG.nr_of_slices=10;
 
 % Tests to perform
-CFG.perform_nonparametric=1;
+CFG.perform_nonparametric=0;
 CFG.perform_parametric=0;
 CFG.perform_mmd=0;
 CFG.perform_poisson=0;

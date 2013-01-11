@@ -1,34 +1,76 @@
 #!/usr/bin/env python
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# Written (W) 2010 Vipin T Sreedharan
-# Copyright (C) 2010 Max Planck Society
-#
-
 """
-Description: Parse genome annotation from a GFF3 (a tab delimited format for storing sequence features and annotations:
-http://www.sequenceontology.org/gff3.shtml) 
-file and create gene struct which can be used for rQuant downstream processing.
+Extract genome annotation from a GFF3 (a tab delimited 
+format for storing sequence features and annotations:
+http://www.sequenceontology.org/gff3.shtml) file.
+
+Usage: ParseGFF.py in.gff3 out.mat 
+
+Requirements: 
+    Scipy :- http://scipy.org/ 
+    Numpy :- http://numpy.org/ 
+
+Copyright (C)	2009-2012 Friedrich Miescher Laboratory of the Max Planck Society, Tubingen, Germany 
+		2012- Memorial Sloan-Kettering Cancer Center, New York City, USA 
 """
 
-import re, sys, os
-import scipy.io
+import re, sys
+import scipy.io as sio
+import numpy as np
 
-def CreateExon(strand_p, five_p_utr, cds_cod, three_p_utr):
-    """Create exon cordinates from UTR's and CDS region"""
-     
+def addCDSphase(strand, cds):
+    """Add CDS phase to the CDS exons
+    """
+    cds_region, cds_flag = [], 0
+    if strand == '+':
+        for cdspos in cds:
+            if cds_flag == 0:
+                cdspos = (cdspos[0], cdspos[1], 0)
+                diff = (cdspos[1]-(cdspos[0]-1))%3
+            else:
+                xy = 0
+                if diff == 0:
+                    cdspos = (cdspos[0], cdspos[1], 0)
+                elif diff == 1:
+                    cdspos = (cdspos[0], cdspos[1], 2)
+                    xy = 2
+                elif diff == 2:
+                    cdspos = (cdspos[0], cdspos[1], 1)
+                    xy = 1
+                diff = ((cdspos[1]-(cdspos[0]-1))-xy)%3
+            cds_region.append(cdspos)
+            cds_flag = 1
+    elif strand == '-':
+        cds.reverse()
+        for cdspos in cds:
+            if cds_flag == 0:
+                cdspos = (cdspos[0], cdspos[1], 0)
+                diff = (cdspos[1]-(cdspos[0]-1))%3
+            else:
+                xy = 0
+                if diff == 0:
+                    cdspos = (cdspos[0], cdspos[1], 0)
+                elif diff == 1:
+                    cdspos = (cdspos[0], cdspos[1], 2)
+                    xy = 2
+                elif diff == 2:
+                    cdspos = (cdspos[0], cdspos[1], 1)
+                    xy = 1
+                diff = ((cdspos[1]-(cdspos[0]-1))-xy)%3
+            cds_region.append(cdspos)
+            cds_flag = 1
+        cds_region.reverse()
+    return cds_region
+
+def createExon(strand_p, five_p_utr, cds_cod, three_p_utr):
+    """Create exon cordinates from UTR's and CDS region
+    """
     exon_pos = []
     if strand_p == '+':        
         utr5_start, utr5_end = 0, 0
         if five_p_utr != []:
-            utr5_start = five_p_utr[-1][0] 
-            utr5_end = five_p_utr[-1][1]
-        cds_5start = cds_cod[0][0]
-        cds_5end = cds_cod[0][1]  
+            utr5_start, utr5_end = five_p_utr[-1][0], five_p_utr[-1][1] 
+        cds_5start, cds_5end = cds_cod[0][0], cds_cod[0][1]
         jun_exon = []
         if cds_5start-utr5_end == 0 or cds_5start-utr5_end == 1:
             jun_exon = [utr5_start, cds_5end]    
@@ -155,234 +197,336 @@ def CreateExon(strand_p, five_p_utr, cds_cod, three_p_utr):
     return exon_pos
 
 def init_gene():
-    """Initializing the gene structure"""
-    
-    gene_details = dict(chr = '', exons = [], gene_info = {}, id = '', is_alt_spliced = 0, name = '', source = '', start = '', stop = '', strand = '', transcripts = [])
+    """Initializing the gene structure
+    """
+    gene_details=dict(
+                    id = '', 
+                    anno_id = [],
+                    confgenes_id = [],
+                    name = '',
+                    source = '',
+                    gene_info = {},
+                    alias = '',
+                    name2 = [],
+                    strand = '',
+                    chr = '',
+                    chr_num = [],
+                    paralogs = [],
+                    start = '',
+                    stop = '',
+                    transcripts = [],
+                    transcript_info = [],
+                    transcript_status = [],
+                    transcript_valid = [],
+                    exons = [],
+                    exons_confirmed = [],
+                    cds_exons = [],
+                    utr5_exons = [],
+                    utr3_exons = [],
+                    tis = [],
+                    tis_conf = [],
+                    tis_info = [],
+                    cdsStop = [],
+                    cdsStop_conf = [],
+                    cdsStop_info = [],
+                    tss = [],
+                    tss_info = [],
+                    tss_conf = [],
+                    cleave = [],
+                    cleave_info = [],
+                    cleave_conf = [],
+                    polya = [],
+                    polya_info = [],
+                    polya_conf = [],
+                    is_alt = [],
+                    is_alt_spliced = 0,
+                    is_valid = [],
+                    transcript_complete = [],
+                    is_complete = [],
+                    is_correctly_gff3_referenced = '',
+                    splicegraph = []
+                    )
     return gene_details
 
 def FeatureValueFormat(singlegene):
-    """Make feature value compactable to write in a .mat format"""
-
-    ## based on the feature set including for rQuant process each genes selected feature values. 
-    import numpy as np
+    """Make feature value compactable to write in a .mat format
+    """
     comp_exon = np.zeros((len(singlegene['exons']),), dtype=np.object)
     for i in range(len(singlegene['exons'])):
         comp_exon[i]= np.array(singlegene['exons'][i])
     singlegene['exons'] = comp_exon
+    comp_cds = np.zeros((len(singlegene['cds_exons']),), dtype=np.object)
+    for i in range(len(singlegene['cds_exons'])):
+        comp_cds[i]= np.array(singlegene['cds_exons'][i])
+    singlegene['cds_exons'] = comp_cds
+    comp_utr3 = np.zeros((len(singlegene['utr3_exons']),), dtype=np.object)
+    for i in range(len(singlegene['utr3_exons'])):
+        comp_utr3[i]= np.array(singlegene['utr3_exons'][i])
+    singlegene['utr3_exons'] = comp_utr3
+    comp_utr5 = np.zeros((len(singlegene['utr5_exons']),), dtype=np.object)
+    for i in range(len(singlegene['utr5_exons'])):
+        comp_utr5[i]= np.array(singlegene['utr5_exons'][i])
+    singlegene['utr5_exons'] = comp_utr5
     comp_transcripts = np.zeros((len(singlegene['transcripts']),), dtype=np.object)
     for i in range(len(singlegene['transcripts'])):
-        comp_transcripts[i] = np.array(singlegene['transcripts'][i])
+        comp_transcripts[i]= np.array(singlegene['transcripts'][i])
     singlegene['transcripts'] = comp_transcripts
+    comp_tss = np.zeros((len(singlegene['tss']),), dtype=np.object)
+    for i in range(len(singlegene['tss'])):
+        comp_tss[i]= np.array(singlegene['tss'][i])
+    singlegene['tss'] = comp_tss
+    comp_tis = np.zeros((len(singlegene['tis']),), dtype=np.object)
+    for i in range(len(singlegene['tis'])):
+        comp_tis[i]= np.array(singlegene['tis'][i])
+    singlegene['tis'] = comp_tis
+    comp_cleave = np.zeros((len(singlegene['cleave']),), dtype=np.object)
+    for i in range(len(singlegene['cleave'])):
+        comp_cleave[i]= np.array(singlegene['cleave'][i])
+    singlegene['cleave'] = comp_cleave
+    comp_cdsStop = np.zeros((len(singlegene['cdsStop']),), dtype=np.object)
+    for i in range(len(singlegene['cdsStop'])):
+        comp_cdsStop[i]= np.array(singlegene['cdsStop'][i])
+    singlegene['cdsStop'] = comp_cdsStop
+
     return singlegene 
 
 def CreateGeneModels(genes_cmpt, transcripts_cmpt, exons_cmpt, utr3_cmpt, utr5_cmpt, cds_cmpt):
-    """Creating Coding/Non-coding gene models from parsed GFF objects."""
-
+    """Creating Coding/Non-coding gene models from parsed GFF objects.
+    """
     gene_counter, gene_models = 1, []
     for gene_entry in genes_cmpt: ## Figure out the genes and transcripts associated feature 
         if gene_entry in transcripts_cmpt:
-            gene = init_gene() ## gene section related tags
-            gene['id'] = gene_counter
-            gene['name'] = gene_entry[1]
-            gene['chr'] = genes_cmpt[gene_entry]['chr']
-            gene['source'] = genes_cmpt[gene_entry]['source']
-            gene['start'] = genes_cmpt[gene_entry]['start']
-            gene['stop'] = genes_cmpt[gene_entry]['stop']
-            gene['strand'] = genes_cmpt[gene_entry]['strand']
-            if gene['strand'] != '+' and gene['strand'] != '-': gene['strand'] = '.' # Strand info not known replaced with a dot symbol instead of None, ?, . etc.
-            general_info = dict()
-            ## TODO add more gene related information from attribute column of GFF file based on the reserved key words
-            if 'Name' in genes_cmpt[gene_entry]:general_info['Name'] = genes_cmpt[gene_entry]['Name']
-            if 'Note' in genes_cmpt[gene_entry]:general_info['Note'] = genes_cmpt[gene_entry]['Note']
-            if 'Alias' in genes_cmpt[gene_entry]:general_info['Alias'] = genes_cmpt[gene_entry]['Alias']
-            if general_info == {}:general_info['ID'] = gene_entry[1]
-            gene['gene_info'] = general_info
-            if len(transcripts_cmpt[gene_entry]) > 1:gene['is_alt_spliced'] = 1
+            gene=init_gene() 
+            gene['id']=gene_counter
+            gene['name']=gene_entry[1]
+            gene['chr']=genes_cmpt[gene_entry]['chr']
+            gene['source']=genes_cmpt[gene_entry]['source']
+            gene['start']=genes_cmpt[gene_entry]['start']
+            gene['stop']=genes_cmpt[gene_entry]['stop']
+            gene['strand']=genes_cmpt[gene_entry]['strand']
+            if not gene['strand'] in ['+', '-']:
+                gene['strand']='.' # Strand info not known replaced with a dot symbol instead of None, ?, . etc.
+            if len(transcripts_cmpt[gene_entry])>1:
+                gene['is_alt_spliced'] = 1
+                gene['is_alt'] = 1
+	    gtype=[]
             for tids in transcripts_cmpt[gene_entry]: ## transcript section related tags 
                 gene['transcripts'].append(tids['ID'])
-                exon_cod = []
-                if len(exons_cmpt) != 0: ## rQuant requires only exon coordinates of the transcripts 
-                    if (gene['chr'], tids['ID']) in exons_cmpt:
-                        for feat_exon in exons_cmpt[(gene['chr'], tids['ID'])]:exon_cod.append([feat_exon['start'], feat_exon['stop']])
-                else: ## build exon coordinates from UTR3, UTR5 and CDS
-                    utr5_pos, cds_pos, utr3_pos = [], [], []
-                    if (gene['chr'], tids['ID']) in utr5_cmpt:
-                        for feat_utr5 in utr5_cmpt[(gene['chr'], tids['ID'])]:utr5_pos.append([feat_utr5['start'], feat_utr5['stop']])
-                    if (gene['chr'], tids['ID']) in cds_cmpt:
-                        for feat_cds in cds_cmpt[(gene['chr'], tids['ID'])]:cds_pos.append([feat_cds['start'], feat_cds['stop']])
-                    if (gene['chr'], tids['ID']) in utr3_cmpt:
-                        for feat_utr3 in utr3_cmpt[(gene['chr'], tids['ID'])]:utr3_pos.append([feat_utr3['start'], feat_utr3['stop']])
-                    exon_cod = CreateExon(gene['strand'], utr5_pos, cds_pos, utr3_pos) 
-                ## generalize the coordinate system for exons, GFF file may contain ascending or descending order.
-                if gene['strand'] == '-':
-                    if exon_cod != [] and len(exon_cod) != 1:
-                        if exon_cod[0][0] > exon_cod[-1][0]: exon_cod.reverse()
-                if exon_cod: gene['exons'].append(exon_cod)
-            ## make a compact form of features in each gene struct to write into .mat format.
-            gene = FeatureValueFormat(gene)
-            gene_counter += 1
+		gtype.append(tids['type'])
+                exon_cod, utr5_cod, utr3_cod, cds_cod = [], [], [], []
+                if (gene['chr'], tids['ID']) in exons_cmpt:
+                    exon_cod = [[feat_exon['start'], feat_exon['stop']] for feat_exon in exons_cmpt[(gene['chr'], tids['ID'])]]
+                if (gene['chr'], tids['ID']) in utr5_cmpt:
+                    utr5_cod = [[feat_utr5['start'], feat_utr5['stop']] for feat_utr5 in utr5_cmpt[(gene['chr'], tids['ID'])]]
+                if (gene['chr'], tids['ID']) in utr3_cmpt:
+                    utr3_cod = [[feat_utr3['start'], feat_utr3['stop']] for feat_utr3 in utr3_cmpt[(gene['chr'], tids['ID'])]]
+                if (gene['chr'], tids['ID']) in cds_cmpt:
+                    cds_cod = [[feat_cds['start'], feat_cds['stop']] for feat_cds in cds_cmpt[(gene['chr'], tids['ID'])]]
+                if len(exon_cod) == 0: ## build exon coordinates from UTR3, UTR5 and CDS
+                    if cds_cod != []:
+                        exon_cod=createExon(gene['strand'], utr5_cod, cds_cod, utr3_cod) 
+
+                if gene['strand']=='-': ## general order to coordinates
+                    if len(exon_cod) >1:
+                        if exon_cod[0][0] > exon_cod[-1][0]:
+                            exon_cod.reverse()
+                    if len(cds_cod) >1:
+                        if cds_cod[0][0] > cds_cod[-1][0]: 
+                            cds_cod.reverse()
+                    if len(utr3_cod) >1:
+                        if utr3_cod[0][0] > utr3_cod[-1][0]: 
+                            utr3_cod.reverse()
+                    if len(utr5_cod) >1:
+                        if utr5_cod[0][0] > utr5_cod[-1][0]:
+                            utr5_cod.reverse()
+
+                tis, cdsStop, tss, cleave = [], [], [], [] ## speacial sited in the gene region 
+                if cds_cod != []:
+                    if gene['strand'] == '+':
+                        tis = [cds_cod[0][0]]
+                        cdsStop = [cds_cod[-1][1]-3]
+                    elif gene['strand'] == '-':
+                        tis = [cds_cod[-1][1]]
+                        cdsStop = [cds_cod[0][0]+3]
+                if utr5_cod != []:
+                    if gene['strand'] == '+':
+                        tss = [utr5_cod[0][0]]
+                    elif gene['strand'] == '-':
+                        tss = [utr5_cod[-1][1]]
+                if utr3_cod != []:
+                    if gene['strand'] == '+':
+                        cleave = [utr3_cod[-1][1]]
+                    elif gene['strand'] == '-':
+                        cleave = [utr3_cod[0][0]]
+
+                cds_status, exon_status, utr_status = 0, 0, 0 ## status of the complete elements of the gene
+                if cds_cod != []: ## adding phase to the CDS region 
+                    cds_cod_phase = addCDSphase(gene['strand'], cds_cod)
+                    cds_status = 1
+                    gene['cds_exons'].append(cds_cod_phase)
+
+                if exon_cod != []: 
+                    exon_status = 1
+                if utr5_cod != [] or utr3_cod != []: 
+                    utr_status = 1
+                if cds_status != 0 and exon_status != 0 and utr_status != 0:
+                    gene['transcript_status'].append(1)
+                else:
+                    gene['transcript_status'].append(0)
+
+                if exon_cod: ## final check point for a valid gene model 
+                    gene['exons'].append(exon_cod)
+                    gene['utr3_exons'].append(utr3_cod)
+                    gene['utr5_exons'].append(utr5_cod)
+                    gene['tis'].append(tis)
+                    gene['cdsStop'].append(cdsStop)
+                    gene['tss'].append(tss)
+                    gene['cleave'].append(cleave)    
+	    
+	    gtype=list(set(gtype)) ## different types  
+            gene['gene_info']=dict(ID=gene_entry[1],
+				Source=genes_cmpt[gene_entry]['source'],
+				Type=gtype)
+            gene=FeatureValueFormat(gene) ## get prepare for MAT writing 
+            gene_counter+=1
             gene_models.append(gene)
     return gene_models    
 
 def GFFParse(gff_file):
-    """Parsing GFF file based on feature"""
-
-    genes, transcripts, exons, utr3, utr5, cds = {}, {}, {}, {}, {}, {}
-    gff_handle = open(gff_file, "rU")
+    """Parsing GFF file based on feature relationship.
+    """
+    genes, utr5, exons=dict(), dict(), dict()
+    transcripts, utr3, cds=dict(), dict(), dict()
+    # TODO Include growing key words of different non-coding/coding transcripts 
+    features=['mRNA', 'transcript', 'ncRNA', 'miRNA', 'pseudogenic_transcript', 'rRNA', 'snoRNA', 'snRNA', 'tRNA', 'scRNA']
+    gff_handle=open(gff_file, "rU")
     for gff_line in gff_handle:
-        gff_line = gff_line.strip('\n\r').split('\t')
-        if not gff_line:continue
-        if re.match(r'#', gff_line[0]) or re.match(r'>', gff_line[0]):continue
-        if len(gff_line) == 1:continue ## GFF files with genome sequence in FASTA at the end 
-        print gff_line
-        if gff_line[3] == '' or gff_line[4] == '' or gff_line[-1] == '':sys.stdout.write('Warning: invalid GFF line\t' + '\t'.join(gff_line) + '\n');continue
-        if gff_line[2] == 'gene' or gff_line[2] == 'pseudogene':
-            gid, gene_info = None, dict()
-            gene_info['start'] = int(gff_line[3])
-            gene_info['stop'] = int(gff_line[4])
-            gene_info['chr'] = gff_line[0]
-            gene_info['source'] = gff_line[1]
-            gene_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'ID':gid=attr[1];continue 
-                gene_info[attr[0]] = attr[1]
-            genes[(gff_line[0], gid)] = gene_info
-        elif gff_line[2] == 'mRNA' or gff_line[2] == 'transcript' or gff_line[2] == 'ncRNA' or gff_line[2] == 'miRNA' or gff_line[2] == 'pseudogenic_transcript' or gff_line[2] == 'rRNA' or gff_line[2] == 'snoRNA' or gff_line[2] == 'snRNA' or gff_line[2] == 'tRNA' or gff_line[2] == 'scRNA': # TODO Include non coding transcripts 
-            gid, mrna_info = None, dict() 
-            mrna_info['start'] = int(gff_line[3])
-            mrna_info['stop'] = int(gff_line[4])
-            mrna_info['chr'] =  gff_line[0]
-            mrna_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'Parent':gid=attr[1];continue
-                mrna_info[attr[0]] = attr[1]
-            if (gff_line[0], gid) in transcripts:
-                transcripts[(gff_line[0], gid)].append(mrna_info)
-            else:
-                transcripts[(gff_line[0], gid)] = [mrna_info]
-        elif gff_line[2] == 'exon':
-            tids, exon_info = None, dict()
-            exon_info['start'] = int(gff_line[3])
-            exon_info['stop'] = int(gff_line[4])
-            exon_info['chr'] =  gff_line[0]
-            exon_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'Parent':tids=attr[1];continue
-                exon_info[attr[0]] = attr[1]
+        gff_line=gff_line.strip('\n\r').split('\t')
+        if re.match(r'#|>', gff_line[0]): # skip commented line or fasta identifier line 
+            continue
+        if len(gff_line)==1: # skip fasta sequence/empty line if present 
+            continue 
+        assert len(gff_line)==9, '\t'.join(gff_line) # not found 9 tab-delimited fields in this line     
+        if '' in gff_line: # skip this line if there any field with an empty value
+            print 'Skipping..', '\t'.join(gff_line)
+            continue
+        if gff_line[-1][-1]==';': # trim the last ';' character 
+            gff_line[-1]=gff_line[-1].strip(';')
+        if gff_line[2] in ['gene', 'pseudogene']:
+            gid, gene_info=None, dict()
+            gene_info['start']=int(gff_line[3])
+            gene_info['stop']=int(gff_line[4])
+            gene_info['chr']=gff_line[0]
+            gene_info['source']=gff_line[1]
+            gene_info['strand']=gff_line[6]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=') # gff attributes are separated by key=value pair 
+                if attb[0]=='ID':
+                    gid=attb[1]
+                    break
+            genes[(gff_line[0], gid)]=gene_info # store gene information based on the chromosome and gene symbol.
+        elif gff_line[2] in features: 
+            gid, mrna_info=None, dict() 
+            mrna_info['start']=int(gff_line[3])
+            mrna_info['stop']=int(gff_line[4])
+            mrna_info['chr']=gff_line[0]
+            mrna_info['strand']=gff_line[6]
+            mrna_info['type'] = gff_line[2]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=')
+                if attb[0]=='Parent':
+                    gid=attb[1]
+                elif attb[0]=='ID':
+                    mrna_info[attb[0]]=attb[1]
+            for fid in gid.split(','): # child may be mapped to multiple parents ex: Parent=AT01,AT01-1-Protein 
+                if (gff_line[0], fid) in transcripts:
+                    transcripts[(gff_line[0], fid)].append(mrna_info)
+                else:
+                    transcripts[(gff_line[0], fid)]=[mrna_info]
+        elif gff_line[2] in ['exon']:
+            tids, exon_info=None, dict()
+            exon_info['start']=int(gff_line[3])
+            exon_info['stop']=int(gff_line[4])
+            exon_info['chr']=gff_line[0]
+            exon_info['strand']=gff_line[6]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=')
+                if attb[0]=='Parent':
+                    tids=attb[1]
+                    break
             for tid in tids.split(','):
                 if (gff_line[0], tid) in exons:
                     exons[(gff_line[0], tid)].append(exon_info)
                 else:
-                    exons[(gff_line[0], tid)] = [exon_info]
-        elif gff_line[2] == 'five_prime_UTR':
-            utr5_info, tids = dict(), None
-            utr5_info['start'] = int(gff_line[3])
-            utr5_info['stop'] = int(gff_line[4])
-            utr5_info['chr'] =  gff_line[0]
-            utr5_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'Parent':tids=attr[1];continue
-                utr5_info[attr[0]] = attr[1]
+                    exons[(gff_line[0], tid)]=[exon_info]
+        elif gff_line[2] in ['five_prime_UTR']:
+            utr5_info, tids=dict(), None
+            utr5_info['start']=int(gff_line[3])
+            utr5_info['stop']=int(gff_line[4])
+            utr5_info['chr']=gff_line[0]
+            utr5_info['strand']=gff_line[6]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=')
+                if attb[0]=='Parent':
+                    tids=attb[1]
+                    break
             for tid in tids.split(','):
                 if (gff_line[0], tid) in utr5:
                     utr5[(gff_line[0], tid)].append(utr5_info)
                 else:
-                    utr5[(gff_line[0], tid)] = [utr5_info]
-        elif gff_line[2] == 'CDS':
-            cds_info, tids = dict(), None
-            cds_info['start'] = int(gff_line[3])
-            cds_info['stop'] = int(gff_line[4])
-            cds_info['chr'] =  gff_line[0]
-            cds_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'Parent':tids=attr[1];continue
-                cds_info[attr[0]] = attr[1]
+                    utr5[(gff_line[0], tid)]=[utr5_info]
+        elif gff_line[2] in ['CDS']:
+            cds_info, tids=dict(), None
+            cds_info['start']=int(gff_line[3])
+            cds_info['stop']=int(gff_line[4])
+            cds_info['chr']=gff_line[0]
+            cds_info['strand']=gff_line[6]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=')
+                if attb[0]=='Parent':
+                    tids=attb[1]
+                    break
             for tid in tids.split(','):
                 if (gff_line[0], tid) in cds:
                     cds[(gff_line[0], tid)].append(cds_info)
                 else:
-                    cds[(gff_line[0], tid)] = [cds_info]
-        elif gff_line[2] == 'three_prime_UTR':
-            utr3_info, tids = dict(), None
-            utr3_info['start'] = int(gff_line[3])
-            utr3_info['stop'] = int(gff_line[4])
-            utr3_info['chr'] =  gff_line[0]
-            utr3_info['strand'] = gff_line[6]
-            for attr in gff_line[-1].split(';'):
-                if attr == '':continue
-                attr = attr.split('=')
-                if attr[0] == 'Parent':tids=attr[1];continue
-                utr3_info[attr[0]] = attr[1]
+                    cds[(gff_line[0], tid)]=[cds_info]
+        elif gff_line[2] in ['three_prime_UTR']:
+            utr3_info, tids=dict(), None
+            utr3_info['start']=int(gff_line[3])
+            utr3_info['stop']=int(gff_line[4])
+            utr3_info['chr']=gff_line[0]
+            utr3_info['strand']=gff_line[6]
+            for attb in gff_line[-1].split(';'):
+                attb=attb.split('=')
+                if attb[0]=='Parent':
+                    tids=attb[1]
+                    break
             for tid in tids.split(','):
                 if (gff_line[0], tid) in utr3:
                     utr3[(gff_line[0], tid)].append(utr3_info)
                 else:
-                    utr3[(gff_line[0], tid)] = [utr3_info]
+                    utr3[(gff_line[0], tid)]=[utr3_info]
     gff_handle.close()
     return genes, transcripts, exons, utr3, utr5, cds
 
 def __main__():
-    """This function provides a best way to extract genome feature information from a GFF3 file for the rQuant downstream processing"""
-
+    """extract genome feature information 
+    """
     try:
         gff_file = sys.argv[1]
-        gff_source = sys.argv[2]
-        gff_contigs = sys.argv[3]
-        mat_file = sys.argv[4]
+        mat_file = sys.argv[2]
     except:
-        sys.stderr.write('Check Input Requirements:\n\t1. Genome annotation in GFF3\n\t2. Gene model source (all- all source gene models/specify source -help:2nd column in GFF file) ex: Coding_transcript\n\t3. Contig(s) (all- all contigs/comma seperated list of contigs) ex: II,IV\n\t4. Result file name ex: gene_models.mat\n')
+        print __doc__
         sys.exit(-1)
-    
-    ## 1. Check for user supplied contig present in GFF file 
-    contigs = []
-    first_col = os.popen('cut -f 1 ' + gff_file + ' | sort | uniq')
-    for entries in first_col:
-        entries = entries.strip( '\r\n' )
-        if not entries or entries[0] == '#':continue
-        contigs.append(entries)
-    first_col.close() 
-    contig_flag = 0
-    for gff_chr in gff_contigs.split(','):
-        if not gff_chr in contigs:
-            if not gff_chr == 'all':sys.stdout.write('Warning: Contig -' + gff_chr + '- NOT present in GFF file\n');contig_flag +=1
-    if len(gff_contigs.split(',')) == contig_flag:sys.stderr.write('Error: Absence of provided CONTIG(s) in GFF file, Cannot continue, Program terminating.\n');sys.exit(-1)        
-    ## 2. Check for the Source in GFF file 
-    source, feature = [], []
-    twoThree_col = os.popen('cut -f 2 ' + gff_file + ' | sort | uniq')
-    for entries in twoThree_col:
-        entries = entries.strip( '\r\n' ).split( '\t' )
-        if not entries or re.match(r'#', entries[0]):continue
-        source.append(entries[0])
-    twoThree_col.close()
-    source_flag = 0
-    for src in gff_source.split(','):
-        if not src in source:
-            if not src == 'all':sys.stdout.write('Warning: Source -' + src + '- NOT present in GFF file.\n');source_flag +=1
-    if len(gff_source.split(','))==source_flag:sys.stderr.write('Error: Absence of provided SOURCE(s) in GFF file, Cannot continue, Program terminating.\n');sys.exit(-1)        
-    ## 3. Creating gene models based on the following types. 
-    type_col = os.popen('cut -f 3 ' + gff_file + ' | sort | uniq')
-    for types in type_col:
-        types = types.strip('\r\n')
-        if not types or re.match(r'#', types):continue
-        feature.append(types)
-    type_col.close()
-    if len(feature)<3:sys.stderr.write('Error: Creating Gene models need at least 3 features like gene, mRNA, exon. Cannot continue, Program terminating.\n');sys.exit(-1)    
-    ## Parse content according to Parent Child relationship   
-    genes, transcripts, exons, utr3, utr5, cds = GFFParse(gff_file)
-    ## Creating gene struct from parsed GFF content 
-    gene_models = CreateGeneModels(genes, transcripts, exons, utr3, utr5, cds)
-    # TODO Write to matlab struct instead of Cell arrays.
-    # Saving genome annotation features to a .mat file 
-    scipy.io.savemat(mat_file, mdict={'genes':gene_models}, format='5', oned_as='row')
 
-if __name__=='__main__':__main__()
+    genes, transcripts, exons, utr3, utr5, cds = GFFParse(gff_file) 
+    gene_models = CreateGeneModels(genes, transcripts, exons, utr3, utr5, cds)
+    # TODO Write to matlab/octave struct instead of cell arrays.
+    sio.savemat(mat_file, 
+                    mdict=dict(genes=gene_models), 
+                    format='5', 
+                    oned_as='row')
+
+if __name__=='__main__':
+    __main__()

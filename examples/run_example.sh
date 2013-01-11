@@ -77,7 +77,7 @@ echo 1a. load the genome annotation in GFF3 format, create an annotation object 
 if [ ! -f ${GENES_FN} ]
 then
     export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
-    ${PYTHON_PATH} -W ignore::FutureWarning ./ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
+    ${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
     ../bin/genes_cell2struct ${GENES_FN}
 fi
 
