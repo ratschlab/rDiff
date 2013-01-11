@@ -17,4 +17,6 @@ set -e
 PROG=`basename $0`
 DIR=`dirname $0`
 
+echo "${DIR}/genarglist.sh $@"
+
 exec ${DIR}/start_interpreter.sh ${PROG} "`${DIR}/genarglist.sh $@`"

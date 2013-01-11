@@ -77,7 +77,7 @@ CFG.save_variance_function_1='variance_function_1.mat';
 
 % compute variance function for sample 2 ( 1 = yes , 0 = use precomputed
 % variance function saved under CFG.variance_function2) 
-CFG.compute_variance_function_1=1;
+CFG.compute_variance_function_2=1;
 CFG.variance_function_2='';
 CFG.save_variance_function_2='variance_function_2.mat';
 
