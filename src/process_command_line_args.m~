@@ -1,0 +1,12 @@
+function [CFG]=process_command_line_args(CFG,ARGS)
+
+%This function adds the command line arguments to the CFG config variable
+
+  if size(ver('Octave'),1)
+  OctaveMode = 1;
+  else
+    OctaveMode = 0;
+end
+
+
+  ARGS=regexp(ARGS,':','split');
