@@ -24,33 +24,36 @@ echo
 
 if [ -z "$1" -o "$1" == '--help' ];
 then
-  echo Usage: $0 poisson\|poisson_big\|mmd
+  echo Usage: $0 poisson\|param\|noparam
   echo "   or:" $0 --help
   false
 fi
-if [ "$1" != 'poisson' -a "$1" != 'poisson_exp' -a "$1" != 'mmd' ];
+if [ "$1" != 'poisson' -a "$1" != 'param' -a "$1" != 'nonparam' ];
 then
   echo invalid parameter: $1
   false
 fi
 
-FASTA_INPUT=data/c_elegans_WS200-I-regions.fasta
-GFF3_INPUT=data/c_elegans_WS200-I-regions.gff3
-SAM_INPUT1=data/c_elegans_WS200-I-regions-SRX001872.sam
-SAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.sam
-BAM_INPUT1=data/c_elegans_WS200-I-regions-SRX001872.bam
-BAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.bam
-EXP=c_elegans_WS200-I-regions
+#FASTA_INPUT=data/TAIR10.fasta
+GFF3_INPUT=data/genes_example.gff3
+#SAM_INPUT1=data/c_elegans_WS200-I-regions-SRX001872.sam
+#SAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.sam
+                                                                                                                                                                                                                                                                                                                                                              
+BAM_INPUT11=data/example_condition_A_replicate_1.bam,data/example_condition_A_replicate_2.bam
+BAM_INPUT22=data/example_condition_B_replicate_1.bam,data/example_condition_B_replicate_2.bam
+
+
+EXP=Arti
 TEST_METH=$1
 if [ "$1" == 'poisson' ];
 then
     echo Note: Running this script takes about 1 minute \(on a single CPU\).
 fi
-if [ "$1" == 'poisson_exp' ];
+if [ "$1" == 'param' ];
 then
     echo Note: Running this script takes about 1 minute \(on a single CPU\).
 fi
-if [ "$1" == 'mmd' ];
+if [ "$1" == 'nonparam' ];
 then
     echo Note: Running this script takes about 5 minutes \(on a single CPU\).
 fi
@@ -66,21 +69,21 @@ echo % 1. Data preparation %
 echo %%%%%%%%%%%%%%%%%%%%%%%
 echo
 
-GENES_RES_DIR=$RESULTDIR/elegans.anno
+GENES_RES_DIR=$RESULTDIR/genes.anno
 mkdir -p $GENES_RES_DIR
 GENES_FN=${GENES_RES_DIR}/genes.mat
 
-echo 1a. load the genome annotation in GFF3 format \(format version = wormbase\), create an annotation object #\[Log file in ${GENES_RES_DIR}/elegans-gff2anno.log\]
+echo 1a. load the genome annotation in GFF3 format, create an annotation object #\[Log file in ${GENES_RES_DIR}/elegans-gff2anno.log\]
 if [ ! -f ${GENES_FN} ]
 then
     export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
-    ${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} all all ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
+    ${PYTHON_PATH} -W ignore::FutureWarning ./ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
     ../bin/genes_cell2struct ${GENES_FN}
 fi
 
-echo 1b. convert the alignments in SAM format to BAM format
-../tools/./sam_to_bam.sh ${SAMTOOLS_DIR} data ${FASTA_INPUT} ${SAM_INPUT1}
-../tools/./sam_to_bam.sh ${SAMTOOLS_DIR} data ${FASTA_INPUT} ${SAM_INPUT2}
+#echo 1b. convert the alignments in SAM format to BAM format
+#../tools/./sam_to_bam.sh ${SAMTOOLS_DIR} data ${FASTA_INPUT} ${SAM_INPUT1}
+#../tools/./sam_to_bam.sh ${SAMTOOLS_DIR} data ${FASTA_INPUT} ${SAM_INPUT2}
 
 echo
 echo %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,8 +95,8 @@ RDIFF_RES_DIR=$RESULTDIR/rdiff
 mkdir -p $RDIFF_RES_DIR
 RDIFF_RES_FILE=$RDIFF_RES_DIR/${EXP}_rdiff_${TEST_METH}.txt
 
-echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/elegans-rdiff.log\)
-../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} > ${RESULTDIR}/elegans-rdiff.log
+echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/example-rdiff.log\)
+../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} > ${RESULTDIR}/example-rdiff.log
 
 echo
 echo Testing result can be found in $RDIFF_RES_FILE

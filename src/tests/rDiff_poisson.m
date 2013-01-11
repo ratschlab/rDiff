@@ -15,8 +15,25 @@ end
 
 
 %get the samples that are expressed (have more than 10 reads)
-SAMPLE1=find(and(CFG.SAMPLES==1,Gene_expression>=10));
-SAMPLE2=find(and(CFG.SAMPLES==2,Gene_expression>=10));
+TEMP_SAMPLE1=and(CFG.SAMPLES==1,Gene_expression>=10);
+TEMP_SAMPLE2=and(CFG.SAMPLES==2,Gene_expression>=10);
+SAMPLE1=find(TEMP_SAMPLE1);
+SAMPLE2=find(TEMP_SAMPLE2);
+
+%Check wether Counts_rDiff_parametric is nonempty
+for j=1:length(TEMP_SAMPLE1)
+  TEMP_SAMPLE1(j)=and(not(isempty(Counts_rDiff_parametric{j})), ...
+		      TEMP_SAMPLE1(j));
+end
+for j=1:length(TEMP_SAMPLE2)
+  TEMP_SAMPLE2(j)=and(not(isempty(Counts_rDiff_parametric{j})), ...
+		      TEMP_SAMPLE2(j));
+end
+
+SAMPLE1=find(TEMP_SAMPLE1);
+SAMPLE2=find(TEMP_SAMPLE2);
+
+
 
 SAMPLE_LENGTH1=length(SAMPLE1);
 SAMPLE_LENGTH2=length(SAMPLE2);
@@ -67,7 +84,12 @@ for i=1:length(P_LIST)
     
     P_LIST(i)=P_VALUE;
 end
-P_VALUE=min(P_LIST)*(length(P_LIST)-SKIPPED_TESTS);
+if length(P_LIST)-SKIPPED_TESTS<=0
+  P_VALUE=1;
+else
+  P_VALUE=min(P_LIST)*(length(P_LIST)-SKIPPED_TESTS);
+end
+
 RET_STRUCT={};
 return
 
