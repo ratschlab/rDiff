@@ -42,6 +42,10 @@ if CFG.perform_nonparametric
     [variance_function_nonparametric_1, variance_function_nonparametric_2]=estimate_variance_nonparametric(CFG,genes);
 end
 
+if CFG.perform_poisson
+    variance_function_parametric_1=[];
+    variance_function_parametric_2=[];
+end
 
 if CFG.perform_parametric
     variance_function_parametric_1=[];

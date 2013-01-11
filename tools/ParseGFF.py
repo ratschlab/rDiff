@@ -398,7 +398,7 @@ def GFFParse(gff_file):
     genes, utr5, exons=dict(), dict(), dict()
     transcripts, utr3, cds=dict(), dict(), dict()
     # TODO Include growing key words of different non-coding/coding transcripts 
-    features=['mRNA', 'transcript', 'ncRNA', 'miRNA', 'pseudogenic_transcript', 'rRNA', 'snoRNA', 'snRNA', 'tRNA', 'scRNA']
+    features=['mrna', 'transcript', 'ncRNA', 'mirna', 'pseudogenic_transcript', 'rrna', 'snorna', 'snrna', 'trna', 'scrna']
     gff_handle=open(gff_file, "rU")
     for gff_line in gff_handle:
         gff_line=gff_line.strip('\n\r').split('\t')
@@ -412,7 +412,7 @@ def GFFParse(gff_file):
             continue
         if gff_line[-1][-1]==';': # trim the last ';' character 
             gff_line[-1]=gff_line[-1].strip(';')
-        if gff_line[2] in ['gene', 'pseudogene']:
+        if gff_line[2].lower() in ['gene', 'pseudogene']:
             gid, gene_info=None, dict()
             gene_info['start']=int(gff_line[3])
             gene_info['stop']=int(gff_line[4])
@@ -425,7 +425,7 @@ def GFFParse(gff_file):
                     gid=attb[1]
                     break
             genes[(gff_line[0], gid)]=gene_info # store gene information based on the chromosome and gene symbol.
-        elif gff_line[2] in features: 
+        elif gff_line[2].lower() in features: 
             gid, mrna_info=None, dict() 
             mrna_info['start']=int(gff_line[3])
             mrna_info['stop']=int(gff_line[4])
@@ -443,7 +443,7 @@ def GFFParse(gff_file):
                     transcripts[(gff_line[0], fid)].append(mrna_info)
                 else:
                     transcripts[(gff_line[0], fid)]=[mrna_info]
-        elif gff_line[2] in ['exon']:
+        elif gff_line[2].lower() in ['exon']:
             tids, exon_info=None, dict()
             exon_info['start']=int(gff_line[3])
             exon_info['stop']=int(gff_line[4])
@@ -459,7 +459,7 @@ def GFFParse(gff_file):
                     exons[(gff_line[0], tid)].append(exon_info)
                 else:
                     exons[(gff_line[0], tid)]=[exon_info]
-        elif gff_line[2] in ['five_prime_UTR']:
+        elif gff_line[2].lower() in ['five_prime_utr']:
             utr5_info, tids=dict(), None
             utr5_info['start']=int(gff_line[3])
             utr5_info['stop']=int(gff_line[4])
@@ -475,7 +475,7 @@ def GFFParse(gff_file):
                     utr5[(gff_line[0], tid)].append(utr5_info)
                 else:
                     utr5[(gff_line[0], tid)]=[utr5_info]
-        elif gff_line[2] in ['CDS']:
+        elif gff_line[2].lower() in ['cds']:
             cds_info, tids=dict(), None
             cds_info['start']=int(gff_line[3])
             cds_info['stop']=int(gff_line[4])
@@ -491,7 +491,7 @@ def GFFParse(gff_file):
                     cds[(gff_line[0], tid)].append(cds_info)
                 else:
                     cds[(gff_line[0], tid)]=[cds_info]
-        elif gff_line[2] in ['three_prime_UTR']:
+        elif gff_line[2].lower() in ['three_prime_utr']:
             utr3_info, tids=dict(), None
             utr3_info['start']=int(gff_line[3])
             utr3_info['stop']=int(gff_line[4])

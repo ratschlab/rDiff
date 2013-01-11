@@ -40,8 +40,8 @@ GFF3_INPUT="${RDIFF_INPUT_DIR}/genes_example.gff3"
 #SAM_INPUT1=data/c_elegans_WS200-I-regions-SRX001872.sam
 #SAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.sam
                                                                                                                                                                                                                                                                                                                                                               
-BAM_INPUT1="$RDIFF_INPUT_DIR/example_condition_A_replicate_1.bam,$RDIFF_INPUT_DIR/example_condition_A_replicate_2.bam"
-BAM_INPUT2="$RDIFF_INPUT_DIR/example_condition_B_replicate_1.bam,$RDIFF_INPUT_DIR/example_condition_B_replicate_2.bam"
+BAM_INPUT1="example_condition_A_replicate_1.bam,example_condition_A_replicate_2.bam"
+BAM_INPUT2="example_condition_B_replicate_1.bam,example_condition_B_replicate_2.bam"
 
 
 EXP=Arti
@@ -78,6 +78,7 @@ echo 1a. load the genome annotation in GFF3 format, create an annotation object 
 if [ ! -f ${GENES_FN} ]
 then
     export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
+echo "${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} "
     ${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
     ../bin/genes_cell2struct ${GENES_FN}
 fi
@@ -96,9 +97,9 @@ RDIFF_RES_DIR=$RESULTDIR/rdiff
 mkdir -p $RDIFF_RES_DIR
 RDIFF_RES_FILE=$RDIFF_RES_DIR/${EXP}_rdiff_${TEST_METH}.txt
 
-echo "../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
+#echo "../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
 echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/example-rdiff.log\)
-../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log
+../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log
 
 echo
 echo Testing result can be found in $RDIFF_RES_FILE

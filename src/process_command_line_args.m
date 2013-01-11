@@ -32,8 +32,8 @@ function [CFG]=process_command_line_args(CFG,ARGS)
     CFG.NAMES=CFG.BAM_FILES;
     
     
-    % Give the directory where the bam-files are
-    CFG.data_dir = ARGS{7};
+    % Give the directory where the input-files are
+    CFG.data_dir = [ARGS{7} '/'];
     
     % Indicate to which sample the bam-files belong
     CFG.SAMPLES=[repmat(1,1,size(BAMS1,2)),repmat(2,1,size(BAMS2,2))];
@@ -43,7 +43,7 @@ function [CFG]=process_command_line_args(CFG,ARGS)
     
     % Output directory
     
-    CFG.out_base =  ARGS{6};
+    CFG.out_base =  [ARGS{6} '/'];
     
     % Output directory for temporary files
     CFG.out_base_temp =   [CFG.out_base '/temp/'];
@@ -58,5 +58,5 @@ function [CFG]=process_command_line_args(CFG,ARGS)
     if strcmp(ARGS{5},'nonparam')
         CFG.perform_nonparametric=1;
     end
-    
+    pwd
 return
