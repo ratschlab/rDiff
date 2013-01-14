@@ -27,6 +27,7 @@ end
 P_VALS=cell(size(genes,2),NUMBER_OF_TESTS_PER_GENE+12);
 
 
+
 %iterate over genes
 for i=1:size(genes,2)
   %TEMP_COUNT contains the counts for the current gene
@@ -35,7 +36,7 @@ for i=1:size(genes,2)
   
   
   OLD_OUT_STR=OUT_STR;
-  OUT_STR=['Current gene: ' gene.name ' '];
+  OUT_STR=['Current gene: ' gene.name ];
   %print progress
   if CFG.use_rproc
       fprintf([OUT_STR '\n'])
@@ -44,7 +45,7 @@ for i=1:size(genes,2)
       fprintf(repmat('\b',1,length(OLD_OUT_STR)));
       fprintf([OUT_STR])
   end
-  
+ 
   %set default return values
   P_VALS{i,1}=gene.name;
   

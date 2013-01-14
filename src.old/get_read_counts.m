@@ -22,7 +22,7 @@ if CFG.estimate_gene_expression==1
             CFG.rproc_memreq = 5000;
             CFG.rproc_par.mem_req_resubmit = [10000 20000 32000];
             CFG.rproc_par.identifier = sprintf('Exp.%i-',i);  
-            CFG.outfile_prefix=[CFG.out_base_temp CFG.NAMES{RUN} '_' num2str(i) '_of_' num2str(CFG.rproc_num_jobs) '.mat'];
+            CFG.outfile_prefix=[CFG.out_base_temp CFG.NAMES{RUN} '_' num2str(j) '_of_' num2str(CFG.rproc_num_jobs) '.mat'];
             PAR.CFG=CFG;
             if CFG.use_rproc
                 fprintf(1, 'Submitting job %i to cluster\n',i);
@@ -56,14 +56,10 @@ idx=[(1:size(genes,2))',ceil((1:size(genes,2))*CFG.rproc_num_jobs/size(genes,2))
 for RUN=1:size(CFG.BAM_FILES,2)
     for j = 1:CFG.rproc_num_jobs
         IN_FILENAME=[CFG.out_base_temp CFG.NAMES{RUN} '_' num2str(j) '_of_' num2str(CFG.rproc_num_jobs) '.mat'];
-	IDX=idx(idx(:,2)==j,1);
         try
             load(IN_FILENAME)
+            IDX=idx(idx(:,2)==j,1);
             for k=1:length(IDX)
-	        %Check wether COUNTS is empty
-		if isempty(COUNTS{k})
-		    continue
-		end
                 %Get the number of reads mapping to a gene
                 if not(isempty(COUNTS{k}{2}))
                     READS_PER_GENE(IDX(k),RUN)=COUNTS{k}{2};
@@ -133,10 +129,10 @@ fclose(fid)
 
 %Save alternative region count file for rDiff.parametric
 OUT_FILENAME=[CFG.out_base 'Alternative_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_parametric','-v7.3')
+save(OUT_FILENAME,'Counts_rDiff_parametric')
 
 %Save alternative region count file for rDiff.nonparametric
 OUT_FILENAME=[CFG.out_base 'Nonparametric_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_nonparametric','-v7.3')
+save(OUT_FILENAME,'Counts_rDiff_nonparametric')
 
 return

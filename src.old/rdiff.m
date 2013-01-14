@@ -25,9 +25,6 @@ fprintf('Compute regions common to multiple genes\n')
 fprintf('Compute alternative regions\n')
 [genes]=compute_testing_region(CFG,genes);
 
-%Make sure the gene structure has no obvious bugs;
-[genes]=sanitize_genes(genes,CFG);
-
 %Get the gene expression
 if CFG.estimate_gene_expression
     fprintf('Measure gene expression\n')

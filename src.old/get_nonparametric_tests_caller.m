@@ -74,7 +74,8 @@ for i=1:size(genes,2)
     SAMPLE1=find(CFG.SAMPLES==1);
     SAMPLE2=find(CFG.SAMPLES==2);
     
-       
+    
+   
     COUNTER=2;
     
     if CFG.perform_mmd
@@ -97,7 +98,7 @@ for i=1:size(genes,2)
     end
     
     if CFG.perform_nonparametric
-        [PV, INFO]= rDiff_nonparametric(CFG,READ_SET(SAMPLE1),READ_SET(SAMPLE2),variance_function_nonparametric_1, variance_function_nonparametric_2);
+        [PV, INFO]= rDiff_nonparametric(CFG,READ_SET(SAMPLE1),READ_SET(SAMPLE2),variance_function_nonparametric_1, variance_function_nonparametric_2)
         P_VALS{i,COUNTER}={PV, INFO};
         COUNTER=COUNTER+1;
     end

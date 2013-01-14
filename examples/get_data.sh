@@ -7,7 +7,7 @@ echo % rDiff examples: get_data.sh %
 echo % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo 
 echo This script gets reads and the genome sequence 
-echo for one C. elegans example.
+echo for one A.thaliana example.
 echo 
 
 export DATA_DIR=data
@@ -20,10 +20,10 @@ then
 fi
 
 echo Downloading rDiff example data from FTP server ...
-wget -c ftp://ftp.tuebingen.mpg.de/fml/bohnert/rDiff/rdiff_examples.tar.bz2
+wget -c http://cbio.mskcc.org/public/raetschlab/user/drewe/rdiff/example_data.tar.gz
 echo uncompressing ...
-tar -xjf rdiff_examples.tar.bz2
-mv rdiff_examples $DATA_DIR
+tar -xjf example_data.tar.gz
+mv example_data $DATA_DIR
 echo
 echo -n Done.
 echo

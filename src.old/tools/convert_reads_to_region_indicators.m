@@ -1,6 +1,7 @@
 function [NEW_READS,UNEXPLAINED_READS,UNEXPLAINED_INDEX] = convert_reads_to_region_indicators(READS, gene)
 % Convert the reads into counts of EIRS 
 
+
 %UNEXPLAINED_REGIONS
 UNEXPLAINED_REGIONS = 1:(length(gene.splicingevents) - 1);
 UNEXPLAINED_REGIONS(gene.sequence == 0);

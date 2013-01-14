@@ -234,6 +234,7 @@ def GFFParse(gff_file):
         if not gff_line:continue
         if re.match(r'#', gff_line[0]) or re.match(r'>', gff_line[0]):continue
         if len(gff_line) == 1:continue ## GFF files with genome sequence in FASTA at the end 
+        print gff_line
         if gff_line[3] == '' or gff_line[4] == '' or gff_line[-1] == '':sys.stdout.write('Warning: invalid GFF line\t' + '\t'.join(gff_line) + '\n');continue
         if gff_line[2] == 'gene' or gff_line[2] == 'pseudogene':
             gid, gene_info = None, dict()
