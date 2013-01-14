@@ -191,10 +191,25 @@ function [output, delimiter, header_rows] = \
   output.colheaders = [];
 
   ## Read file into string and count the number of header rows
-  file_content = fileread (fname);
-
+  #file_content = fileread (fname);
+  file_content_rows={};
+  fid=fopen(fname);
+  currline=0;
+  firstline=1;
+  while 1==1
+      if not(isempty(currline))
+          if currline==-1
+              break
+          end
+      end     
+      currline=fgetl(fid);
+      file_content_rows{end+1}=currline;
+  end
+  fclose(fid);
+  file_content_rows={file_content_rows{1:(end-1)}};
+  
   ## Split the file into rows (using \r\n or \n as delimiters between rows).
-  file_content_rows = regexp (file_content, "\r?\n", "split");
+  #file_content_rows = regexp (file_content, "\r?\n", "split");
 
   ## FIXME: guess delimiter, if it isn't defined
   if (isempty (delimiter))
@@ -262,6 +277,8 @@ function [output, delimiter, header_rows] = \
   ## Go through the data and put it in either output.data or
   ## output.textdata depending on if it is numeric or not.
   output.data = NaN (length (file_content_rows) - header_rows, data_columns);
+
+  cut_rows=zeros(1,data_columns);
   for i=(header_rows+1):length(file_content_rows)
     ## Only use the row if it contains anything other than white-space
     ## characters.
@@ -273,8 +290,11 @@ function [output, delimiter, header_rows] = \
         ## output.data, otherwise in output.textdata
         if (!isempty (row_data{j}))
           data_numeric = str2double (row_data{j});
-          if (!isempty (data_numeric))
+          if and(!isempty (data_numeric),not(isnan(data_numeric)))
             output.data(i-header_rows, j) = data_numeric;
+            if not(isnan(data_numeric))
+                cut_rows(j)=1;
+            end
           else
             output.textdata{i,j} = row_data{j};
           endif
@@ -283,7 +303,8 @@ function [output, delimiter, header_rows] = \
 
     endif
   endfor
-
+  output.data=output.data(:,cut_rows>0);
+  
   ## Check wether rowheaders or colheaders should be used
   if ((header_rows == data_columns) && (size (output.textdata, 2) == 1))
     output.rowheaders = output.textdata;

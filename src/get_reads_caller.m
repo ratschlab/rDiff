@@ -7,8 +7,6 @@ clear PAR;
 % add paths
 addpath(CFG.paths);
 
-
-
 data_dir=CFG.data_dir;
 OUT_STR=[];
 
@@ -54,7 +52,6 @@ for i=1:size(genes,2)
 
   [reads] = get_reads_for_gene(CFG,gene);
 
-%  keyboard
  
   %Get total number of reads
   NR_OF_READS=size(reads,1);
@@ -108,7 +105,7 @@ for i=1:size(genes,2)
   
   
   %Get counts for parametric settting
-  if CFG.perform_parametric
+  if or(CFG.perform_parametric,CFG.perform_poisson)
       %Get the alternative reads 
       ALT_EIRS=and(sum(gene.eirs_in_seq,1)<NR_OF_TRANS,sum(gene.eirs_in_seq,1)>0);
       

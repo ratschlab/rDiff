@@ -16,7 +16,6 @@ try
 catch
     error(['Could not open: ' EXPR_TAB_FILENAME])
 end
-  
 
 %Get the counts
 fprintf('Loading alternative region counts\n')

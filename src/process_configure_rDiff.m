@@ -9,11 +9,11 @@ end
 
 %Get the paths of the filenames
 for i=find(CFG.SAMPLES==1)
-CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
+  CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
 end
 
 for i=find(CFG.SAMPLES==2)
-CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
+  CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
 end
 
 
