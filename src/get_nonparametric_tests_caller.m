@@ -30,7 +30,6 @@ P_VALS=cell(size(genes,2),NUMBER_OF_TESTS_PER_GENE+2);
 %iterate over genes
 for i=1:size(genes,2)
     
-    
     %TEMP_COUNT contains the counts for the current gene
     TEMP_COUNT=cell(1,3);
     gene = genes(i);

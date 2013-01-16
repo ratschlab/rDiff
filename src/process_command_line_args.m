@@ -47,7 +47,7 @@ function [CFG]=process_command_line_args(CFG,ARGS)
     
     % Output directory for temporary files
     CFG.out_base_temp =   [CFG.out_base '/temp/'];
-    mkdir(CFG.out_base_temp)
+    mkdir(CFG.out_base_temp);
 
     if strcmp(ARGS{5},'poisson')
         CFG.perform_poisson=1;
@@ -58,5 +58,4 @@ function [CFG]=process_command_line_args(CFG,ARGS)
     if strcmp(ARGS{5},'nonparam')
         CFG.perform_nonparametric=1;
     end
-    pwd
 return

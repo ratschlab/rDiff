@@ -7,16 +7,16 @@ SAMDIR=${SAMTOOLS_DIR}
 LFSRC=liblfev.c liblocf.c libmut.c libtube.c
 LIBDIR=../lib
 INSTALLDIR=/usr/local
-#LDFLAGS=-L$(LIBDIR) -Wl,-rpath $(INSTALLDIR)/lib -llfev -ltube -llocf -lmut
-
+#LDFLAGS=-L$(LIBDIR) #-Wl,-rpath $(INSTALLDIR)/lib 
+#LDFLAGS= -lmut
 all: mexlf mexpp
 octave:mexlf_oct mexpp_oct
 matlab:mexlf mexpp
 
 mexlf_oct: mexlf.c mlfut.c
-	${MKOCTFILE} -v -g --mex $(MXFLAGS) $(CFLAGS) mexlf.c mlfut.c $(LDFLAGS)
+	${MKOCTFILE} -v -g --mex $(MXFLAGS) $(CFLAGS) mexlf.c mlfut.c liblocf.c libmut.c libtube.c liblfev.c $(LDFLAGS)
 mexpp_oct: mexpp.c mlfut.c
-	${MKOCTFILE} -v -g --mex $(MXFLAGS) $(CFLAGS) mexpp.c mlfut.c $(LDFLAGS)
+	${MKOCTFILE} -v -g --mex $(MXFLAGS) $(CFLAGS) mexpp.c mlfut.c liblocf.c libmut.c libtube.c liblfev.c  $(LDFLAGS)
 mexlf: mexlf.c mlfut.c
 	${MEX} $(MXFLAGS) $(CFLAGS) mexlf.c mlfut.c $(LDFLAGS)
 mexpp: mexpp.c mlfut.c

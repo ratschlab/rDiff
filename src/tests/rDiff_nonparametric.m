@@ -208,9 +208,7 @@ for i = 1:bootstraps
     statistic(:,COUNTER)=mean(STAT_DIST,2);
     bootstrap_results(:,COUNTER)=mean(TEMP_DIST,2);
 end
-size(all_reads_trans)
 
-keyboard
 bootstrap_results=bootstrap_results(:,1:COUNTER);
 statistic=statistic(:,1:COUNTER);
 

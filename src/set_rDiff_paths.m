@@ -5,7 +5,7 @@ function [rDiff_paths] = set_rDiff_paths()
 rDiff_paths='';
 
 %get the path to the source files
-BASEPATH_SRC=getenv('RDIFF_SRC_PATH')
+BASEPATH_SRC=getenv('RDIFF_SRC_PATH');
 
 %Determine interpreter
 if size(ver('Octave'),1)

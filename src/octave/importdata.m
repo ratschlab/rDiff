@@ -63,6 +63,7 @@
 
 function [output, delimiter, header_rows] = importdata (varargin)
 
+    
   ## Default values
   fname   = "";
   delimiter  = "";
@@ -319,6 +320,14 @@ function [output, delimiter, header_rows] = \
 
 endfunction
 
+
+function [RET]=regexp(ARG1,ARG2,ARG3)
+%ARG3 is always 'split' in this context
+  if (strcmp (ARG2, '\t'))
+    ARG2 = "\t";
+  endif
+  RET = strsplit(ARG1,"\t",fixed=true);
+endfunction
 
 ########################################
 
