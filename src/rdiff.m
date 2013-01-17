@@ -1,4 +1,4 @@
-function []=rdiff()
+function []=rdiff(ARGS)
 % rdiff()
 %
 
