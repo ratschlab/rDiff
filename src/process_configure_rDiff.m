@@ -18,6 +18,7 @@ if INTERPR
     warning('off', 'Octave:future-time-stamp');
     warning('off', 'solve_qp:constraints');
     warning('off', 'Octave:assign-as-truth-value');
+    warning('off', 'Octave:matlab-incompatible');
 else
     warning('off', 'MATLAB:typeaheadBufferOverflow');
 end
