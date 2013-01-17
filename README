@@ -16,6 +16,8 @@ REQUIREMENTS
 - Octave or Matlab
 - Python >=2.6.5 and Scipy >=0.7.1
 - SAMTools >= 0.1.7
+- wget
+
 
 GETTING STARTED
 To install rDiff and the required software please follow the
@@ -51,7 +53,5 @@ rDiff is licensed under the GPL version 3 or any later version
 CITE US
 If you use rDiff in your research you are kindly asked to cite the
 following publication:
-* Oliver Stegle, Philipp Drewe, Regina Bohnert, Karsten Borgwardt, and
-Gunnar Raetsch: Statistical Tests for Detecting Differential
-RNA-Transcript Expression from Read Counts. Available from Nature
-Precedings, May 2010.
+Philipp Drewe, Oliver Stegle, Lisa Hartmann, Andŕe Kahles2 Regina Bohnert2 Andreas Wachter5 Karsten Borgwardt6 Gunnar aetsch,
+Accurate Detection of Differential RNA Processing, NAR, 2013
