@@ -221,10 +221,13 @@ cd mex
 if [ "$INTERPRETER" == "octave" ];
 then
 	make octave
+
         (cd ../src/locfit/Source/ && make octave)
+        #make -C ./src/locfit/Source octave
 else
 	make matlab                                                                                                                                                                                                                                                                                                                                                                                                  
-        (cd ../src/locfit/Source/ && make matlab)                                                                                                                                                                                                                                                                                                                                                                   
+        cd ../src/locfit/Source/                                                                                                                                                                                                                                                                                                                                                                                        
+        make matlab  
 fi
 cd ..
 
