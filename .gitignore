@@ -1,2 +1,4 @@
 *~.branch
 .branch
+*~
+*.gz

@@ -2,8 +2,10 @@ If matlab is used do not include intersect scripts in src
 
 Pakages required:
 
+
 scipy
 python
-samtools octave or matlab
+samtools (fPIC option needed)
+ octave or matlab
 wget
 
