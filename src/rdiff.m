@@ -1,5 +1,5 @@
-function []=rDiff()
-% rDiff()
+function []=rdiff()
+% rdiff()
 %
 
 %%% Add paths  %%%
