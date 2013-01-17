@@ -97,7 +97,7 @@ RDIFF_RES_DIR=$RESULTDIR/rdiff
 mkdir -p $RDIFF_RES_DIR
 RDIFF_RES_FILE=$RDIFF_RES_DIR/${EXP}_rdiff_${TEST_METH}.txt
 
-#echo "../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
+echo "../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
 echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/example-rdiff.log\)
 ../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} #> ${RESULTDIR}/example-rdiff.log
 
