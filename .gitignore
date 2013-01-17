@@ -2,3 +2,5 @@
 .branch
 *~
 *.gz
+bin/rdiff_config.sh
+*.mex

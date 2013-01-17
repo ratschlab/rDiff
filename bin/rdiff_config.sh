@@ -12,10 +12,6 @@
 
 export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
 export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
 export RDIFF_VERSION=0.1
 export RDIFF_PATH=/Users/drewe/git/software/rDiff
 export RDIFF_SRC_PATH=/Users/drewe/git/software/rDiff/src
@@ -26,7 +22,7 @@ export MATLAB_MEX_PATH=/Applications/MATLAB_R2012b.app/bin/mex
 export MATLAB_INCLUDE_DIR=/Applications/MATLAB_R2012b.app/extern/include/
 export OCTAVE_BIN_PATH=/opt/local/bin/octave
 export OCTAVE_MKOCT=/opt/local/bin/mkoctfile
-export SAMTOOLS_DIR=/Users/drewe/Programs/samtools
+export SAMTOOLS_DIR=/cbio/grlab/share/software/samtools/samtools-0.1.18_fPIC/
 export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export PYTHON_PATH=/opt/local/bin/python2.7
+export PYTHON_PATH=/usr/bin/python
 export SCIPY_PATH=

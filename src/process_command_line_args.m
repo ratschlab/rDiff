@@ -3,6 +3,32 @@ function [CFG]=process_command_line_args(CFG,ARGS)
 %This function adds the command line arguments to the CFG config variable
 
 %Parse the ARGS 
+
+
+
+if size(ver('Octave'),1)
+  INTERPR = 1;
+else
+  INTERPR = 0;
+end
+
+if INTERPR
+warning('off', 'Octave:precedence-change');
+warning('off', 'Octave:function-name-clash');
+warning('off', '');
+warning('off', 'Octave:num-to-str');
+warning('off', 'Octave:function-name-clash');
+warning('off', 'Octave:divide-by-zero');
+warning('off', 'Octave:future-time-stamp');
+warning('off', 'solve_qp:constraints');
+warning('off', 'Octave:assign-as-truth-value');
+warning('off', 'Octave:matlab-incompatible');
+else
+   warning('off', 'MATLAB:typeaheadBufferOverflow');
+end
+
+
+
     
 %Check which interpreter is used
     if size(ver('Octave'),1)
