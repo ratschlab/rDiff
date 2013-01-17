@@ -15,7 +15,7 @@ set -e
 . `dirname $0`/rdiff_config.sh
 
 #export MATLAB_RETURN_FILE=`tempfile`
-export MATLAB_RETURN_FILE=`mktemp -t rDiff` 
+export MATLAB_RETURN_FILE=`mktemp -t rDiff.XXXXXXXXXX.tmp` 
 
 echo "$2"
 

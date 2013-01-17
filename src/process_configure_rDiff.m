@@ -1,5 +1,27 @@
 function CFG = process_configure_rDiff(CFG)
-%  process_configure_rDiff(CFG)
+  %  process_configure_rDiff(CFG)
+
+if size(ver('Octave'),1)
+    INTERPR = 1;
+else
+    INTERPR = 0;
+end
+
+
+if INTERPR
+    warning('off', 'Octave:precedence-change');
+    warning('off', 'Octave:function-name-clash');
+    warning('off', '');
+    warning('off', 'Octave:num-to-str');
+    warning('off', 'Octave:function-name-clash');
+    warning('off', 'Octave:divide-by-zero');
+    warning('off', 'Octave:future-time-stamp');
+    warning('off', 'solve_qp:constraints');
+    warning('off', 'Octave:assign-as-truth-value');
+else
+    warning('off', 'MATLAB:typeaheadBufferOverflow');
+end
+
 
 for i=1:length(CFG.BAM_FILES)
     if isempty(CFG.NAMES{i})
