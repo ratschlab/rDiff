@@ -10,6 +10,7 @@ CFG.paths = set_rDiff_paths();
 %%% Read configuration file %%%
 fprintf('Load configuration\n')
 CFG = configure_rDiff(CFG);
+CFG = process_command_line_args(CFG,ARGS);
 CFG = process_configure_rDiff(CFG);
 
 %%% Get read counts %%%
