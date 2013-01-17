@@ -22,7 +22,7 @@ fi
 echo Downloading rDiff example data from FTP server ...
 wget -c http://cbio.mskcc.org/public/raetschlab/user/drewe/rdiff/example_data.tar.gz
 echo uncompressing ...
-tar -xjf example_data.tar.gz
+tar -xzf example_data.tar.gz
 mv example_data $DATA_DIR
 echo
 echo -n Done.
