@@ -1,4 +1,4 @@
-function []=rDiff(ARGS)
+function []=rDiff()
 % rDiff()
 %
 
@@ -10,7 +10,7 @@ CFG.paths = set_rDiff_paths();
 %%% Read configuration file %%%
 fprintf('Load configuration\n')
 CFG = configure_rDiff(CFG);
-CFG=process_command_line_args(CFG,ARGS);
+CFG = process_command_line_args(CFG,ARGS);
 CFG = process_configure_rDiff(CFG);
 
 %%% Get read counts %%%
@@ -26,13 +26,10 @@ fprintf('Compute regions common to multiple genes\n')
 fprintf('Compute alternative regions\n')
 [genes]=compute_testing_region(CFG,genes);
 
-%Make sure the gene structure has no obvious bugs;
-[genes]=sanitize_genes(genes,CFG);
-
 %Get the gene expression
 if CFG.estimate_gene_expression
     fprintf('Measure gene expression\n')
-    %get_read_counts(CFG,genes);
+    get_read_counts(CFG,genes);
 end
 
 %%% Estimate variance function %%%
@@ -42,10 +39,6 @@ if CFG.perform_nonparametric
     [variance_function_nonparametric_1, variance_function_nonparametric_2]=estimate_variance_nonparametric(CFG,genes);
 end
 
-if CFG.perform_poisson
-    variance_function_parametric_1=[];
-    variance_function_parametric_2=[];
-end
 
 if CFG.perform_parametric
     variance_function_parametric_1=[];
