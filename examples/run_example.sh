@@ -48,15 +48,18 @@ EXP=Arti
 TEST_METH=$1
 if [ "$1" == 'poisson' ];
 then
-    echo Note: Running this script takes about 1 minute \(on a single CPU\).
+    echo Note: Running this script takes about 5 minute \(on a single CPU\).
+    TEST_METH_NAME=poisson
 fi
 if [ "$1" == 'param' ];
 then
-    echo Note: Running this script takes about 1 minute \(on a single CPU\).
+    echo Note: Running this script takes about 5 minute \(on a single CPU\).
+    TEST_METH_NAME=parametric
 fi
 if [ "$1" == 'nonparam' ];
 then
-    echo Note: Running this script takes about 5 minutes \(on a single CPU\).
+    echo Note: Running this script takes about 60 minutes \(on a single CPU\).
+    TEST_METH_NAME=nonparametric
 fi
 
 RESULTDIR=./results-$1
@@ -95,7 +98,7 @@ echo
 
 RDIFF_RES_DIR=$RESULTDIR/rdiff
 mkdir -p $RDIFF_RES_DIR
-RDIFF_RES_FILE=$RDIFF_RES_DIR/${EXP}_rdiff_${TEST_METH}.txt
+RDIFF_RES_FILE=$RDIFF_RES_DIR/P_values_rDiff_${TEST_METH_NAME}.tab
 
 echo "../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
 echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/example-rdiff.log\)
