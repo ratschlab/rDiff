@@ -101,7 +101,7 @@ for j = 1:CFG.rproc_num_jobs
                 if CFG.perform_mmd
                     if not(isempty(P_VALS{k,COUNTER}))
                         P_values_rDiff_mmd(IDX(k))=P_VALS{k,COUNTER}{1};
-                        if not(isempty(P_VALS{k,COUNTER}{2}))
+                        if (isempty(P_VALS{k,COUNTER}{2}))
                             P_values_rDiff_mmd_error_flag{IDX(k)}='NOT_TESTED';
                         else
                             P_values_rDiff_mmd_error_flag{IDX(k)}='OK';
@@ -119,7 +119,7 @@ for j = 1:CFG.rproc_num_jobs
 			    P_values_rDiff_nonparametric(IDX(k))=min(10*min(P_VALS{k,COUNTER}{2}{3})+max(P_VALS{k,COUNTER}{2}{3})*(10/(CFG.bootstraps+1)),1);
 			  end
 			end
-                        if not(isempty(P_VALS{k,COUNTER}{2}))
+                        if (isempty(P_VALS{k,COUNTER}{2}))
                             P_values_rDiff_nonparametric_error_flag{IDX(k)}='NOT_TESTED';
                         else
                             P_values_rDiff_nonparametric_error_flag{IDX(k)}='OK';
