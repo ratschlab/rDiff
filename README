@@ -29,7 +29,7 @@ rdiff.sh is the main script to start rDiff.
 
 GALAXY
 rDiff can be used as a web service embedded in a Galaxy instance
-(cf. http://galaxy.fml.tuebingen.mpg.de/tool_runner?tool_id=rdiffweb).
+(cf. http://http://galaxy.raetschlab.org/root?tool_id=rdiffweb_1).
 The Galaxy tool configuration file of rDiff is located in the
 subdirectory galaxy along with XML file for loading example data and
 instructions (rdiff_web.xml and rdiff_web_instructions.xml,

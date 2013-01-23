@@ -1,3 +1,4 @@
+
 #/bin/bash
 
 #
@@ -96,7 +97,7 @@ echo % 2. Differential testing %
 echo %%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo
 
-RDIFF_RES_DIR=$RESULTDIR/rdiff
+RDIFF_RES_DIR=$RESULTDIR
 mkdir -p $RDIFF_RES_DIR
 RDIFF_RES_FILE=$RDIFF_RES_DIR/P_values_rDiff_${TEST_METH_NAME}.tab
 
