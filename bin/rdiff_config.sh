@@ -9,13 +9,13 @@
 #
 
 export RDIFF_VERSION=0.3
-export RDIFF_PATH=
-export RDIFF_SRC_PATH=
-export RDIFF_BIN_PATH=
+export RDIFF_PATH=/Users/raetsch/tmp/rDiff
+export RDIFF_SRC_PATH=/Users/raetsch/tmp/rDiff/src
+export RDIFF_BIN_PATH=/Users/raetsch/tmp/rDiff/bin
 export RDIFF_INTERPRETER=octave
-export RDIFF_OCTAVE_BIN_PATH=
-export RDIFF_OCTAVE_MKOCT=
-export RDIFF_SAMTOOLS_BIN_DIR=
-export RDIFF_SAMTOOLS_LIB_DIR=
-export RDIFF_SAMTOOLS_INCLUDE_DIR=
-export RDIFF_PYTHON_PATH=
+export RDIFF_OCTAVE_BIN_PATH=/opt/local/bin/octave
+export RDIFF_OCTAVE_MKOCT=/opt/local/bin/mkoctfile
+export RDIFF_SAMTOOLS_BIN_DIR=/opt/local/bin/samtools
+export RDIFF_SAMTOOLS_LIB_DIR=/opt/local/bin/../lib/
+export RDIFF_SAMTOOLS_INCLUDE_DIR=/opt/local/bin/../include/bam/
+export RDIFF_PYTHON_PATH=/opt/local/bin/python2.7

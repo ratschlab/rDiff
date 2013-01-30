@@ -1,0 +1,11 @@
+*~.branch
+.branch
+*~
+*.gz
+bin/rdiff_config.sh
+*.mex
+bin/rdiff_config.sh.bak
+examples/data/
+examples/results-nonparam/
+examples/results-param/
+examples/results-poisson/
