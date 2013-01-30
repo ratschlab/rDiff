@@ -1,6 +1,6 @@
 Software: rDiff
 Description: Detection of differential Isoform expression
-Authors: Philipp Drewe, Regina Bohnert, Oliver Stegle, Gunnar Raetsch
+Authors: Philipp Drewe, Regina Bohnert, Oliver Stegle, Gunnar Raetsch et al.
 URL: http://raetschlab.org/suppl/rdiff
 
 ---------------------
@@ -13,7 +13,7 @@ per gene locus from RNA-Seq measurements. It can simultaneously
 estimate the effect of biases introduced by experimental settings. 
 
 REQUIREMENTS
-- Octave or Matlab
+- Octave >=3.0.3
 - Python >=2.6.5 and Scipy >=0.7.1
 - SAMTools >= 0.1.7
 - wget
@@ -29,7 +29,7 @@ rdiff.sh is the main script to start rDiff.
 
 GALAXY
 rDiff can be used as a web service embedded in a Galaxy instance
-(cf. http://http://galaxy.raetschlab.org/root?tool_id=rdiffweb_1).
+(cf. http://galaxy.raetschlab.org/root?tool_id=rdiffweb_1).
 The Galaxy tool configuration file of rDiff is located in the
 subdirectory galaxy along with XML file for loading example data and
 instructions (rdiff_web.xml and rdiff_web_instructions.xml,
@@ -53,5 +53,7 @@ rDiff is licensed under the GPL version 3 or any later version
 CITE US
 If you use rDiff in your research you are kindly asked to cite the
 following publication:
-Philipp Drewe, Oliver Stegle, Lisa Hartmann, Andŕe Kahles2 Regina Bohnert2 Andreas Wachter5 Karsten Borgwardt6 Gunnar aetsch,
+
+Philipp Drewe, Oliver Stegle, Lisa Hartmann, Andŕe Kahles, 
+Regina Bohnert, Andreas Wachter, Karsten Borgwardt, Gunnar Raetsch,
 Accurate Detection of Differential RNA Processing, NAR, 2013
