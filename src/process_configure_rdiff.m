@@ -1,4 +1,4 @@
-function CFG = process_configure_rDiff(CFG)
+function CFG = process_configure_rdiff(CFG)
   %  process_configure_rDiff(CFG)
 
 for i=1:length(CFG.BAM_FILES)
@@ -18,11 +18,11 @@ end
 
 
 %Check that the variance functions are available if necessary
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function1)<3 & isempty(CFG.variance_function_1)
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function1)<3 && isempty(CFG.variance_function_1)
     CFG.compute_variance_function_1=1;
 end
     
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function2)<3 & isempty(CFG.variance_function_2)
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function2)<3 && isempty(CFG.variance_function_2)
     CFG.compute_variance_function_2=1;
 end
 
@@ -43,22 +43,22 @@ end
 
 %If a variance function can be loaded use this function and do not
 %compute a new one
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function1)<3 & not(isempty(CFG.variance_function_1))
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function1)<3 && not(isempty(CFG.variance_function_1))
     CFG.compute_variance_function_1=0;
 end
     
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function2)<3 & not(isempty(CFG.variance_function_2))
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function2)<3 && not(isempty(CFG.variance_function_2))
     CFG.compute_variance_function_2=0;
 end
 
    
 %If a variance function can be loaded use this function and do not
 %compute a new one
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function1)<3 & not(isempty(CFG.variance_function_1))
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function1)<3 && not(isempty(CFG.variance_function_1))
     CFG.compute_variance_function_1=0;
 end
     
-if or(CFG.perform_nonparametric,CFG.perform_parametric) &  length(CFG.predefined_variance_function2)<3 & not(isempty(CFG.variance_function_2))
+if or(CFG.perform_nonparametric,CFG.perform_parametric) &&  length(CFG.predefined_variance_function2)<3 && not(isempty(CFG.variance_function_2))
     CFG.compute_variance_function_2=0;
 end
     

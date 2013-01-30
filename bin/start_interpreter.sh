@@ -21,7 +21,7 @@ export MATLAB_RETURN_FILE=`mktemp -t rDiff.XXXXXXXXXX.tmp`
 
 if [ "$RDIFF_INTERPRETER" == 'octave' ];
 then
-	echo exit | ${RDIFF_OCTAVE_BIN_PATH} -q --eval "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Octave failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
+	echo exit | ${RDIFF_OCTAVE_BIN_PATH} -q --eval "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; warning('off', 'Octave:shadowed-function'); warning('off', 'Octave:deprecated-function') ; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Octave failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
 fi
 
 if [ "$RDIFF_INTERPRETER" == 'matlab' ];
