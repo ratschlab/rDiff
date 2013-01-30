@@ -1,6 +1,5 @@
 function [P_VALUE, RET_STRUCT]= rDiff_poisson(CFG,gene,Counts_rDiff_parametric,Gene_expression)
 
- 
 % Calculates the p-Values of a poisson test on each
 % alternative regions and combines the p-values using Bonferroni's correction
 

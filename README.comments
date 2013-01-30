@@ -1,9 +1,0 @@
-If matlab is used do not include intersect scripts in src
-
-Pakages required:
-
-scipy
-python
-samtools octave or matlab
-wget
-

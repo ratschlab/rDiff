@@ -1,0 +1,620 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=mex 2011.7.3)  14 JAN 2013 13:01
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**mexlf.c mlfut.c -L../lib -Wl,-rpath /usr/local/lib -llfev -ltube -llocf -lmut
+
+(./mexlf.c
+This is MeX  Version 1.05  18 XII 1993  (B. Jackowski & M. Ry\'cko)
+! You can't use `macro parameter character #' in horizontal mode.
+l.7 #
+     include "mex.h"
+? q
+OK, entering \batchmode...
+! You can't use `macro parameter character #' in horizontal mode.
+l.8 #
+     include "lfev.h"
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+Overfull \hbox (65.80214pt too wide) in paragraph at lines 1--9
+[]\tenrm /*=================================================================|
+
+\hbox(7.5+2.5)x469.75499
+.\hbox(0.0+0.0)x20.0
+.\tenrm /
+.\tenrm *
+.\tenrm =
+.\tenrm =
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.12 int lf_
+            error;
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.13 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.22     const char * fpcnames[] = {"evaluation_
+                                                points","fitted_values","eva...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.22 ...ctors","fit_limits","family_link","kappa"}
+                                                  ;
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.24 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (333.65805pt too wide) in paragraph at lines 16--24
+\tenrm nc, mvc, lw[7]; do-uble *y; mxAr-ray *iwkc, *tem-par-ray; const char * f
+pc-na-mes[] = "evaluation$[]\teni oints\tenrm "\teni ; \tenrm "\teni fitted[]al
+ues\tenrm "\teni ; \tenrm "\teni evaluation[]ectors\tenrm "\teni ; \tenrm "\ten
+i fit[]imits\tenrm "\teni ; \tenrm "\teni family[]ink\tenrm "\teni ; \tenrm "\t
+eni kappa\tenrm "; \teni constchar \tensy ^^C|
+
+\hbox(7.5+2.86108)x469.75499, glue set - 1.0
+.\tenrm n
+.\tenrm c
+.\tenrm ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm m
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.25     mut_
+             redirect(mexPrintf);
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.28 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.29     lfit_
+              alloc(&lf);
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.29     lfit_alloc(&
+                     lf);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.30     lfit_init(&
+                    lf);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.31 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.32     lfmxdata(&
+                   lf.lfd,prhs[0]);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.35     lfmxsp(&
+                 lf.sp,prhs[2],d);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.36     lfmxevs(&
+                  lf,prhs[1]);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.38     guessnv(&
+                  lf.evs,&lf.sp,&lf.mdl,lf.lfd.n,d,lw,nvc);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.38     guessnv(&lf.evs,&
+                          lf.sp,&lf.mdl,lf.lfd.n,d,lw,nvc);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.38     guessnv(&lf.evs,&lf.sp,&
+                                 lf.mdl,lf.lfd.n,d,lw,nvc);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.41     if (ev(&
+                 lf.evs) != EPRES) lf.fp.xev = mxCalloc(nvm*d,sizeof(double));
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.53     if (!lf_
+                 error) startmodule(&lf,&des,NULL,NULL);
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.53     if (!lf_error) startmodule(&
+                                     lf,&des,NULL,NULL);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.53     if (!lf_error) startmodule(&lf,&
+                                         des,NULL,NULL);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.54 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.58    fit_
+            points.evaluation_points - matrix of evaluation points.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.67 ...blem with CreateStructMatrix for plhs[0]\n
+                                                  ");fflush(stdout);
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.69 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (56.428pt too wide) in paragraph at lines 55--69
+\teni matrixfittedvaluesetc:fit[]oints:evaluation[]ectors \tensy ^^@ \teni stru
+ctureof[]integer[]vectors[]fit[]oints:fit[]imits \tensy ^^@|
+
+\hbox(7.51782+2.86108)x469.75499, glue set - 1.0
+.\teni m
+.\teni a
+.\teni t
+.\teni r
+.\kern0.27779
+.etc.
+
+
+Overfull \hbox (186.34958pt too wide) in paragraph at lines 55--69
+\teni =plhs\tenrm [0] = \teni mxCreateStructMatrix\tenrm (1\teni ; \tenrm 1\ten
+i ; \tenrm 6\teni ; fpcnames\tenrm ); \teni if\tenrm (\teni plhs\tenrm [0] == \
+teni NULL\tenrm )[]$ |
+
+\hbox(7.5+2.5)x469.75499
+.\teni =
+.\teni p
+.\teni l
+.\kern0.19678
+.\teni h
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.70     mxSetField(plhs[0],0,"evaluation_
+                                          points",mxCreateDoubleMatrix(d,lf....
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.72 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (292.12619pt too wide) in paragraph at lines 70--72
+[]\tenrm mxSetField(plhs[0],0,"evaluation$[]\teni oints\tenrm "\teni ; mxCreate
+DoubleMatrix\tenrm (\teni d; lf:fp:nv; mxREAL\tenrm )); \teni memcpy\tenrm (\te
+ni mxGetPr\tenrm (\teni mxGetField\tenrm (\teni plhs\tenrm [0]\teni ; \tenrm 0\
+teni ; \tenrm "\teni evaluation[]oints\tenrm "))\teni ; lf:fp:xev; d \tensy ^^C
+|
+
+\hbox(7.5+2.86108)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm m
+.\tenrm x
+.\tenrm S
+.\tenrm e
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.73     mxSetField(plhs[0],0,"fitted_
+                                      values",mxCreateDoubleMatrix(lf.fp.nv,...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.75       memcpy(&
+                   mxGetPr(mxGetField(plhs[0],0,"fitted_values"))[i*lf.fp.nv...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.75 ...plhs[0],0,"fitted_values"))[i*lf.fp.nv], &
+                                                  lf.fp.coef[i*nvm], lf.fp.n...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.77 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (14.65979pt too wide) in paragraph at lines 73--77
+[]\tenrm mxSetField(plhs[0],0,"fitted$[]\teni alues\tenrm "\teni ; mxCreateDoub
+leMatrix\tenrm (\teni lf:fp:nv; lf:mdl:keepv; mxREAL\tenrm )); \teni for\tenrm 
+(\teni i \tenrm =|
+
+\hbox(7.5+2.5)x469.75499
+.\hbox(0.0+0.0)x20.0
+.\tenrm m
+.\tenrm x
+.\tenrm S
+.\tenrm e
+.etc.
+
+
+Overfull \hbox (13.51213pt too wide) in paragraph at lines 73--77
+\tenrm 0; \teni i < lf:mdl:keepv\tenrm ; \teni i \tenrm + +)\teni memcpy\tenrm 
+(\teni mxGetPr\tenrm (\teni mxGetField\tenrm (\teni plhs\tenrm [0]\teni ; \tenr
+m 0\teni ; \tenrm "\teni fitted[]alues\tenrm "))[\teni i \tensy ^^C \teni lf:fp
+:nv\tenrm ]\teni ; lf:fp:coef\tenrm [\teni i \tensy ^^C|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm 0
+.\tenrm ;
+.\glue(\thinmuskip) 1.66663
+.\teni i
+.\glue(\thickmuskip) 2.77771 plus 2.77771
+.etc.
+
+! Undefined control sequence.
+l.80 ...em with CreateStructMatrix for temparray\n
+                                                  ");fflush(stdout);
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.82     mxSetField(plhs[0],0,"evaluation_
+                                          vectors",temparray);
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.99 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (26.15648pt too wide) in paragraph at lines 78--99
+\tenrm Cre-ate-Struct-Ma-trix for tem-par-ray");fflush(stdout);  mxSetField(plh
+s[0],0,"evaluation$[]\teni ectors\tenrm "\teni ; temparray\tenrm ); \teni iwkc 
+\tenrm =|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm C
+.\tenrm r
+.\tenrm e
+.\discretionary
+..\tenrm -
+.\tenrm a
+.etc.
+
+
+Overfull \hbox (311.5125pt too wide) in paragraph at lines 78--99
+\teni mxGetField\tenrm (\teni plhs\tenrm [0]\teni ; \tenrm 0\teni ; \tenrm "\te
+ni evaluation[]ectors\tenrm "); \teni nv \tenrm = \teni lf:fp:nv\tenrm ; \teni 
+nc \tenrm = \teni lf:evs:nce\tenrm ; \teni mvc \tenrm = (\teni nv > nc\tenrm )?
+\teni nv \tenrm : \teni nc\tenrm ; \teni mxSetField\tenrm (\teni iwkc; \tenrm 0
+\teni ; \tenrm "\teni cell\tenrm "\teni ; mxCreateDoubleMatrix\tenrm (\teni vc;
+ nc; mxREAL\tenrm )); \teni = \tensy ^^C|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni m
+.\teni x
+.\teni G
+.\teni e
+.\teni t
+.etc.
+
+
+Overfull \hbox (246.61499pt too wide) in paragraph at lines 78--99
+\teni ce \tensy ^^C \teni =mxSetField\tenrm (\teni iwkc; \tenrm 0\teni ; \tenrm
+ "\teni splitvar\tenrm "\teni ; mxCreateDoubleMatrix\tenrm (1\teni ; mvc; mxREA
+L\tenrm )); \teni = \tensy ^^C \teni s \tensy ^^C \teni =mxSetField\tenrm (\ten
+i iwkc; \tenrm 0\teni ; \tenrm "\teni lo\tenrm "\teni ; mxCreateDoubleMatrix\te
+nrm (1\teni ; mvc; mxREAL\tenrm )); \teni = \tensy ^^C|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni c
+.\teni e
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.\tensy ^^C
+.\penalty 700
+.etc.
+
+
+Overfull \hbox (126.60738pt too wide) in paragraph at lines 78--99
+\teni lo \tensy ^^C \teni =mxSetField\tenrm (\teni iwkc; \tenrm 0\teni ; \tenrm
+ "\teni hi\tenrm "\teni ; mxCreateDoubleMatrix\tenrm (1\teni ; mvc; mxREAL\tenr
+m )); \teni = \tensy ^^C \teni hi \tensy ^^C \teni =y \tenrm = \teni mxGetPr\te
+nrm (\teni mxGetField\tenrm (\teni iwkc; \tenrm 0\teni ; \tenrm "\teni cell\ten
+rm ")); \teni for\tenrm (\teni i \tenrm =|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\teni l
+.\kern0.19678
+.\teni o
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.\tensy ^^C
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.100     mxSetField(plhs[0],0,"fit_
+                                    limits",mxCreateDoubleMatrix(d,2,mxREAL));
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.102 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (187.82939pt too wide) in paragraph at lines 100--102
+[]\tenrm mxSetField(plhs[0],0,"fit$[]\teni imits\tenrm "\teni ; mxCreateDoubleM
+atrix\tenrm (\teni d; \tenrm 2\teni ; mxREAL\tenrm )); \teni memcpy\tenrm (\ten
+i mxGetPr\tenrm (\teni mxGetField\tenrm (\teni plhs\tenrm [0]\teni ; \tenrm 0\t
+eni ; \tenrm "\teni fit[]imits\tenrm "))\teni ; lf:evs:fl; \tenrm 2 \tensy ^^C|
+
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm m
+.\tenrm x
+.\tenrm S
+.\tenrm e
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.103     mxSetField(plhs[0],0,"family_
+                                       link",mxCreateDoubleMatrix(1,2,mxREAL));
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.105     y[0] = fam(&
+                      lf.sp);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.106     y[1] = link(&
+                       lf.sp);
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.107 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (157.88109pt too wide) in paragraph at lines 103--107
+[]\tenrm mxSetField(plhs[0],0,"family$[]\teni ink\tenrm "\teni ; mxCreateDouble
+Matrix\tenrm (1\teni ; \tenrm 2\teni ; mxREAL\tenrm )); \teni y \tenrm = \teni 
+mxGetPr\tenrm (\teni mxGetField\tenrm (\teni plhs\tenrm [0]\teni ; \tenrm 0\ten
+i ; \tenrm "\teni family[]ink\tenrm ")); \teni y\tenrm [0] =|
+
+\hbox(7.5+2.5)x469.75499
+.\hbox(0.0+0.0)x20.0
+.\tenrm m
+.\tenrm x
+.\tenrm S
+.\tenrm e
+.etc.
+
+)
+! Emergency stop.
+<*> ...h /usr/local/lib -llfev -ltube -llocf -lmut
+                                                  
+*** (job aborted, no legal \end found)
+
+No pages of output.

@@ -131,12 +131,28 @@ end
 
 fclose(fid)
 
+%Determine interpreter
+if size(ver('Octave'),1)
+    INTERPR = 1;
+else
+    INTERPR = 0;
+end
+
+
 %Save alternative region count file for rDiff.parametric
 OUT_FILENAME=[CFG.out_base 'Alternative_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_parametric','-v7.3')
+if INTERPR
+    save('-mat7-binary',OUT_FILENAME,'Counts_rDiff_parametric')
+else
+    save(OUT_FILENAME,'Counts_rDiff_parametric','-v7.3')
+end
 
 %Save alternative region count file for rDiff.nonparametric
 OUT_FILENAME=[CFG.out_base 'Nonparametric_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_nonparametric','-v7.3')
+if INTERPR
+    save('-mat7-binary',OUT_FILENAME,'Counts_rDiff_nonparametric')
+else
+    save(OUT_FILENAME,'Counts_rDiff_nonparametric','-v7.3')
+end
 
 return
