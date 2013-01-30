@@ -23,4 +23,4 @@ nonparam:
 	./run_example.sh nonparam
 
 clean:
-	rm -rf  results-param results-nonparam results-poisson #example_data.tar.gz data
+	rm -rf  results-param results-nonparam results-poisson example_data.tar.gz data

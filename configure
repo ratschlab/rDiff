@@ -226,5 +226,5 @@ echo Done.
 echo 
 
 echo Please use \'make\' to compile the mex files before using rDiff.
-echo To test rDiff use \'make test\'.
+echo To test rDiff use \'make example\'.
 echo
