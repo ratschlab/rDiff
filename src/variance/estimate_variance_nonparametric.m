@@ -9,12 +9,12 @@ VARIANCE2=[];
 fprintf('Loading gene expression\n')
 
 if isempty(CFG.Counts_gene_expression)
-    EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.mat'];
+    EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.tab'];
 else
     EXPR_TAB_FILENAME=CFG.Counts_gene_expression;
 end
 try
-    load(EXPR_TAB_FILENAME,'Gene_expression');
+    Gene_expression=importdata(EXPR_TAB_FILENAME,'\t',1);
 catch
     error(['Could not open: ' EXPR_TAB_FILENAME])
 end
@@ -32,8 +32,10 @@ else
 end
 
 
+
 %Iterate over the functions to be generated
 %compute means and variances
+
 if CFG.compute_variance_function_1
     fprintf('estimating variance function for sample 1\n')
     %Get the samples to use for the for estimation the variance function

@@ -79,7 +79,6 @@ function [UNIQUE_NEW_EXONS, GRAPHNODES, ORDER_OF_GRAPHNODE, EIRS_IN_SEQ] = trans
             
             %%% Already seen such exon composition in sliding
             %%% window?
-            
             [TEMP, CURRENT_NODE] = intersect(GRAPHNODES, CURRENT_EIRS, 'rows');
             if isempty(TEMP)
 		GRAPHNODES = [GRAPHNODES; CURRENT_EIRS];  %Add Key

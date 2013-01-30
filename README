@@ -1,14 +1,23 @@
-----------------------
-  rDiff version 0.1
-----------------------
+Software: rDiff
+Description: Detection of differential Isoform expression
+Authors: Philipp Drewe, Regina Bohnert, Oliver Stegle, Gunnar Raetsch et al.
+URL: http://raetschlab.org/suppl/rdiff
+
+---------------------
+  rDiff version 0.3
+---------------------
 
 DESCRIPTION
-rDiff is a programme to determine 
+rDiff is a programme to determine abundances of multiple transcripts
+per gene locus from RNA-Seq measurements. It can simultaneously
+estimate the effect of biases introduced by experimental settings. 
 
 REQUIREMENTS
-- Octave or Matlab
+- Octave >=3.0.3
 - Python >=2.6.5 and Scipy >=0.7.1
 - SAMTools >= 0.1.7
+- wget
+
 
 GETTING STARTED
 To install rDiff and the required software please follow the
@@ -17,15 +26,13 @@ instructions in INSTALL in this directory.
 CONTENTS
 All relevant scripts for rDiff are located in the subdirectory src.
 rdiff.sh is the main script to start rDiff.
-In the same subdirectory you find the script read_stats.sh that
-generates a statistic about the read alignments and the covered genes.
 
 GALAXY
 rDiff can be used as a web service embedded in a Galaxy instance
-(cf. http://galaxy.fml.tuebingen.mpg.de/tool_runner?tool_id=rdiffweb).
+(cf. http://galaxy.raetschlab.org/root?tool_id=rdiffweb_1).
 The Galaxy tool configuration file of rDiff is located in the
 subdirectory galaxy along with XML file for loading example data and
-instructions (rquant_web.xml and rdiff_web_instructions.xml,
+instructions (rdiff_web.xml and rdiff_web_instructions.xml,
 respectively). Please adapt the paths to the respective tools in
 command section of the XML files as indicated.
 The subdirectory test_data contains all data for running a functional
@@ -33,12 +40,11 @@ test in Galaxy (e.g. with sh run_functional_test.sh -id rdiffweb). You
 may need to move these test files into the Galaxy test-data directory.
 
 DOCUMENTATION
-More information is available in doc/rdiff_web_instructions.txt,
-doc/rdiff_web.txt, and doc/read_stats.txt. Examples for running
-rDiff can be found in examples/./run_example.sh.
-You can also find information on rDiff.web and rDiff on
-http://bioweb.me/rdiff/suppl/rdiff/web and
-http://bioweb.me/rdiff/suppl/rdiff, respectively.
+More information is available in doc/rdiff_web_instructions.txt and
+doc/rdiff_web.txt. Examples for running rDiff can be found in
+examples/./run_example.sh.
+You can also find information on rDiff on
+http://fml.mpg.de/raetsch/suppl/rdiff.
  
 LICENSE
 rDiff is licensed under the GPL version 3 or any later version
@@ -46,9 +52,8 @@ rDiff is licensed under the GPL version 3 or any later version
 
 CITE US
 If you use rDiff in your research you are kindly asked to cite the
-following publications:
-* Philipp Drewe and Gunnar Raetsch: rDiff.web: A tool for
-RNA-Seq-based transcript quantitation. Nucleic Acids Research,
-38(Suppl 2):W348-51, July 2010.
-* Regina Bohnert, Jonas Behr, and Gunnar Raetsch: Transcript quantification
-with RNA-Seq data. BMC Bioinformatics, 10(S13):P5, October 2009.
+following publication:
+
+Philipp Drewe, Oliver Stegle, Lisa Hartmann, Andŕe Kahles, 
+Regina Bohnert, Andreas Wachter, Karsten Borgwardt, Gunnar Raetsch,
+Accurate Detection of Differential RNA Processing, NAR, 2013

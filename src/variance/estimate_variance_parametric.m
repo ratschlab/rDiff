@@ -8,13 +8,13 @@ VARIANCE2=[];
 %Get the gene expression
 fprintf('Loading gene expression\n')
 if isempty(CFG.Counts_gene_expression)
-    EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.mat'];
+    EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.tab'];
 else
     EXPR_TAB_FILENAME=CFG.Counts_gene_expression;
 end
 
 try
-    load(EXPR_TAB_FILENAME,'Gene_expression');
+    Gene_expression=importdata(EXPR_TAB_FILENAME,'\t',1);
 catch
     error(['Could not open: ' EXPR_TAB_FILENAME])
 end

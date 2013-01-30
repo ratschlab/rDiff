@@ -56,10 +56,14 @@ idx=[(1:size(genes,2))',ceil((1:size(genes,2))*CFG.rproc_num_jobs/size(genes,2))
 for RUN=1:size(CFG.BAM_FILES,2)
     for j = 1:CFG.rproc_num_jobs
         IN_FILENAME=[CFG.out_base_temp CFG.NAMES{RUN} '_' num2str(j) '_of_' num2str(CFG.rproc_num_jobs) '.mat'];
+	IDX=idx(idx(:,2)==j,1);
         try
             load(IN_FILENAME)
-            IDX=idx(idx(:,2)==j,1);
             for k=1:length(IDX)
+	        %Check wether COUNTS is empty
+		if isempty(COUNTS{k})
+		    continue
+		end
                 %Get the number of reads mapping to a gene
                 if not(isempty(COUNTS{k}{2}))
                     READS_PER_GENE(IDX(k),RUN)=COUNTS{k}{2};
@@ -85,7 +89,6 @@ for RUN=1:size(CFG.BAM_FILES,2)
                 end
             end
         catch
-            IDX=idx(idx(:,2)==j,1);
             warning(['There was a problem loading: ' IN_FILENAME ])
             % If something went wrong
             for k=1:length(IDX)
@@ -108,18 +111,48 @@ GENE_EXPR(GENE_EXPR<10)=READS_PER_GENE(GENE_EXPR<10);
 %Generate gene expression tables
 
 %Open file handler for the gene expression table
-EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.mat'];
-Gene_expression=struct();
-Gene_expression.data=GENE_EXPR;
-Gene_expression.textdata={genes(:).name};
-save(EXPR_TAB_FILENAME,'Gene_expression');
+EXPR_TAB_FILENAME=[CFG.out_base 'Gene_expression.tab'];
+fid=fopen(EXPR_TAB_FILENAME,'w');
+
+%print header
+fprintf(fid,'gene');
+for i=1:length(CFG.NAMES)
+    fprintf(fid,'\t%s',CFG.NAMES{i});
+end
+fprintf(fid,'\n');
+
+for j=1:size(genes,2)
+   fprintf(fid,'%s',genes(j).name);
+   for i=1:length(CFG.NAMES)
+       fprintf(fid,'\t%i',GENE_EXPR(j,i));
+   end
+   fprintf(fid,'\n');
+end
+
+fclose(fid)
+
+%Determine interpreter
+if size(ver('Octave'),1)
+    INTERPR = 1;
+else
+    INTERPR = 0;
+end
+
 
 %Save alternative region count file for rDiff.parametric
 OUT_FILENAME=[CFG.out_base 'Alternative_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_parametric')
+if INTERPR
+    save('-mat7-binary',OUT_FILENAME,'Counts_rDiff_parametric')
+else
+    save(OUT_FILENAME,'Counts_rDiff_parametric','-v7.3')
+end
 
 %Save alternative region count file for rDiff.nonparametric
 OUT_FILENAME=[CFG.out_base 'Nonparametric_region_counts.mat'];
-save(OUT_FILENAME,'Counts_rDiff_nonparametric')
+if INTERPR
+    save('-mat7-binary',OUT_FILENAME,'Counts_rDiff_nonparametric')
+else
+    save(OUT_FILENAME,'Counts_rDiff_nonparametric','-v7.3')
+end
 
 return

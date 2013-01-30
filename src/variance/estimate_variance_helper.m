@@ -1,10 +1,6 @@
 function [VARIANCE]=estimate_variance_helper(CFG,SAMPLE_IX,COUNTS_PER_GENE,GENE_EXPRESSION_MATRIX)
 
 
-%%% Add paths  %%%
-fprintf('Set the paths\n')
-CFG.paths = set_rDiff_paths();
-
 %compute means and variances
 %Get the number of of positions to be used in MEANS and VARS
 LENGTH=0;
@@ -27,26 +23,30 @@ COUNTER=1;
 for i=1:size(COUNTS_PER_GENE,1)
     try
         TS=GENE_EXPRESSION_MATRIX(i, SAMPLE_IX);
-        if sum(TS)>0
-            S=length(TS)*TS/sum(TS);
-            
-            TEMP_SUM=zeros(length(SAMPLE_IX),size(COUNTS_PER_GENE{i, SAMPLE_IX(1)},2));
-            TEMP_SUM(1,:)=COUNTS_PER_GENE{i, SAMPLE_IX(1)}/S(1);
-            for j=2:length(SAMPLE_IX)
-                TEMP_SUM(j,:)=COUNTS_PER_GENE{i,SAMPLE_IX(j)}/S(j);
-            end
-            TEMP_SUM=TEMP_SUM(:,sum(TEMP_SUM,1)>0);
-            MEANS(COUNTER:(COUNTER+size(TEMP_SUM,2)-1))=mean(TEMP_SUM(:,sum(TEMP_SUM,1)>0),1);
-            VARS(COUNTER:(COUNTER+size(TEMP_SUM,2)-1))=var(TEMP_SUM(:,sum(TEMP_SUM,1)>0));
-            COUNTER=COUNTER+size(TEMP_SUM,2);
-        else
-            LENGTH=LENGTH;
-        end
+        S=length(TS)*TS/sum(TS);
+        
+        TEMP_SUM=sparse(zeros(length(SAMPLE_IX),size(COUNTS_PER_GENE{i, SAMPLE_IX(1)},2)));
+	%if S(1)==0
+	%  TEMP_SUM(1,:)=0;
+	%else
+	%  TEMP_SUM(1,:)=COUNTS_PER_GENE{i, SAMPLE_IX(1)}/S(1);
+        %end
+	for j=1:length(SAMPLE_IX)
+	  if S(j)==0
+	    TEMP_SUM(j,:)=0;
+	  else
+            TEMP_SUM(j,:)=COUNTS_PER_GENE{i,SAMPLE_IX(j)}/S(j);
+	  end
+	end
+        TEMP_SUM=TEMP_SUM(:,sum(TEMP_SUM,1)>0);
+        MEANS(COUNTER:(COUNTER+size(TEMP_SUM,2)-1))=mean(TEMP_SUM(:,sum(TEMP_SUM,1)>0),1);
+        VARS(COUNTER:(COUNTER+size(TEMP_SUM,2)-1))=var(TEMP_SUM(:,sum(TEMP_SUM,1)>0));
+        COUNTER=COUNTER+size(TEMP_SUM,2);
     catch
         LENGTH=LENGTH;
     end
 end
-%filter
+
 %filter those which have a zeros mean
 NONZERO_IDX=MEANS>0;
 MEANS=MEANS(NONZERO_IDX);
@@ -56,7 +56,6 @@ VARS=VARS(NONZERO_IDX);
 [MEANS,POS]=sort(MEANS);
 MAX_VAL=max(MEANS);
 MIN_VAL=min(MEANS);
-
 BOUNDS=exp(linspace(log(MIN_VAL),log(MAX_VAL), CFG.variance_samplebins+1));
 SAMPLE=[];
 for i=1:CFG.variance_samplebins
@@ -74,5 +73,5 @@ end
 VARS=VARS(POS);
 
 %estimate variance function
-[VARIANCE]=estimate_variance(MEANS(SAMPLE)',VARS(SAMPLE)');
+[VARIANCE]=estimate_variance(full(MEANS(SAMPLE))',full(VARS(SAMPLE)'));
 return

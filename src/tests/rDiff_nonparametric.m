@@ -141,15 +141,19 @@ FACT_arr=zeros(nr_of_slices,1);
 V1_cell=cell(nr_of_slices,1);
 V2_cell=cell(nr_of_slices,1);
 
+%Detemine regions wher to match the variances
 for s=nr_of_slices:(-1):1
         LOWER_POS=min(NR_OF_ZEROS+ceil(((nr_of_slices-s)/nr_of_slices)*(length(TOTAL_SUM)-NR_OF_ZEROS))+1,length(TOTAL_SUM));
         UPPER_POS=min(NR_OF_ZEROS+ceil(((nr_of_slices-s+1)/nr_of_slices)*(length(TOTAL_SUM)-NR_OF_ZEROS))+1,length(TOTAL_SUM));
         
         SLICE_LOWER_BOUND=SUM_SORTED(LOWER_POS);
         SLICE_UPPER_BOUND=SUM_SORTED(UPPER_POS);
-        
-        SLICE=and(TOTAL_SUM>SLICE_LOWER_BOUND,TOTAL_SUM<=SLICE_UPPER_BOUND);
-        SLICES(s,:)=SLICE;
+        if s==nr_of_slices
+	  SLICE=and(TOTAL_SUM>=SLICE_LOWER_BOUND,TOTAL_SUM<=SLICE_UPPER_BOUND);
+	else
+	  SLICE=and(TOTAL_SUM>SLICE_LOWER_BOUND,TOTAL_SUM<=SLICE_UPPER_BOUND);
+        end
+	SLICES(s,:)=SLICE;
         
         N1s_temp=ceil(median(N1s(SLICE)));
         N2s_temp=ceil(median(N2s(SLICE)));
@@ -182,7 +186,8 @@ for i = 1:bootstraps
     for s=nr_of_slices:(-1):1
         if SUM_SLICES(s)==0;
             continue;
-        end    
+        end 
+	%Create random samples 1 and 2
         sample1 = sum(all_reads_trans_slices{s}(:,read_per(1:N1_arr(s))),2);
         sample2 = sum(all_reads_trans_slices{s}(:,read_per((N1_arr(s)+1):(N1_arr(s)+N2_arr(s)))),2);
         
@@ -199,17 +204,17 @@ for i = 1:bootstraps
     TEMP_DIST(isnan(TEMP_DIST))=0;
    
     COUNTER=COUNTER+1;  
-    %Cpmute the average from the different matching regionon
+    %Compute the average from the different matching regionon
     statistic(:,COUNTER)=mean(STAT_DIST,2);
     bootstrap_results(:,COUNTER)=mean(TEMP_DIST,2);
 end
-  
+
 bootstrap_results=bootstrap_results(:,1:COUNTER);
 statistic=statistic(:,1:COUNTER);
 
 pval=double(sum(bootstrap_results>=statistic,2)) / COUNTER;
 
-info = {bootstrap_results,statistic,max(pval)};
+info = {bootstrap_results,statistic,pval};
 pval=min(pval)*10;
 
 function result = eucl_dist_weigthed(A,B,W)

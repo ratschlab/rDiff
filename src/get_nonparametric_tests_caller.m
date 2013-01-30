@@ -30,7 +30,6 @@ P_VALS=cell(size(genes,2),NUMBER_OF_TESTS_PER_GENE+2);
 %iterate over genes
 for i=1:size(genes,2)
     
-    
     %TEMP_COUNT contains the counts for the current gene
     TEMP_COUNT=cell(1,3);
     gene = genes(i);
@@ -74,8 +73,7 @@ for i=1:size(genes,2)
     SAMPLE1=find(CFG.SAMPLES==1);
     SAMPLE2=find(CFG.SAMPLES==2);
     
-    
-   
+       
     COUNTER=2;
     
     if CFG.perform_mmd
@@ -98,7 +96,7 @@ for i=1:size(genes,2)
     end
     
     if CFG.perform_nonparametric
-        [PV, INFO]= rDiff_nonparametric(CFG,READ_SET(SAMPLE1),READ_SET(SAMPLE2),variance_function_nonparametric_1, variance_function_nonparametric_2)
+        [PV, INFO]= rDiff_nonparametric(CFG,READ_SET(SAMPLE1),READ_SET(SAMPLE2),variance_function_nonparametric_1, variance_function_nonparametric_2);
         P_VALS{i,COUNTER}={PV, INFO};
         COUNTER=COUNTER+1;
     end

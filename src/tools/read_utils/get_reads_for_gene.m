@@ -1,4 +1,6 @@
 function [reads1] = get_reads_for_gene(CFG,gene)
+  
+
 % Get the reads from the bam-file
 if strcmp(gene.strand,'-')
     [mask1, read_intron_list] = get_reads(CFG.curr_bamfile, [CFG.chr_prefix gene.chr],gene.start+1,gene.stop+1, '0');
