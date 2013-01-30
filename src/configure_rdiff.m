@@ -1,5 +1,5 @@
-function CFG = configure_rDiff(CFG)
-% configure_rDifft(CFG)
+function CFG = configure_rdiff(CFG)
+% configure_rdiff(CFG)
 
 %%% rDiff parameters %%%
 
@@ -11,19 +11,19 @@ CFG.NAMES={'A1','A2','B1','B2'};
 
 
 % Give the directory where the bam-files are
-CFG.data_dir = '/Users/USER/git/rDiff/data/';
+CFG.data_dir = '' ;
 
 % Indicate to which sample the bam-files belong
 CFG.SAMPLES=[1,1,2,2];
 
 % Location of the gene structure
-CFG.genes_path='/Users/drewe/Data/rdiff/arti/genes_label_large_var.mat';
+CFG.genes_path='' ;
 
 % Output directory
-CFG.out_base =  '/Users/USER/git/rDiff/data';
+CFG.out_base =  '' ;
 
 % Output directory for temporary files
-CFG.out_base_temp =  '/Users/USER/git/rDiff/data/temp/';
+CFG.out_base_temp =  '' ;
 
 %Length of the reads
 CFG.sequenced_length=75;

@@ -4,14 +4,14 @@ function []=rdiff(ARGS)
 
 %%% Add paths  %%%
 fprintf('Set the paths\n')
-CFG.paths = set_rDiff_paths();
+CFG.paths = set_rdiff_paths();
 
 
 %%% Read configuration file %%%
 fprintf('Load configuration\n')
-CFG = configure_rDiff(CFG);
+CFG = configure_rdiff(CFG);
 CFG = process_command_line_args(CFG,ARGS);
-CFG = process_configure_rDiff(CFG);
+CFG = process_configure_rdiff(CFG);
 
 %%% Get read counts %%%
 

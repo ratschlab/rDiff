@@ -8,13 +8,6 @@
 #
 #
 
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export INTERPRETER=octave
-export OCTAVE_BIN_PATH=/opt/local/bin/octave
-export OCTAVE_MKOCT=/opt/local/bin/mkoctfile
-export SAMTOOLS_DIR=/opt/local/bin
-export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR
-export PYTHON_PATH=/usr/bin/python
 export RDIFF_VERSION=0.1
 export RDIFF_PATH=/Users/raetsch/git/software/rDiff
 export RDIFF_SRC_PATH=/Users/raetsch/git/software/rDiff/src
@@ -25,4 +18,4 @@ export RDIFF_OCTAVE_MKOCT=/opt/local/bin/mkoctfile
 export RDIFF_SAMTOOLS_BIN_DIR=/opt/local/bin/samtools
 export RDIFF_SAMTOOLS_LIB_DIR=/opt/local/bin/../lib/
 export RDIFF_SAMTOOLS_INCLUDE_DIR=/opt/local/bin/../include/bam/
-export RDIFF_PYTHON_PATH=/usr/bin/python
+export RDIFF_PYTHON_PATH=/opt/local/bin/python2.7

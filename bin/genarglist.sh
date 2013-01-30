@@ -10,12 +10,15 @@
 # Copyright (C) 2009-2010 Max Planck Society
 #
 
+list=
 until [ -z $1 ] ; do
 	if [ $# != 1 ];
 	then
-		echo -n "$1:"
+		list="${list}$1:"
 	else
-		echo -n "$1"
+		list="${list}$1"
 	fi
 	shift
 done
+echo $list
+

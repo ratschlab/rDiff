@@ -82,10 +82,11 @@ echo 1a. load the genome annotation in GFF3 format, create an annotation object 
 if [ ! -f ${GENES_FN} ]
 then
     export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
-echo "${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} "
-    ${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
+echo "${RDIFF_PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} "
+    ${RDIFF_PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
     ../bin/genes_cell2struct ${GENES_FN}
 fi
+
 
 #echo 1b. convert the alignments in SAM format to BAM format
 #../tools/./sam_to_bam.sh ${SAMTOOLS_DIR} data ${FASTA_INPUT} ${SAM_INPUT1}

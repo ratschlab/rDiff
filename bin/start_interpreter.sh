@@ -17,16 +17,16 @@ set -e
 #export MATLAB_RETURN_FILE=`tempfile`
 export MATLAB_RETURN_FILE=`mktemp -t rDiff.XXXXXXXXXX.tmp` 
 
-echo "$2"
+#echo "$2"
 
-if [ "$INTERPRETER" == 'octave' ];
+if [ "$RDIFF_INTERPRETER" == 'octave' ];
 then
-	echo exit | ${OCTAVE_BIN_PATH} --eval "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Octave failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
+	echo exit | ${RDIFF_OCTAVE_BIN_PATH} -q --eval "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Octave failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
 fi
 
-if [ "$INTERPRETER" == 'matlab' ];
+if [ "$RDIFF_INTERPRETER" == 'matlab' ];
 then
-	echo exit | ${MATLAB_BIN_PATH} -nodisplay -r "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Matlab failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
+	echo exit | ${RDIFF_MATLAB_BIN_PATH} -nodisplay -r "global SHELL_INTERPRETER_INVOKE; SHELL_INTERPRETER_INVOKE=1; addpath $RDIFF_SRC_PATH;  $1('$2'); exit;" || (echo starting Matlab failed; rm -f $MATLAB_RETURN_FILE; exit -1) ;
 fi
 
 test -f $MATLAB_RETURN_FILE || exit 0

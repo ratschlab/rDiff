@@ -6,8 +6,8 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# Written (W) 2009-2010 Regina Bohnert, Gunnar Raetsch
-# Copyright (C) 2009-2010 Max Planck Society
+# Written (W) 2009-2013 Gunnar Raetsch, Regina Bohnert, Philipp Drewe
+# Copyright (C) 2009-2013 Max Planck Society, Sloan-Kettering Institute
 #
 
 # rDiff wrapper script to start the interpreter with the correct list of arguments

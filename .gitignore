@@ -4,3 +4,4 @@
 *.gz
 bin/rdiff_config.sh
 *.mex
+bin/rdiff_config.sh.bak

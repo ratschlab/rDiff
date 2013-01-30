@@ -14,9 +14,9 @@ set -e
 
 . ./bin/rdiff_config.sh
 
-echo =====================================
-echo  rDiff setup script \(version $RDIFF_VERSION\) 
-echo =====================================
+echo ======================================
+echo  rDiff configure \(version $RDIFF_VERSION\) 
+echo ======================================
 echo
 
 echo rDiff base directory \(currently set to \"$RDIFF_PATH\", suggest to set to \"`pwd`\", used if left empty\)

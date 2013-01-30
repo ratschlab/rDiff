@@ -1,5 +1,5 @@
-function [rDiff_paths] = set_rDiff_paths()
-% [difftest_paths] = set_rDiff_paths()
+function [rDiff_paths] = set_rdiff_paths()
+% [difftest_paths] = set_rdiff_paths()
 
 %Initialize rDiff_paths
 rDiff_paths='';
@@ -26,3 +26,4 @@ rDiff_paths=[rDiff_paths ':' [BASEPATH_SRC '/tools/read_utils/']];
 rDiff_paths=[rDiff_paths ':' [BASEPATH_SRC '/variance/']];
 rDiff_paths=[rDiff_paths ':' genpath([BASEPATH_SRC '/locfit/'])];
 addpath(rDiff_paths);
+

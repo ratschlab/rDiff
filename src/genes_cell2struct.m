@@ -19,7 +19,6 @@ function genes_cell2struct(anno_fname)
 %   Copyright (C) 2009-2011 Max Planck Society
 %
 
-
 load(anno_fname, 'genes');
 if iscell(genes)
   genes_cell = genes;
@@ -35,5 +34,5 @@ if iscell(genes)
     gene.stop = double(gene.stop);
     genes(g) = gene;
   end
-save(anno_fname, 'genes');
+  save(anno_fname, 'genes');
 end
