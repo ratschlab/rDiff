@@ -2,9 +2,9 @@
 
 set -e
 
-echo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+echo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo % rDiff examples: get_data.sh %
-echo % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+echo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo 
 echo This script gets reads and the genome sequence 
 echo for one A.thaliana example.
