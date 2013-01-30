@@ -11,15 +11,15 @@
 
 
 export RDIFF_VERSION=0.1
-export RDIFF_PATH=/Users/drewe/git/software/rDiff
-export RDIFF_SRC_PATH=/Users/drewe/git/software/rDiff/src
-export RDIFF_BIN_PATH=/Users/drewe/git/software/rDiff/bin
+export RDIFF_PATH=/Users/raetsch/git/software/rDiff
+export RDIFF_SRC_PATH=/Users/raetsch/git/software/rDiff/src
+export RDIFF_BIN_PATH=/Users/raetsch/git/software/rDiff/bin
 export INTERPRETER=octave
 export MATLAB_BIN_PATH=/Applications/MATLAB_R2012b.app/bin/matlab
 export MATLAB_MEX_PATH=/Applications/MATLAB_R2012b.app/bin/mex
 export MATLAB_INCLUDE_DIR=/Applications/MATLAB_R2012b.app/extern/include/
 export OCTAVE_BIN_PATH=/opt/local/bin/octave
 export OCTAVE_MKOCT=/opt/local/bin/mkoctfile
-export SAMTOOLS_DIR=/Users/drewe/Programs/samtools
+export SAMTOOLS_DIR=/opt/local/bin
 export PYTHON_PATH=/opt/local/bin/python2.7
 export SCIPY_PATH=
