@@ -12,6 +12,12 @@
 
 set -e 
 
+if [ $# != "0" ];
+then
+		echo configure is interactive and does not accept any parameters
+		exit -1
+fi
+
 . ./bin/rdiff_config.sh
 
 echo ======================================
