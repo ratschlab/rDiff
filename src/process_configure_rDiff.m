@@ -1,5 +1,5 @@
 function CFG = process_configure_rDiff(CFG)
-%  process_configure_rDiff(CFG)
+  %  process_configure_rDiff(CFG)
 
 for i=1:length(CFG.BAM_FILES)
     if isempty(CFG.NAMES{i})
@@ -9,11 +9,11 @@ end
 
 %Get the paths of the filenames
 for i=find(CFG.SAMPLES==1)
-CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
+  CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
 end
 
 for i=find(CFG.SAMPLES==2)
-CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
+  CFG.BAM_FILES{i}=fullfile(CFG.data_dir,CFG.BAM_FILES{i}); 
 end
 
 
@@ -30,13 +30,12 @@ end
 if CFG.compute_variance_function_1==1
     if length(find(CFG.SAMPLES==1))<2
         error('Not sufficient samples to estimate variance function for sample 1');
-    
     end
 end
+
 if CFG.compute_variance_function_2==1
     if length(find(CFG.SAMPLES==2))<2
         error('Not sufficient samples to estimate variance function for sample 2');
-    
     end
 end
 

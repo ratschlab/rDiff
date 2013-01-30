@@ -8,8 +8,6 @@
 #
 #
 
-
-
 export RDIFF_VERSION=0.1
 export RDIFF_PATH=/Users/raetsch/git/software/rDiff
 export RDIFF_SRC_PATH=/Users/raetsch/git/software/rDiff/src

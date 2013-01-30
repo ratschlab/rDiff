@@ -28,20 +28,42 @@ fi
 echo '=>' Setting rDiff base directory to \"$RDIFF_PATH\"
 echo
 
-echo SAMTools directory \(currently set to \"$SAMTOOLS_DIR\", system version used if left empty\)
+echo SAMTools library directory \(currently set to \"$SAMTOOLS_DIR\", system version used if left empty\)
 read SAMTOOLS_DIR
 if [ "$SAMTOOLS_DIR" == "" ];
 then
 	if [ "$(which samtools)" != "" ] ;
 	then
-		SAMTOOLS_DIR=$(dirname $(which samtools)) 
-	else
-		echo samtools not found
+	    if [ -f $(dirname $(which samtools))/sam.h ]
+	    then
+		SAMTOOLS_DIR=$(dirname $(which samtools))
+	    else
+		echo libraries not found
 		exit -1 ;
+	    fi
+	else
+	    echo libraries not found
+	    exit -1 ;
 	fi
 fi
 echo '=>' Setting SAMTools directory to \"$SAMTOOLS_DIR\"
 echo
+
+echo SAMTools binary directory \(currently set to \"$SAMTOOLS_BIN_DIR\", system version used if left empty\)
+read SAMTOOLS_BIN_DIR
+if [ "$SAMTOOLS_BIN_DIR" == "" ];
+then
+        if [ "$(which samtools)" != "" ] ;
+        then
+                SAMTOOLS_BIN_DIR=$(dirname $(which samtools))
+        else
+                echo samtools not found
+                exit -1 ;
+        fi
+fi
+echo '=>' Setting SAMTools directory to \"$SAMTOOLS_BIN_DIR\"
+echo
+
 
 echo Path to the python binary \(currently set to \"$PYTHON_PATH\", system version used, if left empty\)
 read PYTHON_PATH
@@ -188,6 +210,7 @@ echo export MATLAB_INCLUDE_DIR=$MATLAB_INCLUDE_DIR >> bin/rdiff_config.sh
 echo export OCTAVE_BIN_PATH=$OCTAVE_BIN_PATH >> bin/rdiff_config.sh
 echo export OCTAVE_MKOCT=$OCTAVE_MKOCT >> bin/rdiff_config.sh
 echo export SAMTOOLS_DIR=$SAMTOOLS_DIR >> bin/rdiff_config.sh
+echo export SAMTOOLS_BIN_DIR=SAMTOOLS_BIN_DIR >> bin/rdiff_config.sh  
 echo export PYTHON_PATH=$PYTHON_PATH >> bin/rdiff_config.sh
 echo export SCIPY_PATH=$SCIPY_PATH >> bin/rdiff_config.sh
 
@@ -198,8 +221,10 @@ cd mex
 if [ "$INTERPRETER" == "octave" ];
 then
 	make octave
+        (cd ../src/locfit/Source/ && make octave)
 else
-	make matlab
+	make matlab                                                                                                                                                                                                                                                                                                                                                                                                  
+        (cd ../src/locfit/Source/ && make matlab)                                                                                                                                                                                                                                                                                                                                                                   
 fi
 cd ..
 

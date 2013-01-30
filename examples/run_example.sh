@@ -1,3 +1,4 @@
+
 #/bin/bash
 
 #
@@ -24,7 +25,7 @@ echo
 
 if [ -z "$1" -o "$1" == '--help' ];
 then
-  echo Usage: $0 poisson\|param\|noparam
+  echo Usage: $0 poisson\|param\|nonparam
   echo "   or:" $0 --help
   false
 fi
@@ -34,28 +35,32 @@ then
   false
 fi
 
+RDIFF_INPUT_DIR=data/
 #FASTA_INPUT=data/TAIR10.fasta
-GFF3_INPUT=data/genes_example.gff3
+GFF3_INPUT="${RDIFF_INPUT_DIR}/genes_example.gff3"
 #SAM_INPUT1=data/c_elegans_WS200-I-regions-SRX001872.sam
 #SAM_INPUT2=data/c_elegans_WS200-I-regions-SRX001875.sam
                                                                                                                                                                                                                                                                                                                                                               
-BAM_INPUT11=data/example_condition_A_replicate_1.bam,data/example_condition_A_replicate_2.bam
-BAM_INPUT22=data/example_condition_B_replicate_1.bam,data/example_condition_B_replicate_2.bam
+BAM_INPUT1="example_condition_A_replicate_1.bam,example_condition_A_replicate_2.bam"
+BAM_INPUT2="example_condition_B_replicate_1.bam,example_condition_B_replicate_2.bam"
 
 
 EXP=Arti
 TEST_METH=$1
 if [ "$1" == 'poisson' ];
 then
-    echo Note: Running this script takes about 1 minute \(on a single CPU\).
+    echo Note: Running this script takes about 5 minute \(on a single CPU\).
+    TEST_METH_NAME=poisson
 fi
 if [ "$1" == 'param' ];
 then
-    echo Note: Running this script takes about 1 minute \(on a single CPU\).
+    echo Note: Running this script takes about 5 minute \(on a single CPU\).
+    TEST_METH_NAME=parametric
 fi
 if [ "$1" == 'nonparam' ];
 then
-    echo Note: Running this script takes about 5 minutes \(on a single CPU\).
+    echo Note: Running this script takes about 60 minutes \(on a single CPU\).
+    TEST_METH_NAME=nonparametric
 fi
 
 RESULTDIR=./results-$1
@@ -77,7 +82,8 @@ echo 1a. load the genome annotation in GFF3 format, create an annotation object 
 if [ ! -f ${GENES_FN} ]
 then
     export PYTHONPATH=$PYTHONPATH:${SCIPY_PATH}
-    ${PYTHON_PATH} -W ignore::FutureWarning ./ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
+echo "${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} "
+    ${PYTHON_PATH} -W ignore::FutureWarning ../tools/ParseGFF.py ${GFF3_INPUT} ${GENES_FN} #> ${RESULTDIR}/elegans-gff2anno.log
     ../bin/genes_cell2struct ${GENES_FN}
 fi
 
@@ -91,12 +97,13 @@ echo % 2. Differential testing %
 echo %%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo
 
-RDIFF_RES_DIR=$RESULTDIR/rdiff
+RDIFF_RES_DIR=$RESULTDIR
 mkdir -p $RDIFF_RES_DIR
-RDIFF_RES_FILE=$RDIFF_RES_DIR/${EXP}_rdiff_${TEST_METH}.txt
+RDIFF_RES_FILE=$RDIFF_RES_DIR/P_values_rDiff_${TEST_METH_NAME}.tab
 
+echo "../bin/rDiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} > ${RESULTDIR}/example-rdiff.log"
 echo testing genes for differential expression using given alignments \(log file in ${RESULTDIR}/example-rdiff.log\)
-../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} > ${RESULTDIR}/example-rdiff.log
+../bin/rdiff ${GENES_FN} ${BAM_INPUT1} ${BAM_INPUT2} ${RDIFF_RES_FILE} ${TEST_METH} ${RESULTDIR} ${RDIFF_INPUT_DIR} #> ${RESULTDIR}/example-rdiff.log
 
 echo
 echo Testing result can be found in $RDIFF_RES_FILE

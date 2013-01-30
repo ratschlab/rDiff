@@ -1,6 +1,5 @@
 function []=perform_nonparametric_tests(CFG,genes,variance_function_nonparametric_1, variance_function_nonparametric_2)
 
-keyboard
 
 %Get the gene expression
 fprintf('Loading gene expression\n')
@@ -37,7 +36,7 @@ end
 
 PAR.variance_function_nonparametric_1=variance_function_nonparametric_1;
 PAR.variance_function_nonparametric_2=variance_function_nonparametric_2;
-
+if 1==1
 %%% Perform the test
 % configuration
 if not(CFG.use_rproc)
@@ -67,7 +66,7 @@ end
 if CFG.use_rproc
     [JOB_INFO num_crashed] = rproc_wait(JOB_INFO, 60, 1, -1);
 end
-
+end
 % Get the test results
 
 %%% Generate the output files
@@ -85,7 +84,6 @@ idx=[(1:size(genes,2))',ceil((1:size(genes,2))*CFG.rproc_num_jobs/size(genes,2))
 % Iterate over the result files to load the data from the count files
 for j = 1:CFG.rproc_num_jobs
     IN_FILENAME=[CFG.out_base_temp 'P_values_nonparametric_' num2str(j) '_of_' num2str(CFG.rproc_num_jobs)];
-    
     IDX=idx(idx(:,2)==j,1);
     try
         load(IN_FILENAME)
@@ -103,7 +101,7 @@ for j = 1:CFG.rproc_num_jobs
                 if CFG.perform_mmd
                     if not(isempty(P_VALS{k,COUNTER}))
                         P_values_rDiff_mmd(IDX(k))=P_VALS{k,COUNTER}{1};
-                        if not(isempty(P_VALS{k,COUNTER}{2}))
+                        if (isempty(P_VALS{k,COUNTER}{2}))
                             P_values_rDiff_mmd_error_flag{IDX(k)}='NOT_TESTED';
                         else
                             P_values_rDiff_mmd_error_flag{IDX(k)}='OK';
@@ -121,7 +119,7 @@ for j = 1:CFG.rproc_num_jobs
 			    P_values_rDiff_nonparametric(IDX(k))=min(10*min(P_VALS{k,COUNTER}{2}{3})+max(P_VALS{k,COUNTER}{2}{3})*(10/(CFG.bootstraps+1)),1);
 			  end
 			end
-                        if not(isempty(P_VALS{k,COUNTER}{2}))
+                        if (isempty(P_VALS{k,COUNTER}{2}))
                             P_values_rDiff_nonparametric_error_flag{IDX(k)}='NOT_TESTED';
                         else
                             P_values_rDiff_nonparametric_error_flag{IDX(k)}='OK';

@@ -1,3 +1,11 @@
+rDiff version 0.3 (14 January, 2013)
+---------------------------------------
+The new veriosn of rDiff contains now two new tests, rDiff.parametric and
+rDiff nonparametric. The code has been completly rewritten and is now considerably
+faster and more stable.
+
+
+
 rDiff version 0.1 (Month DD, 2011)
 ----------------------------------------
 
