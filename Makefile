@@ -10,9 +10,9 @@ include bin/rdiff_config.sh
 # Copyright (C) 2009-2013 Max Planck Society, Sloan-Kettering Institute
 #
 
-all:	mex
+all:	mexfiles
 
-mex:
+mexfiles:
 	echo Entering ./mex
 	cd mex ; make octave
 	echo Entering ./src/locfit/Source
@@ -25,11 +25,12 @@ clean:
 	cd examples ; make clean
 	echo Entering ./src/locfit/Source
 	cd src/locfit/Source ; make clean
+	cd src/locfit/mex/ ; rm *
 
-example:	
+example:
 	echo Entering ./examples
 	cd examples ; make example
 
-examples:	
+more_examples:	
 	echo Entering ./examples
-	cd examples ; make examples
+	cd examples ; make threeexamples

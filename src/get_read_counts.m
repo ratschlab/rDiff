@@ -11,7 +11,7 @@ if CFG.estimate_gene_expression==1
         % configuration
         CFG.curr_bamfile = CFG.BAM_FILES{RUN};
         if not(CFG.use_rproc)
-            fprintf('Getting gene expression for :%s\n', CFG.curr_bamfile);
+            fprintf('Getting gene expression for: %s\n', CFG.curr_bamfile);
         end
         tic
         %define the splits of the genes for the jobs

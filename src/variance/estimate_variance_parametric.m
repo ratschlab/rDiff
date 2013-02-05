@@ -37,7 +37,11 @@ end
 if CFG.compute_variance_function_1
     fprintf('estimating variance function for sample 1\n')
     %Get the samples to use for the for estimation the variance function
-    SAMPLE_IX=find(CFG.SAMPLES==1);
+    if CFG.merge_sample1
+        SAMPLE_IX=find(CFG.SAMPLES);
+    else
+        SAMPLE_IX=find(CFG.SAMPLES==1);
+    end
     VARIANCE1=estimate_variance_helper(CFG,SAMPLE_IX,Counts_rDiff_parametric,Gene_expression.data);
     if not(isempty(CFG.save_variance_function_1))
         VARIANCE_FUNTION_OUTPATH=[CFG.out_base CFG.save_variance_function_1];
@@ -57,8 +61,12 @@ end
 
 if CFG.compute_variance_function_2
     fprintf('estimating variance function for sample 2\n')
-   %Get the samples to use for the for estimation the variance function
-    SAMPLE_IX=find(CFG.SAMPLES==2);
+    %Get the samples to use for the for estimation the variance function
+    if CFG.merge_sample2
+        SAMPLE_IX=find(CFG.SAMPLES);
+    else
+        SAMPLE_IX=find(CFG.SAMPLES==2);
+    end
     VARIANCE2=estimate_variance_helper(CFG,SAMPLE_IX,Counts_rDiff_parametric,Gene_expression.data);
     if not(isempty(CFG.save_variance_function_2))
         VARIANCE_FUNTION_OUTPATH=[CFG.out_base CFG.save_variance_function_2];

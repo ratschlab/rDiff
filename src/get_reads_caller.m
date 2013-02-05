@@ -49,7 +49,6 @@ for i=1:size(genes,2)
   end
   
   %Get the reads from gene
-
   [reads] = get_reads_for_gene(CFG,gene);
 
  
@@ -67,10 +66,10 @@ for i=1:size(genes,2)
  
   
   EXON_IDX=sum(gene.exonsequence,1)<NR_OF_TRANS;
-  
+
   %Transform the reads in to counts per region
   [NEW_READS,UNEXPLAINED_READS,UNEXPLAINED_INDEX]= convert_reads_to_region_indicators(reads,gene);
- 
+
   if length(unique(sum(NEW_READS,2)))>1
       warning(['Assignment of reads to regions is not unique for gene:' gene.name  '\n']); 
   end
@@ -95,7 +94,11 @@ for i=1:size(genes,2)
       
       %Get the coverage of the read starts
       %COVERAGE=sum(read_starts(find(ALT_READ_IX>0),:),1);
-      COVERAGE=sum(reads(find(ALT_READ_IX>0),:),1);
+      if CFG.only_gene_start
+          COVERAGE=sum(reads,1);
+      else
+          COVERAGE=sum(reads(find(ALT_READ_IX>0),:),1);
+      end
       if max(COVERAGE)>0
           TEMP_COUNT{4}=COVERAGE;
       else

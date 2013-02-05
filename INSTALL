@@ -1,13 +1,26 @@
 To setup rDiff, please follow these steps:
 
-1. Download the SAMTools (version 0.1.18) from http://samtools.sourceforge.net/ and install it. You need to add the flag -fPIC in the SAMTools Makefile for compilation.
-2. Add the SAMTools directory to ./mex/Makefile, go to ./mex and run make ('make octave' for Octave).
-3. Run ./configure and setup paths and configuration options for rDiff.
-4. run "make" 
+1) Download the SAMTools (version 0.1.7) from http://samtools.sourceforge.net/ and install it. You need to add the flag -fPIC in the SAMTools Makefile for compilation.
 
-Optional
-5. Download the example data with ./get_data.sh in ./examples.
-6. Run an example by executing ./run_example.sh with input 'poisson', 'param' or 'nonparam' to perform a Poisson-based test for differential gene expression, rDiff.poisson, rDiff.parametric or rDiff.nonparametric for differential transcript expression, respectively, on an A.thaliana data set in the examples directory.
+2) Change to directory that contains rDiff and configure rDiff by typing:
 
-Alternatively:
-5-6: Run "make examples" 
+    ./configure 
+
+   this etects and stores paths of dependencies necessary to compile and run rDiff. You can also set these variables manually using the interactive configuration:
+
+    ./configure -i 
+
+3) To compile rDiff, type:
+
+    make
+
+4) When successfully completed, rDiff is usable. Check out the <Examples>:
+
+    make example
+
+   This will download an example dataset and run the rDiff.parametric on it. You can also run rDiff.parametric, rDiff.nonparametric or rDiff.poisson by typing:
+
+    make more_examples
+
+
+

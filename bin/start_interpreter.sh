@@ -17,7 +17,6 @@ set -e
 #export MATLAB_RETURN_FILE=`tempfile`
 export MATLAB_RETURN_FILE=`mktemp -t rDiff.XXXXXXXXXX.tmp` 
 
-#echo "$2"
 
 if [ "$RDIFF_INTERPRETER" == 'octave' ];
 then

@@ -2,6 +2,12 @@ function []=rdiff(ARGS)
 % rdiff()
 %
 
+if isempty(ARGS)
+    usage() ;
+    exit(-1) ;
+end
+%ARGS=[ARGS ':.:.'] ;
+
 %%% Add paths  %%%
 fprintf('Set the paths\n')
 CFG.paths = set_rdiff_paths();
@@ -48,6 +54,12 @@ if CFG.perform_parametric
     variance_function_parametric_2=[];
     [variance_function_parametric_1, variance_function_parametric_2]=estimate_variance_parametric(CFG,genes); 
 end
+
+%If only gene expression is needed, stop here
+if CFG.only_gene_expression
+    return
+end
+
 
 %%% Perform tests &  Write output %%%
 

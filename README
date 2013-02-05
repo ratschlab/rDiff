@@ -13,7 +13,7 @@ per gene locus from RNA-Seq measurements. It can simultaneously
 estimate the effect of biases introduced by experimental settings. 
 
 REQUIREMENTS
-- Octave >=3.0.3
+- Octave >=3.4
 - Python >=2.6.5 and Scipy >=0.7.1
 - SAMTools >= 0.1.7
 - wget

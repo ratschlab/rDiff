@@ -28,13 +28,13 @@ end
 
 %Check that there are sufficient samples to estimate the variance funtions
 if CFG.compute_variance_function_1==1
-    if length(find(CFG.SAMPLES==1))<2
+  if and(length(find(CFG.SAMPLES==1))<2,not(CFG.merge_sample1))
         error('Not sufficient samples to estimate variance function for sample 1');
     end
 end
 
 if CFG.compute_variance_function_2==1
-    if length(find(CFG.SAMPLES==2))<2
+      if and(length(find(CFG.SAMPLES==2))<2,not(CFG.merge_sample2))
         error('Not sufficient samples to estimate variance function for sample 2');
     end
 end

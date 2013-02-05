@@ -5,21 +5,18 @@ all: example
 data: 
 	./get_data.sh
 
-example: data
-	./run_example.sh param
+example: param
 
-examples:
-	./run_example.sh poisson
-	./run_example.sh param
-	./run_example.sh nonparam
 
-poisson:
+threeexamples: data poisson param nonparam
+
+poisson: data
 	./run_example.sh poisson
 
-param:
+param: data
 	./run_example.sh param
 
-nonparam:
+nonparam: data
 	./run_example.sh nonparam
 
 clean:
