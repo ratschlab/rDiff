@@ -89,7 +89,9 @@ CFG.BAM_FILES={BAMS1{:},BAMS2{:}};
     
 %Name of the experiment. Use the FILENAMES if the entries are empty.
 CFG.NAMES=CFG.BAM_FILES;
-
+for i=1:length(CFG.NAMES)
+	CFG.NAMES{i}=strrep(CFG.NAMES{i},"/","_");
+end
 
 % Give the directory where the input-files are
 CFG.data_dir = [RDIFF_INPUT_DIR '/'];
