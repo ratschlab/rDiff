@@ -14,6 +14,6 @@ end
 %Make sure the variance is bigger than the poisson
 %variance. Otherwise the NB cannot be definied
 
-VARIANCE=max([VARIANCE,MEANS*(1e-8)],[],2);
+VARIANCE=max([VARIANCE,MEANS*(1+(1e-8))],[],2);
 
 return

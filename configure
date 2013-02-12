@@ -158,7 +158,18 @@ fi
 echo '=>' Setting Python path to \"$RDIFF_PYTHON_PATH\"
 echo
 
-RDIFF_INTERPRETER="octave"
+if [ "$1" == "-i" ];
+then
+	echo "Please enter prefered interpreter ( octave or matlab )"
+	read RDIFF_INTERPRETER
+elif [ "$1" == "-o" ] ; then
+     RDIFF_INTERPRETER="octave"
+elif [ "$1" == "-m" ] ; then
+     RDIFF_INTERPRETER="matlab"
+else
+	RDIFF_INTERPRETER="octave"
+fi
+
 if [ "$RDIFF_INTERPRETER" == 'octave' ];
 then
   if [ "$1" == "-i" ];
@@ -207,61 +218,61 @@ fi
 
 if [ "$RDIFF_INTERPRETER" == 'matlab' ];
 then
-	echo Please enter the full path to matlab \(currently set to \"$MATLAB_BIN_PATH\", system version used, if left empty\)
-	read MATLAB_BIN_PATH
-	if [ "$MATLAB_BIN_PATH" == "" ];
+	echo Please enter the full path to matlab \(currently set to \"$RDIFF_MATLAB_BIN_PATH\", system version used, if left empty\)
+	read RDIFF_MATLAB_BIN_PATH
+	if [ "$RDIFF_MATLAB_BIN_PATH" == "" ];
 	then
-		MATLAB_BIN_PATH=`which matlab`
-		if [ "$MATLAB_BIN_PATH" == "" ];
+		RDIFF_MATLAB_BIN_PATH=`which matlab`
+		if [ "$RDIFF_MATLAB_BIN_PATH" == "" ];
 		then
 			echo matlab not found
 			echo please run interactive mode: ./configure -i
 			exit -1
 		fi
 	fi
-	if [ ! -f $MATLAB_BIN_PATH ];
+	if [ ! -f $RDIFF_MATLAB_BIN_PATH ];
 	then
 		echo matlab not found
 		echo please run interactive mode: ./configure -i
 		exit -1
 	fi
-	echo '=>' Setting matlab\'s path to \"$MATLAB_BIN_PATH\"
+	echo '=>' Setting matlab\'s path to \"$RDIFF_MATLAB_BIN_PATH\"
 	echo
 
-	echo Please enter the full path to mex binary \(currently set to \"$MATLAB_MEX_PATH\", system version used if left empty\)
-	read MATLAB_MEX_PATH
-	if [ "$MATLAB_MEX_PATH" == "" ];
+	echo Please enter the full path to mex binary \(currently set to \"$RDIFF_MATLAB_MEX_PATH\", system version used if left empty\)
+	read RDIFF_MATLAB_MEX_PATH
+	if [ "$RDIFF_MATLAB_MEX_PATH" == "" ];
 	then
-		MATLAB_MEX_PATH=`which mex`
-		if [ "$MATLAB_MEX_PATH" == "" ];
+		RDIFF_MATLAB_MEX_PATH=`which mex`
+		if [ "$RDIFF_MATLAB_MEX_PATH" == "" ];
 		then
 			echo mex not found
 			echo please run interactive mode: ./configure -i
 			exit -1
 		fi
 	fi
-	if [ ! -f "$MATLAB_MEX_PATH" ];
+	if [ ! -f "$RDIFF_MATLAB_MEX_PATH" ];
 	then
 		echo mex not found
 		echo please run interactive mode: ./configure -i
 		exit -1
 	fi
-	echo '=>' Setting mex\' path to \"$MATLAB_MEX_PATH\"
+	echo '=>' Setting mex\' path to \"$RDIFF_MATLAB_MEX_PATH\"
 	echo
 
-	echo Please enter the full path to the matlab include directory \(currently set to \"$MATLAB_INCLUDE_DIR\", system version used, if left empty\)
-	read MATLAB_INCLUDE_DIR
-	if [ "$MATLAB_INCLUDE_DIR" == "" ];
+	echo Please enter the full path to the matlab include directory \(currently set to \"$RDIFF_MATLAB_INCLUDE_DIR\", system version used, if left empty\)
+	read RDIFF_MATLAB_INCLUDE_DIR
+	if [ "$RDIFF_MATLAB_INCLUDE_DIR" == "" ];
 	then
-		MATLAB_INCLUDE_DIR=$(dirname $MATLAB_BIN_PATH)/../extern/include
+		RDIFF_MATLAB_INCLUDE_DIR=$(dirname $RDIFF_MATLAB_BIN_PATH)/../extern/include
 	fi
-	if [ ! -d "$MATLAB_INCLUDE_DIR" ];
+	if [ ! -d "$RDIFF_MATLAB_INCLUDE_DIR" ];
 	then
 		echo matlab include dir not found
 		echo please run interactive mode: ./configure -i
 		exit -1
 	fi
-	echo '=>' Setting matlab\'s include directory to \"$MATLAB_INCLUDE_DIR\"
+	echo '=>' Setting matlab\'s include directory to \"$RDIFF_MATLAB_INCLUDE_DIR\"
 	echo
 
 	RDIFF_OCTAVE_BIN_PATH=
@@ -269,7 +280,7 @@ fi
 
 cp -p bin/rdiff_config.sh bin/rdiff_config.sh.bak
 
-grep -v -e RDIFF_OCTAVE_BIN_PATH -e RDIFF_OCTAVE_MKOCT -e MATLAB_BIN_PATH -e MATLAB_MEX_PATH -e MATLAB_INCLUDE_DIR \
+grep -v -e RDIFF_OCTAVE_BIN_PATH -e RDIFF_OCTAVE_MKOCT -e RDIFF_MATLAB_BIN_PATH -e RDIFF_MATLAB_MEX_PATH -e RDIFF_MATLAB_INCLUDE_DIR \
     -e RDIFF_PATH -e RDIFF_SRC_PATH -e RDIFF_BIN_PATH \
     -e RDIFF_INTERPRETER bin/rdiff_config.sh.bak \
     -e RDIFF_SAMTOOLS_BIN_DIR -e RDIFF_SAMTOOLS_LIB_DIR -e RDIFF_SAMTOOLS_INCLUDE_DIR -e RDIFF_PYTHON_PATH -e SCIPY_PATH -e $RDIFF_VERSION > bin/rdiff_config.sh
@@ -282,9 +293,9 @@ echo export RDIFF_PATH=$RDIFF_PATH >> bin/rdiff_config.sh
 echo export RDIFF_SRC_PATH=${RDIFF_PATH}/src >> bin/rdiff_config.sh
 echo export RDIFF_BIN_PATH=${RDIFF_PATH}/bin >> bin/rdiff_config.sh
 echo export RDIFF_INTERPRETER=$RDIFF_INTERPRETER >> bin/rdiff_config.sh
-#echo export MATLAB_BIN_PATH=$MATLAB_BIN_PATH >> bin/rdiff_config.sh
-#echo export MATLAB_MEX_PATH=$MATLAB_MEX_PATH >> bin/rdiff_config.sh
-#echo export MATLAB_INCLUDE_DIR=$MATLAB_INCLUDE_DIR >> bin/rdiff_config.sh
+echo export RDIFF_MATLAB_BIN_PATH=$RDIFF_MATLAB_BIN_PATH >> bin/rdiff_config.sh
+echo export RDIFF_MATLAB_MEX_PATH=$RDIFF_MATLAB_MEX_PATH >> bin/rdiff_config.sh
+echo export RDIFF_MATLAB_INCLUDE_DIR=$RDIFF_MATLAB_INCLUDE_DIR >> bin/rdiff_config.sh
 echo export RDIFF_OCTAVE_BIN_PATH=$RDIFF_OCTAVE_BIN_PATH >> bin/rdiff_config.sh
 echo export RDIFF_OCTAVE_MKOCT=$RDIFF_OCTAVE_MKOCT >> bin/rdiff_config.sh
 echo export RDIFF_SAMTOOLS_BIN_DIR=$RDIFF_SAMTOOLS_BIN_DIR >> bin/rdiff_config.sh  

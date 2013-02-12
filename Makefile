@@ -13,10 +13,17 @@ include bin/rdiff_config.sh
 all:	mexfiles
 
 mexfiles:
+ifeq ($(RDIFF_INTERPRETER),octave)
 	echo Entering ./mex
 	cd mex ; make octave
 	echo Entering ./src/locfit/Source
 	cd src/locfit/Source ; make octave
+else
+	echo Entering ./mex
+	cd mex ; make matlab
+	echo Entering ./src/locfit/Source
+	cd src/locfit/Source ; make matlab
+endif
 
 clean:	
 	echo Entering ./mex

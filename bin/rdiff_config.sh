@@ -8,14 +8,18 @@
 #
 #
 
-export RDIFF_VERSION=0.3
-export RDIFF_PATH=/Users/drewe/git/software/rdiff
-export RDIFF_SRC_PATH=/Users/drewe/git/software/rdiff/src
-export RDIFF_BIN_PATH=/Users/drewe/git/software/rdiff/bin
-export RDIFF_INTERPRETER=octave
-export RDIFF_OCTAVE_BIN_PATH=/opt/local/bin/octave
-export RDIFF_OCTAVE_MKOCT=/opt/local/bin/mkoctfile
-export RDIFF_SAMTOOLS_BIN_DIR=/Users/drewe/Programs/samtools//samtools
-export RDIFF_SAMTOOLS_LIB_DIR=/Users/drewe/Programs/samtools/
-export RDIFF_SAMTOOLS_INCLUDE_DIR=/Users/drewe/Programs/samtools/
-export RDIFF_PYTHON_PATH=/opt/local/bin/python2.7
+
+export RDIFF_VERSION=""
+export RDIFF_PATH=""
+export RDIFF_SRC_PATH=""
+export RDIFF_BIN_PATH=""
+export RDIFF_INTERPRETER=""
+export RDIFF_MATLAB_BIN_PATH=""
+export RDIFF_MATLAB_MEX_PATH=""
+export RDIFF_MATLAB_INCLUDE_DIR=""
+export RDIFF_OCTAVE_BIN_PATH=""
+export RDIFF_OCTAVE_MKOCT=""
+export RDIFF_SAMTOOLS_BIN_DIR=""
+export RDIFF_SAMTOOLS_LIB_DIR=""
+export RDIFF_SAMTOOLS_INCLUDE_DIR=""
+export RDIFF_PYTHON_PATH=""

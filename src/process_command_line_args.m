@@ -50,30 +50,30 @@ for i=1:length(ARGS)
     
     
     if length(VALS)>2
-        error([" more than one field for variable: " VALS{1} ":" VALS{:} "\n  Maybe there are colons in the input argument?"])
+        error([' more than one field for variable: ' VALS{1} ':' VALS{:} '\n  Maybe there are colons in the input argument?'])
     end
     
-    if strcmp(VALS{1},"RDIFF_RES_DIR"),RDIFF_RES_DIR=VALS{2};continue,end
-    if strcmp(VALS{1},"RDIFF_INPUT_DIR"),RDIFF_INPUT_DIR=VALS{2};continue,end
-    if strcmp(VALS{1},"BAM_INPUT1"),BAM_INPUT1=VALS{2};continue,end
-    if strcmp(VALS{1},"BAM_INPUT2"),BAM_INPUT2=VALS{2};continue,end
-    if strcmp(VALS{1},"GFF_INPUT"),GFF_INPUT=VALS{2};continue,end
-    if strcmp(VALS{1},"READ_LENGTH"),READ_LENGTH=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"MIN_READ_LENGTH"),MIN_READ_LENGTH=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"EST_GENE_EXPR"),EST_GENE_EXPR=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"ONLY_GENE_EXPR"),ONLY_GENE_EXPR=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"VAR_PATH1"),VAR_PATH1=VALS{2};continue,end
-    if strcmp(VALS{1},"VAR_PATH2"),VAR_PATH2=VALS{2};continue,end
-    if strcmp(VALS{1},"SAVE_VAR1"),SAVE_VAR1=VALS{2};continue,end
-    if strcmp(VALS{1},"SAVE_VAR2"),SAVE_VAR2=VALS{2};continue,end
-    if strcmp(VALS{1},"PRED_VAR1"),PRED_VAR1=VALS{2};continue,end
-    if strcmp(VALS{1},"PRED_VAR2"),PRED_VAR2=VALS{2};continue,end
-    if strcmp(VALS{1},"ONLY_GENE_START"),ONLY_GENE_START=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"SUBSAMPLE"),SUBSAMPLE=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"CLIP"),CLIP=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"BOOTSTRAP"),BOOTSTRAP=str2num(VALS{2});continue,end
-    if strcmp(VALS{1},"TEST_METH_NAME"),TEST_METH_NAME=VALS{2};continue,end
-    if strcmp(VALS{1},"MERGE_SAMPLE"),MERGE_SAMPLE=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'RDIFF_RES_DIR'),RDIFF_RES_DIR=VALS{2};continue,end
+    if strcmp(VALS{1},'RDIFF_INPUT_DIR'),RDIFF_INPUT_DIR=VALS{2};continue,end
+    if strcmp(VALS{1},'BAM_INPUT1'),BAM_INPUT1=VALS{2};continue,end
+    if strcmp(VALS{1},'BAM_INPUT2'),BAM_INPUT2=VALS{2};continue,end
+    if strcmp(VALS{1},'GFF_INPUT'),GFF_INPUT=VALS{2};continue,end
+    if strcmp(VALS{1},'READ_LENGTH'),READ_LENGTH=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'MIN_READ_LENGTH'),MIN_READ_LENGTH=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'EST_GENE_EXPR'),EST_GENE_EXPR=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'ONLY_GENE_EXPR'),ONLY_GENE_EXPR=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'VAR_PATH1'),VAR_PATH1=VALS{2};continue,end
+    if strcmp(VALS{1},'VAR_PATH2'),VAR_PATH2=VALS{2};continue,end
+    if strcmp(VALS{1},'SAVE_VAR1'),SAVE_VAR1=VALS{2};continue,end
+    if strcmp(VALS{1},'SAVE_VAR2'),SAVE_VAR2=VALS{2};continue,end
+    if strcmp(VALS{1},'PRED_VAR1'),PRED_VAR1=VALS{2};continue,end
+    if strcmp(VALS{1},'PRED_VAR2'),PRED_VAR2=VALS{2};continue,end
+    if strcmp(VALS{1},'ONLY_GENE_START'),ONLY_GENE_START=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'SUBSAMPLE'),SUBSAMPLE=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'CLIP'),CLIP=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'BOOTSTRAP'),BOOTSTRAP=str2num(VALS{2});continue,end
+    if strcmp(VALS{1},'TEST_METH_NAME'),TEST_METH_NAME=VALS{2};continue,end
+    if strcmp(VALS{1},'MERGE_SAMPLE'),MERGE_SAMPLE=str2num(VALS{2});continue,end
 end
 
 %Process Bamfiles
@@ -90,7 +90,7 @@ CFG.BAM_FILES={BAMS1{:},BAMS2{:}};
 %Name of the experiment. Use the FILENAMES if the entries are empty.
 CFG.NAMES=CFG.BAM_FILES;
 for i=1:length(CFG.NAMES)
-	CFG.NAMES{i}=strrep(CFG.NAMES{i},"/","_");
+	CFG.NAMES{i}=strrep(CFG.NAMES{i},'/','_');
 end
 
 % Give the directory where the input-files are

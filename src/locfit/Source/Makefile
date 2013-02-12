@@ -21,9 +21,9 @@ mexpp.mex: mexpp.c mlfut.c
 	${MKOCTFILE} -v -g --mex $(MXFLAGS) $(CFLAGS) mexpp.c mlfut.c liblocf.c libmut.c libtube.c liblfev.c  $(LDFLAGS)
 
 mexlf: mexlf.c mlfut.c
-	${MEX} $(MXFLAGS) $(CFLAGS) mexlf.c mlfut.c $(LDFLAGS)
+	${MEX} $(MXFLAGS) $(CFLAGS) mexlf.c mlfut.c liblocf.c libmut.c libtube.c liblfev.c $(LDFLAGS)
 mexpp: mexpp.c mlfut.c
-	${MEX} $(MXFLAGS) $(CFLAGS) mexpp.c mlfut.c $(LDFLAGS)
+	${MEX} $(MXFLAGS) $(CFLAGS) mexpp.c mlfut.c liblocf.c libmut.c libtube.c liblfev.c $(LDFLAGS)
 nodlls: mexlf.c mlfut.c mexpp.c $(LFSRC)
 	${MEX} $(MXFLAGS) mexlf.c mlfut.c $(LFSRC)
 	${MEX} $(MXFLAGS) mexpp.c mlfut.c $(LFSRC)
