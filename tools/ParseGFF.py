@@ -11,7 +11,7 @@ Requirements:
     Numpy :- http://numpy.org/ 
 
 Copyright (C)	2009-2012 Friedrich Miescher Laboratory of the Max Planck Society, Tubingen, Germany 
-		2012- Memorial Sloan-Kettering Cancer Center, New York City, USA 
+		2012- Memorial Sloan Kettering Cancer Center, New York City, USA 
 """
 
 import re, sys
