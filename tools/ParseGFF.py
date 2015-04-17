@@ -14,9 +14,10 @@ Copyright (C)	2009-2012 Friedrich Miescher Laboratory of the Max Planck Society,
 		2012- Memorial Sloan Kettering Cancer Center, New York City, USA 
 """
 
-import re, sys
-import scipy.io as sio
+import re
+import sys
 import numpy as np
+import scipy.io as sio
 
 def addCDSphase(strand, cds):
     """Add CDS phase to the CDS exons
